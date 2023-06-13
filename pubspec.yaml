@@ -1,0 +1,82 @@
+name: nutrition_app
+description: A new Flutter project.
+
+publish_to: 'none' # Remove this line if you wish to publish to pub.dev
+
+
+version: 1.0.0+1
+
+environment:
+  sdk: '>=2.19.4 <3.0.0'
+
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  cupertino_icons: ^1.0.2
+
+  #packages
+  flutter_native_splash: ^2.3.1
+  get_it: ^7.2.0
+  bloc: ^8.1.1
+  flutter_bloc: ^8.1.2
+  freezed: ^2.3.2
+  json_annotation: ^4.8.0
+  crypto: ^3.0.2
+  font_awesome_flutter: ^10.4.0
+  floating_navbar: ^2.0.2
+
+  #signin
+  google_sign_in: ^6.0.2
+  sign_in_with_apple: ^4.3.0
+
+  #firebase
+  firebase_core: ^2.8.0
+  firebase_auth: ^4.3.0
+  cloud_firestore: ^4.4.5
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+
+  flutter_lints: ^2.0.0
+  json_serializable: ^6.6.1
+  build_runner: ^2.3.3
+  flutter_launcher_icons: ^0.13.1
+
+flutter_native_splash:
+  background color: "#f8f4f5"
+  color: "#f8f4f5"
+  image: assets/images/logo.png
+  android: true
+  ios: true
+  android_12:
+    image: assets/images/logo.png
+    icon_background_color: "#f8f4f5"
+
+flutter_launcher_icons:
+  android: "launcher_icon"
+  ios: true
+  image_path: "assets/images/logo.png"
+
+flutter:
+
+
+  uses-material-design: true
+
+
+  assets:
+     - assets/images/logo.png
+
+  fonts:
+    - family: Abril Fatface
+      fonts:
+        - asset: assets/fonts/AbrilFatface-Regular.ttf
+    - family: Roboto
+      fonts:
+        - asset: assets/fonts/Roboto-Bold.ttf
+        - asset: assets/fonts/Roboto-Medium.ttf
+        - asset: assets/fonts/Roboto-Regular.ttf
+
