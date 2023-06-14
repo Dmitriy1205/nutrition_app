@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:nutrition_app/app/providers.dart';
 import 'package:nutrition_app/common/theme.dart';
+import 'package:nutrition_app/presentation/screens/create_account_screen.dart';
 import 'package:nutrition_app/presentation/screens/home/home_screen.dart';
 
 import '../presentation/blocs/auth/auth_bloc.dart';
@@ -21,7 +22,7 @@ class MyApp extends StatelessWidget {
           builder: (context, state) {
             return state.maybeMap(
               authenticated: (_) => const HomeScreen(),
-              orElse: () => const SignInScreen(),
+              orElse: () => const CreateAccountScreen(),
             );
           },
         ),

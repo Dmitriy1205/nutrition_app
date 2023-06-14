@@ -3,9 +3,11 @@
 <plist version="1.0">
 <dict>
 	<key>CLIENT_ID</key>
-	<string>771159136654-o9qhdbkvitsff54k6v7mr4pvg4euf143.apps.googleusercontent.com</string>
+	<string>771159136654-rk38doap6mo425ub7if6nftb6jnd32ei.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.771159136654-o9qhdbkvitsff54k6v7mr4pvg4euf143</string>
+	<string>com.googleusercontent.apps.771159136654-rk38doap6mo425ub7if6nftb6jnd32ei</string>
+	<key>ANDROID_CLIENT_ID</key>
+	<string>771159136654-9v3tkdrlp9cgbb2apq0i65d9oodpha3h.apps.googleusercontent.com</string>
 	<key>API_KEY</key>
 	<string>AIzaSyBwYy1nlHrCiZ720qVTN0uVat2LCUerHzw</string>
 	<key>GCM_SENDER_ID</key>
@@ -13,7 +15,7 @@
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>com.example.nutritionApp</string>
+	<string>com.dp.nutritionApp</string>
 	<key>PROJECT_ID</key>
 	<string>nutrition-app-b84cb</string>
 	<key>STORAGE_BUCKET</key>
@@ -29,6 +31,6 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:771159136654:ios:a72206259bb37226552cdf</string>
+	<string>1:771159136654:ios:27cd1b15332b7606552cdf</string>
 </dict>
 </plist>

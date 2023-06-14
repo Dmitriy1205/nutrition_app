@@ -9,6 +9,7 @@ import 'common/services/service_locator.dart' as sl;
 import 'firebase_options.dart';
 
 void main() async {
+
   WidgetsFlutterBinding.ensureInitialized();
   Bloc.observer = GlobalObserver();
   await Firebase.initializeApp(

@@ -39,33 +39,30 @@ class _HomeScreenState extends State<HomeScreen> {
         ],
       ),
       backgroundColor: AppColors.background,
-      body: Padding(
-        padding: const EdgeInsets.only(bottom: 25),
-        child: FloatingNavBar(
-          borderRadius: 30,
-          resizeToAvoidBottomInset: true,
-          color: AppColors.red,
-          selectedIconColor: Colors.white,
-          unselectedIconColor: Colors.white.withOpacity(0.6),
-          items: [
-            FloatingNavBarItem(
-              iconData: Icons.person,
-              title: 'My Profile',
-              page: const ProfileScreen(),
-            ),
-            FloatingNavBarItem(
-                iconData: Icons.no_food,
-                title: 'My Recipe',
-                page: const RecipeScreen()),
-            FloatingNavBarItem(
-                iconData: Icons.browse_gallery,
-                title: 'My Gallery',
-                page: const GalleryScreen()),
-          ],
-          horizontalPadding: 30.0,
-          hapticFeedback: true,
-          showTitle: true,
-        ),
+      body: FloatingNavBar(
+        borderRadius: 30,
+        resizeToAvoidBottomInset: true,
+        color: AppColors.red,
+        selectedIconColor: Colors.white,
+        unselectedIconColor: Colors.white.withOpacity(0.6),
+        items: [
+          FloatingNavBarItem(
+            iconData: Icons.person,
+            title: 'My Profile',
+            page: const ProfileScreen(),
+          ),
+          FloatingNavBarItem(
+              iconData: Icons.no_food,
+              title: 'My Recipe',
+              page: const RecipeScreen()),
+          FloatingNavBarItem(
+              iconData: Icons.browse_gallery,
+              title: 'My Gallery',
+              page: const GalleryScreen()),
+        ],
+        horizontalPadding: 10.0,
+        hapticFeedback: true,
+        showTitle: true,
       ),
     );
   }

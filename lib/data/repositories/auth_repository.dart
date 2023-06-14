@@ -82,17 +82,15 @@ class AuthRepository {
   Future<void> signInWithApple() async {
     final rawNonce = generateNonce();
     final nonce = _sha256ofString(rawNonce);
-    var redirectURL = "https://micqui.firebaseapp.com/__/auth/handler";
-    var clientID = "com.pandascode.micqui.service";
+
     try {
       final appleCredential = await SignInWithApple.getAppleIDCredential(
           scopes: [
             AppleIDAuthorizationScopes.email,
             AppleIDAuthorizationScopes.fullName,
           ],
-          nonce: nonce,
-          webAuthenticationOptions: WebAuthenticationOptions(
-              clientId: clientID, redirectUri: Uri.parse(redirectURL)));
+        nonce: nonce
+          );
       final oauthCredential = OAuthProvider("apple.com").credential(
         idToken: appleCredential.identityToken,
         rawNonce: rawNonce,
