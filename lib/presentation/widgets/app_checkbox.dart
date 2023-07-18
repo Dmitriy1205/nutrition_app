@@ -21,10 +21,10 @@ class AppCheckbox extends StatelessWidget {
         onChanged?.call(!value);
       },
       child: Container(
-        width: 20.0,
-        height: 20.0,
+        width: 23.0,
+        height: 23.0,
         decoration: BoxDecoration(
-          color: value ? AppColors.red :AppColors.background,
+          color: value ? AppColors.violet :AppColors.background,
           borderRadius: BorderRadius.circular(5.0),
           border: Border.all(
             color: borderColor,
@@ -32,11 +32,13 @@ class AppCheckbox extends StatelessWidget {
           ),
         ),
         child: value
-            ? FaIcon(
+            ? const Center(
+              child: FaIcon(
           FontAwesomeIcons.check,
           color: Colors.white,
           size: 16,
-        )
+        ),
+            )
             : null,
       ),
     );

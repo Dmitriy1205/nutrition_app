@@ -5,11 +5,12 @@ import '../../common/theme.dart';
 class AppElevatedButton extends StatelessWidget {
   final String text;
   final VoidCallback onPressed;
+  final TextStyle? style;
 
   const AppElevatedButton({
     required this.text,
     required this.onPressed,
-    super.key,
+    super.key, this.style,
   });
 
   @override
@@ -20,8 +21,8 @@ class AppElevatedButton extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Padding(
-            padding: const EdgeInsets.symmetric(vertical: 15),
-            child: Text(text,style: AppTheme.themeData.textTheme.headlineMedium,),
+            padding: const EdgeInsets.symmetric(vertical: 20),
+            child: Text(text,style: style ?? AppTheme.themeData.textTheme.titleMedium,),
           ),
         ],
       ),

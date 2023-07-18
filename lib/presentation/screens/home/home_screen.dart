@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:nutrition_app/common/colors.dart';
 import 'package:nutrition_app/presentation/blocs/auth/auth_bloc.dart';
+import 'package:nutrition_app/presentation/blocs/user/user_bloc.dart';
 import 'package:nutrition_app/presentation/screens/home/profile_screen.dart';
 import 'package:nutrition_app/presentation/screens/home/recipe_screen.dart';
 
@@ -19,50 +20,121 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-
+  int _selectedIndex = 1;
+  final List<Widget> _pages = <Widget>[
+   const ProfileScreen(),
+    RecipeScreen(),
+     GalleryScreen(),
+  ];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text(
-          context.read<AuthBloc>().state.user!.email ?? '',
-          style: AppTheme.themeData.textTheme.displayMedium,
+      appBar: PreferredSize(
+        preferredSize: Size(double.infinity,30),
+        child: AppBar(
+          backgroundColor: AppColors.background,
+          actions: [
+            Padding(
+              padding: const EdgeInsets.only(right: 15.0),
+              child: PopupMenuButton(
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(5.0),
+                  ),
+                  itemBuilder: (context) {
+                    return [
+                      const PopupMenuItem<int>(
+                        value: 0,
+                        child: Text(AppStrings.logout),
+                      ),
+                    ];
+                  },
+                  onSelected: (value) {
+                    if (value == 0) {
+                      showAlertDialog(context);
+                    }
+                  }),
+            ),
+          ],
         ),
-        actions: [
-          const Text('Logout'),
-          IconButton(
-            onPressed: () {
-              showAlertDialog(context);
-            },
-            icon: const Icon(Icons.logout),
-          ),
-        ],
       ),
       backgroundColor: AppColors.background,
-      body: FloatingNavBar(
-        borderRadius: 30,
-        resizeToAvoidBottomInset: true,
-        color: AppColors.red,
-        selectedIconColor: Colors.white,
-        unselectedIconColor: Colors.white.withOpacity(0.6),
-        items: [
-          FloatingNavBarItem(
-            iconData: Icons.person,
-            title: 'My Profile',
-            page: const ProfileScreen(),
+      body: IndexedStack(
+        index: _selectedIndex,
+        children: _pages,
+      ),
+      // body: FloatingNavBar(
+      //   borderRadius: 30,
+      //   resizeToAvoidBottomInset: true,
+      //   color: AppColors.red,
+      //   selectedIconColor: Colors.white,
+      //   unselectedIconColor: Colors.white.withOpacity(0.6),
+      //   items: [
+      //     FloatingNavBarItem(
+      //       iconData: Icons.person,
+      //       title: 'My Profile',
+      //       page: const ProfileScreen(),
+      //     ),
+      //     FloatingNavBarItem(
+      //         iconData: Icons.no_food,
+      //         title: 'My Recipe',
+      //         page: const RecipeScreen()),
+      //     FloatingNavBarItem(
+      //         iconData: Icons.browse_gallery,
+      //         title: 'My Gallery',
+      //         page: const GalleryScreen()),
+      //   ],
+      //   horizontalPadding: 10.0,
+      //   hapticFeedback: true,
+      //   showTitle: true,
+      // ),
+      bottomNavigationBar: Container(
+
+        decoration: BoxDecoration(
+
+          color: Colors.white,
+          borderRadius: const BorderRadius.only(
+            topLeft: Radius.circular(30.0),
+            topRight: Radius.circular(30.0),
           ),
-          FloatingNavBarItem(
-              iconData: Icons.no_food,
-              title: 'My Recipe',
-              page: const RecipeScreen()),
-          FloatingNavBarItem(
-              iconData: Icons.browse_gallery,
-              title: 'My Gallery',
-              page: const GalleryScreen()),
-        ],
-        horizontalPadding: 10.0,
-        hapticFeedback: true,
-        showTitle: true,
+          boxShadow: [
+            BoxShadow(
+              color: Colors.grey.withOpacity(0.5),
+              spreadRadius: 2,
+              blurRadius: 5,
+              offset: const Offset(0, -3),
+            ),
+          ],
+        ),
+        child: ClipRRect(
+          borderRadius: BorderRadius.circular(30),
+          child: BottomNavigationBar(
+            backgroundColor: AppColors.red,
+            currentIndex: _selectedIndex,
+            onTap: (index) {
+              setState(() {
+                _selectedIndex = index;
+              });
+            },
+            unselectedItemColor: Colors.white.withOpacity(0.4),
+            selectedItemColor:Colors.white,
+            items: const [
+              BottomNavigationBarItem(
+                icon: Icon(Icons.person),
+                label: 'My Profile',
+              ),
+              BottomNavigationBarItem(
+                icon: Icon(
+                    Icons.no_food
+                ),
+                label: 'My Recipe',
+              ),
+              BottomNavigationBarItem(
+                icon: Icon(Icons.browse_gallery),
+                label: 'My Gallery',
+              ),
+            ],
+          ),
+        ),
       ),
     );
   }

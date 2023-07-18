@@ -26,6 +26,8 @@ dependencies:
   crypto: ^3.0.2
   font_awesome_flutter: ^10.4.0
   floating_navbar: ^2.0.2
+  intl: ^0.18.1
+  flutter_svg: ^2.0.7
 
   #signin
   google_sign_in: ^6.0.2
@@ -49,11 +51,12 @@ dev_dependencies:
 flutter_native_splash:
   background color: "#f8f4f5"
   color: "#f8f4f5"
-  image: assets/images/logo.png
+  image: assets/images/splash.png
   android: true
   ios: true
+  fullscreen: true
   android_12:
-    image: assets/images/logo.png
+    image: assets/images/splash.png
     icon_background_color: "#f8f4f5"
 
 flutter_launcher_icons:
@@ -68,7 +71,10 @@ flutter:
 
 
   assets:
+     - assets/images/
+     - assets/icons/
      - assets/images/logo.png
+     - assets/cities/cities.json
 
   fonts:
     - family: Abril Fatface
@@ -79,4 +85,8 @@ flutter:
         - asset: assets/fonts/Roboto-Bold.ttf
         - asset: assets/fonts/Roboto-Medium.ttf
         - asset: assets/fonts/Roboto-Regular.ttf
-
+    - family: Plus Jakarta Sans
+      fonts:
+        - asset: assets/fonts/PlusJakartaSans-Bold.ttf
+        - asset: assets/fonts/PlusJakartaSans-Medium.ttf
+        - asset: assets/fonts/PlusJakartaSans-Regular.ttf

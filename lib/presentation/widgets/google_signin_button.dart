@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import '../../common/colors.dart';
+import '../../common/icons.dart';
 import '../../common/services/service_locator.dart';
 import '../../common/strings.dart';
 import '../../common/theme.dart';
@@ -33,7 +35,13 @@ class GoogleSignInButton extends StatelessWidget {
       },
       builder: (context, state) {
         return Material(
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(15),
+          ),
           child: InkWell(
+            customBorder:RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(15),
+            ),
             onTap: () {
               state.maybeMap(
                   loading: (_) => null,
@@ -44,8 +52,9 @@ class GoogleSignInButton extends StatelessWidget {
             },
             child: Ink(
               decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(30),
-                  color: AppColors.blackBlue),
+                border: Border.all(),
+                  borderRadius: BorderRadius.circular(15),
+                  color: AppColors.white),
               child: SizedBox(
                 width: MediaQuery.of(context).size.width,
                 height: 56,
@@ -53,13 +62,10 @@ class GoogleSignInButton extends StatelessWidget {
                   initial: (_) => Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
-                      const FaIcon(
-                        FontAwesomeIcons.google,
-                        color: AppColors.background,
-                      ),
+                      SvgPicture.asset(AppIcons.google),
                       Text(
                         AppStrings.signInGoogle,
-                        style: AppTheme.themeData.textTheme.labelMedium,
+                        style: AppTheme.themeData.textTheme.titleMedium,
                       ),
                       const SizedBox(),
                     ],
@@ -75,13 +81,10 @@ class GoogleSignInButton extends StatelessWidget {
                   orElse: () => Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
-                      const FaIcon(
-                        FontAwesomeIcons.google,
-                        color: AppColors.background,
-                      ),
+                      SvgPicture.asset(AppIcons.google),
                       Text(
                         AppStrings.signInGoogle,
-                        style: AppTheme.themeData.textTheme.labelMedium,
+                        style: AppTheme.themeData.textTheme.titleMedium,
                       ),
                       const SizedBox(),
                     ],

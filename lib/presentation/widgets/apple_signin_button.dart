@@ -16,7 +16,13 @@ class AppleSignInButton extends StatelessWidget {
       bloc: _bloc,
       builder: (context, state) {
         return Material(
-          child: InkWell(
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(15),
+          ),
+          child: InkWell(customBorder:RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(15),
+          ),
+
             onTap: () {
               state.maybeMap(
                   loading: (_) => null,
@@ -27,8 +33,9 @@ class AppleSignInButton extends StatelessWidget {
             },
             child: Ink(
               decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(30),
-                  color: AppColors.blackBlue),
+                  border: Border.all(),
+                  borderRadius: BorderRadius.circular(15),
+                  color: AppColors.white),
               child: SizedBox(
                 width: MediaQuery.of(context).size.width,
                 height: 56,
@@ -47,11 +54,11 @@ class AppleSignInButton extends StatelessWidget {
                       const Icon(
                         Icons.apple,
                         size: 30,
-                        color: AppColors.background,
+                        color: Colors.black,
                       ),
                       Text(
                         AppStrings.signInApple,
-                        style: AppTheme.themeData.textTheme.labelMedium,
+                        style: AppTheme.themeData.textTheme.titleMedium,
                       ),
                       const SizedBox(),
                     ],
