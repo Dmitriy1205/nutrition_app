@@ -45,10 +45,9 @@ class CreateAccountBloc extends Bloc<CreateAccountEvent, CreateAccountState> {
     await event.map(
         createFields: (e) => _createFields(e, emit),
         checkIfUserCreatedProfile: (e) => _checkIfUserCreatedProfile(e, emit),
-        reset: (e) => _reset(e, emit));
+        reset: (e) => _reset(e, emit),
+        accountCreated: (e) => _accountCreated(e, emit));
   }
-
-
 
   Future<void> _checkIfUserCreatedProfile(_CheckIfUserCreatedAccount event,
       Emitter<CreateAccountState> emit) async {
@@ -68,16 +67,24 @@ class CreateAccountBloc extends Bloc<CreateAccountEvent, CreateAccountState> {
     try {
       var currentUser = _authBloc.state.user!;
 
-      await _userRepository.createUser(data: event.account!, userId: currentUser.uid);
+      await _userRepository.createUser(
+          data: event.account!, userId: currentUser.uid);
       emit(const CreateAccountState.created());
     } on BadRequestException catch (e) {
       emit(CreateAccountState.error(error: e.message));
       emit(previousState);
     }
   }
+
   Future<void> _reset(_Reset event, Emitter<CreateAccountState> emit) async {
     emit(const CreateAccountState.initial());
   }
+
+  Future<void> _accountCreated(
+      _AccountCreated event, Emitter<CreateAccountState> emit) async {
+    emit(const CreateAccountState.success());
+  }
+
   @override
   Future<void> close() {
     _subscription.cancel();

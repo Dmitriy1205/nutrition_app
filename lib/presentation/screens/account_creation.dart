@@ -39,128 +39,103 @@ class _AccountCreationState extends State<AccountCreation> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: BlocConsumer<CreateAccountBloc, CreateAccountState>(
-        listener: (context, state) {
-          state.maybeMap(
-              error: (e) {
-                ScaffoldMessenger.of(context).showSnackBar(
-                  SnackBar(
-                    backgroundColor: AppColors.red,
-                    duration: const Duration(seconds: 5),
-                    content: Text(
-                      e.error,
-                      textAlign: TextAlign.center,
-                    ),
-                  ),
-                );
-              },
-              created: (_) => _currentPage == 2
-                  ? Navigator.pushReplacement(context,
-                      MaterialPageRoute(builder: (context) => HomeScreen()))
-                  : WidgetsBinding.instance?.addPostFrameCallback((_) {
-                _pageController.nextPage(
-                  duration: const Duration(milliseconds: 200),
-                  curve: Curves.ease,
-                );
-              }),
-
-              orElse: () {});
-        },
-        builder: (context, state) {
-          return Stack(
-            children: [
-              Container(
-                decoration: BoxDecoration(
-                  gradient: LinearGradient(
-                    colors: [
-                      const Color(0xFFDEF3F2).withOpacity(0.7),
-                      const Color(0xFFD6CFFF).withOpacity(0.7),
-                    ],
-                    stops: const [
-                      0.3,
-                      0.9,
-                    ],
-                    begin: Alignment.bottomLeft,
-                    end: Alignment.centerRight,
-                  ),
-                ),
+      body: Stack(
+        children: [
+          Container(
+            decoration: BoxDecoration(
+              gradient: LinearGradient(
+                colors: [
+                  const Color(0xFFDEF3F2).withOpacity(0.7),
+                  const Color(0xFFD6CFFF).withOpacity(0.7),
+                ],
+                stops: const [
+                  0.3,
+                  0.9,
+                ],
+                begin: Alignment.bottomLeft,
+                end: Alignment.centerRight,
               ),
-              Padding(
-                padding: const EdgeInsets.symmetric(vertical: 60.0),
-                child: Column(
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 30.0),
-                      child: Row(
-                        children: [
-                          AnimatedOpacity(
-                            duration: const Duration(milliseconds: 200),
-                            opacity: _currentPage == 0 ? 0.0 : 1.0,
-                            child: InkWell(
-                              borderRadius: BorderRadius.circular(20),
-                              child: Ink(
-                                width: 20,
-                                height: 20,
-                                child: const Center(
-                                  child: Icon(
-                                    Icons.arrow_back_ios,
-                                    size: 20,
-                                  ),
-                                ),
-                              ),
-                              onTap: () {
-                                _pageController.previousPage(
-                                    duration:
-                                    const Duration(milliseconds: 200),
-                                    curve: Curves.ease);
-                              },
-                            ),
-                          ),
-                          const SizedBox(
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.symmetric(vertical: 60.0),
+            child: Column(
+              children: [
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 30.0),
+                  child: Row(
+                    children: [
+                      AnimatedOpacity(
+                        duration: const Duration(milliseconds: 200),
+                        opacity: _currentPage == 0 ? 0.0 : 1.0,
+                        child: InkWell(
+                          borderRadius: BorderRadius.circular(20),
+                          child: Ink(
                             width: 20,
-                          ),
-                          Expanded(
-                            child: SizedBox(
-                              height: 17,
-                              child: ClipRRect(
-                                borderRadius: BorderRadius.circular(40),
-                                child: LinearProgressIndicator(
-                                  value: (_currentPage + 1) / 3,
-                                  backgroundColor: AppColors.white,
-                                  valueColor:
-                                  const AlwaysStoppedAnimation<Color>(
-                                      AppColors.violet),
-                                ),
+                            height: 20,
+                            child: const Center(
+                              child: Icon(
+                                Icons.arrow_back_ios,
+                                size: 20,
                               ),
                             ),
                           ),
-                        ],
-                      ),
-                    ),
-                    const SizedBox(
-                      height: 30,
-                    ),
-                    state.maybeMap(
-                      loading: (_) => const LoadingIndicator(),
-                      orElse: ()=>Expanded(
-                        child: PageView(
-                          controller: _pageController,
-                          pageSnapping: false,
-                          physics: const NeverScrollableScrollPhysics(),
-                          children: const [
-                            First(),
-                            Second(),
-                            Third(),
-                          ],
+                          onTap: () {
+                            _pageController.previousPage(
+                                duration: const Duration(milliseconds: 200),
+                                curve: Curves.ease);
+                          },
                         ),
-                      ),),
-
-                  ],
+                      ),
+                      const SizedBox(
+                        width: 20,
+                      ),
+                      Expanded(
+                        child: SizedBox(
+                          height: 17,
+                          child: ClipRRect(
+                            borderRadius: BorderRadius.circular(40),
+                            child: LinearProgressIndicator(
+                              value: (_currentPage + 1) / 3,
+                              backgroundColor: AppColors.white,
+                              valueColor: const AlwaysStoppedAnimation<Color>(
+                                  AppColors.violet),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
-              ),
-            ],
-          );
-        },
+                const SizedBox(
+                  height: 30,
+                ),
+                Expanded(
+                  child: PageView(
+                    controller: _pageController,
+                    pageSnapping: false,
+                    physics: const NeverScrollableScrollPhysics(),
+                    children:  [
+                      First(nextPage: () {
+                       return _pageController.nextPage(
+                          duration: const Duration(milliseconds: 200),
+                          curve: Curves.ease,
+                        );
+                      },),
+                      Second(nextPage: () {
+                        return _pageController.nextPage(
+                          duration: const Duration(milliseconds: 200),
+                          curve: Curves.ease,
+                        );
+                      },),
+                      Third(),
+                    ],
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ],
       ),
     );
   }

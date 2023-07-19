@@ -22,12 +22,14 @@ class Providers extends StatelessWidget {
         ),
         BlocProvider(
           create: (context) => sl<CreateAccountBloc>(),
-        ),
-        BlocProvider(
-          create: (context) => sl<UserBloc>(),
           lazy: false,
         ),
-        BlocProvider(create: (context)=> sl<ProfileBloc>(),),
+        // BlocProvider(
+        //   create: (context) => sl<UserBloc>(),
+        //   lazy: false,
+        // ),
+        BlocProvider(create: (context)=> sl<ProfileBloc>(),
+          lazy: false,),
       ],
       child: child,
     );

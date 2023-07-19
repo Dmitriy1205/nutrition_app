@@ -30,7 +30,7 @@ Future<void> init() async {
   sl.registerLazySingleton(() => UserRepository(firestoreService: sl()));
 
   //Blocs
-  sl.registerLazySingleton(() => AuthBloc(authRepository: sl()));
+  sl.registerLazySingleton(() => AuthBloc(authRepository: sl(),));
   sl.registerFactory(() => SignupBloc(auth: sl(), authBloc: sl()));
   sl.registerFactory(() => SigninBloc(auth: sl()));
   sl.registerFactory(() => ForgotPasswordBloc(auth: sl()));
@@ -38,8 +38,8 @@ Future<void> init() async {
   sl.registerFactory(() => AppleSigninBloc(auth: sl()));
   sl.registerLazySingleton(
       () => CreateAccountBloc(authBloc: sl(), userRepository: sl()));
-  sl.registerLazySingleton(() =>
-      UserBloc(userRepository: sl(), authBloc: sl(), createAccountBloc: sl()));
+  // sl.registerLazySingleton(() =>
+  //     UserBloc(userRepository: sl(), authBloc: sl(), createAccountBloc: sl()));
   sl.registerFactory(() => ProfileBloc(
       userRepository: sl(), authBloc: sl(), createAccountBloc: sl()));
 }

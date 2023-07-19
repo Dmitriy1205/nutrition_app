@@ -9,5 +9,6 @@ class CreateAccountEvent with _$CreateAccountEvent {
   const factory CreateAccountEvent.checkIfUserCreatedProfile(
       {required String id}) = _CheckIfUserCreatedAccount;
 
+  const factory CreateAccountEvent.accountCreated() = _AccountCreated;
   const factory CreateAccountEvent.reset() = _Reset;
 }

@@ -20,6 +20,7 @@ mixin _$CreateAccountEvent {
   TResult when<TResult extends Object?>({
     required TResult Function(Map<String, dynamic>? account) createFields,
     required TResult Function(String id) checkIfUserCreatedProfile,
+    required TResult Function() accountCreated,
     required TResult Function() reset,
   }) =>
       throw _privateConstructorUsedError;
@@ -27,6 +28,7 @@ mixin _$CreateAccountEvent {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(Map<String, dynamic>? account)? createFields,
     TResult? Function(String id)? checkIfUserCreatedProfile,
+    TResult? Function()? accountCreated,
     TResult? Function()? reset,
   }) =>
       throw _privateConstructorUsedError;
@@ -34,6 +36,7 @@ mixin _$CreateAccountEvent {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(Map<String, dynamic>? account)? createFields,
     TResult Function(String id)? checkIfUserCreatedProfile,
+    TResult Function()? accountCreated,
     TResult Function()? reset,
     required TResult orElse(),
   }) =>
@@ -43,6 +46,7 @@ mixin _$CreateAccountEvent {
     required TResult Function(_CreateFields value) createFields,
     required TResult Function(_CheckIfUserCreatedAccount value)
         checkIfUserCreatedProfile,
+    required TResult Function(_AccountCreated value) accountCreated,
     required TResult Function(_Reset value) reset,
   }) =>
       throw _privateConstructorUsedError;
@@ -51,6 +55,7 @@ mixin _$CreateAccountEvent {
     TResult? Function(_CreateFields value)? createFields,
     TResult? Function(_CheckIfUserCreatedAccount value)?
         checkIfUserCreatedProfile,
+    TResult? Function(_AccountCreated value)? accountCreated,
     TResult? Function(_Reset value)? reset,
   }) =>
       throw _privateConstructorUsedError;
@@ -59,6 +64,7 @@ mixin _$CreateAccountEvent {
     TResult Function(_CreateFields value)? createFields,
     TResult Function(_CheckIfUserCreatedAccount value)?
         checkIfUserCreatedProfile,
+    TResult Function(_AccountCreated value)? accountCreated,
     TResult Function(_Reset value)? reset,
     required TResult orElse(),
   }) =>
@@ -158,6 +164,7 @@ class _$_CreateFields implements _CreateFields {
   TResult when<TResult extends Object?>({
     required TResult Function(Map<String, dynamic>? account) createFields,
     required TResult Function(String id) checkIfUserCreatedProfile,
+    required TResult Function() accountCreated,
     required TResult Function() reset,
   }) {
     return createFields(account);
@@ -168,6 +175,7 @@ class _$_CreateFields implements _CreateFields {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(Map<String, dynamic>? account)? createFields,
     TResult? Function(String id)? checkIfUserCreatedProfile,
+    TResult? Function()? accountCreated,
     TResult? Function()? reset,
   }) {
     return createFields?.call(account);
@@ -178,6 +186,7 @@ class _$_CreateFields implements _CreateFields {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(Map<String, dynamic>? account)? createFields,
     TResult Function(String id)? checkIfUserCreatedProfile,
+    TResult Function()? accountCreated,
     TResult Function()? reset,
     required TResult orElse(),
   }) {
@@ -193,6 +202,7 @@ class _$_CreateFields implements _CreateFields {
     required TResult Function(_CreateFields value) createFields,
     required TResult Function(_CheckIfUserCreatedAccount value)
         checkIfUserCreatedProfile,
+    required TResult Function(_AccountCreated value) accountCreated,
     required TResult Function(_Reset value) reset,
   }) {
     return createFields(this);
@@ -204,6 +214,7 @@ class _$_CreateFields implements _CreateFields {
     TResult? Function(_CreateFields value)? createFields,
     TResult? Function(_CheckIfUserCreatedAccount value)?
         checkIfUserCreatedProfile,
+    TResult? Function(_AccountCreated value)? accountCreated,
     TResult? Function(_Reset value)? reset,
   }) {
     return createFields?.call(this);
@@ -215,6 +226,7 @@ class _$_CreateFields implements _CreateFields {
     TResult Function(_CreateFields value)? createFields,
     TResult Function(_CheckIfUserCreatedAccount value)?
         checkIfUserCreatedProfile,
+    TResult Function(_AccountCreated value)? accountCreated,
     TResult Function(_Reset value)? reset,
     required TResult orElse(),
   }) {
@@ -304,6 +316,7 @@ class _$_CheckIfUserCreatedAccount implements _CheckIfUserCreatedAccount {
   TResult when<TResult extends Object?>({
     required TResult Function(Map<String, dynamic>? account) createFields,
     required TResult Function(String id) checkIfUserCreatedProfile,
+    required TResult Function() accountCreated,
     required TResult Function() reset,
   }) {
     return checkIfUserCreatedProfile(id);
@@ -314,6 +327,7 @@ class _$_CheckIfUserCreatedAccount implements _CheckIfUserCreatedAccount {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(Map<String, dynamic>? account)? createFields,
     TResult? Function(String id)? checkIfUserCreatedProfile,
+    TResult? Function()? accountCreated,
     TResult? Function()? reset,
   }) {
     return checkIfUserCreatedProfile?.call(id);
@@ -324,6 +338,7 @@ class _$_CheckIfUserCreatedAccount implements _CheckIfUserCreatedAccount {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(Map<String, dynamic>? account)? createFields,
     TResult Function(String id)? checkIfUserCreatedProfile,
+    TResult Function()? accountCreated,
     TResult Function()? reset,
     required TResult orElse(),
   }) {
@@ -339,6 +354,7 @@ class _$_CheckIfUserCreatedAccount implements _CheckIfUserCreatedAccount {
     required TResult Function(_CreateFields value) createFields,
     required TResult Function(_CheckIfUserCreatedAccount value)
         checkIfUserCreatedProfile,
+    required TResult Function(_AccountCreated value) accountCreated,
     required TResult Function(_Reset value) reset,
   }) {
     return checkIfUserCreatedProfile(this);
@@ -350,6 +366,7 @@ class _$_CheckIfUserCreatedAccount implements _CheckIfUserCreatedAccount {
     TResult? Function(_CreateFields value)? createFields,
     TResult? Function(_CheckIfUserCreatedAccount value)?
         checkIfUserCreatedProfile,
+    TResult? Function(_AccountCreated value)? accountCreated,
     TResult? Function(_Reset value)? reset,
   }) {
     return checkIfUserCreatedProfile?.call(this);
@@ -361,6 +378,7 @@ class _$_CheckIfUserCreatedAccount implements _CheckIfUserCreatedAccount {
     TResult Function(_CreateFields value)? createFields,
     TResult Function(_CheckIfUserCreatedAccount value)?
         checkIfUserCreatedProfile,
+    TResult Function(_AccountCreated value)? accountCreated,
     TResult Function(_Reset value)? reset,
     required TResult orElse(),
   }) {
@@ -379,6 +397,123 @@ abstract class _CheckIfUserCreatedAccount implements CreateAccountEvent {
   @JsonKey(ignore: true)
   _$$_CheckIfUserCreatedAccountCopyWith<_$_CheckIfUserCreatedAccount>
       get copyWith => throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$_AccountCreatedCopyWith<$Res> {
+  factory _$$_AccountCreatedCopyWith(
+          _$_AccountCreated value, $Res Function(_$_AccountCreated) then) =
+      __$$_AccountCreatedCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$_AccountCreatedCopyWithImpl<$Res>
+    extends _$CreateAccountEventCopyWithImpl<$Res, _$_AccountCreated>
+    implements _$$_AccountCreatedCopyWith<$Res> {
+  __$$_AccountCreatedCopyWithImpl(
+      _$_AccountCreated _value, $Res Function(_$_AccountCreated) _then)
+      : super(_value, _then);
+}
+
+/// @nodoc
+
+class _$_AccountCreated implements _AccountCreated {
+  const _$_AccountCreated();
+
+  @override
+  String toString() {
+    return 'CreateAccountEvent.accountCreated()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _$_AccountCreated);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(Map<String, dynamic>? account) createFields,
+    required TResult Function(String id) checkIfUserCreatedProfile,
+    required TResult Function() accountCreated,
+    required TResult Function() reset,
+  }) {
+    return accountCreated();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(Map<String, dynamic>? account)? createFields,
+    TResult? Function(String id)? checkIfUserCreatedProfile,
+    TResult? Function()? accountCreated,
+    TResult? Function()? reset,
+  }) {
+    return accountCreated?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(Map<String, dynamic>? account)? createFields,
+    TResult Function(String id)? checkIfUserCreatedProfile,
+    TResult Function()? accountCreated,
+    TResult Function()? reset,
+    required TResult orElse(),
+  }) {
+    if (accountCreated != null) {
+      return accountCreated();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_CreateFields value) createFields,
+    required TResult Function(_CheckIfUserCreatedAccount value)
+        checkIfUserCreatedProfile,
+    required TResult Function(_AccountCreated value) accountCreated,
+    required TResult Function(_Reset value) reset,
+  }) {
+    return accountCreated(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_CreateFields value)? createFields,
+    TResult? Function(_CheckIfUserCreatedAccount value)?
+        checkIfUserCreatedProfile,
+    TResult? Function(_AccountCreated value)? accountCreated,
+    TResult? Function(_Reset value)? reset,
+  }) {
+    return accountCreated?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_CreateFields value)? createFields,
+    TResult Function(_CheckIfUserCreatedAccount value)?
+        checkIfUserCreatedProfile,
+    TResult Function(_AccountCreated value)? accountCreated,
+    TResult Function(_Reset value)? reset,
+    required TResult orElse(),
+  }) {
+    if (accountCreated != null) {
+      return accountCreated(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _AccountCreated implements CreateAccountEvent {
+  const factory _AccountCreated() = _$_AccountCreated;
 }
 
 /// @nodoc
@@ -419,6 +554,7 @@ class _$_Reset implements _Reset {
   TResult when<TResult extends Object?>({
     required TResult Function(Map<String, dynamic>? account) createFields,
     required TResult Function(String id) checkIfUserCreatedProfile,
+    required TResult Function() accountCreated,
     required TResult Function() reset,
   }) {
     return reset();
@@ -429,6 +565,7 @@ class _$_Reset implements _Reset {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(Map<String, dynamic>? account)? createFields,
     TResult? Function(String id)? checkIfUserCreatedProfile,
+    TResult? Function()? accountCreated,
     TResult? Function()? reset,
   }) {
     return reset?.call();
@@ -439,6 +576,7 @@ class _$_Reset implements _Reset {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(Map<String, dynamic>? account)? createFields,
     TResult Function(String id)? checkIfUserCreatedProfile,
+    TResult Function()? accountCreated,
     TResult Function()? reset,
     required TResult orElse(),
   }) {
@@ -454,6 +592,7 @@ class _$_Reset implements _Reset {
     required TResult Function(_CreateFields value) createFields,
     required TResult Function(_CheckIfUserCreatedAccount value)
         checkIfUserCreatedProfile,
+    required TResult Function(_AccountCreated value) accountCreated,
     required TResult Function(_Reset value) reset,
   }) {
     return reset(this);
@@ -465,6 +604,7 @@ class _$_Reset implements _Reset {
     TResult? Function(_CreateFields value)? createFields,
     TResult? Function(_CheckIfUserCreatedAccount value)?
         checkIfUserCreatedProfile,
+    TResult? Function(_AccountCreated value)? accountCreated,
     TResult? Function(_Reset value)? reset,
   }) {
     return reset?.call(this);
@@ -476,6 +616,7 @@ class _$_Reset implements _Reset {
     TResult Function(_CreateFields value)? createFields,
     TResult Function(_CheckIfUserCreatedAccount value)?
         checkIfUserCreatedProfile,
+    TResult Function(_AccountCreated value)? accountCreated,
     TResult Function(_Reset value)? reset,
     required TResult orElse(),
   }) {
