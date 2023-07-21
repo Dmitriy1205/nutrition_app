@@ -38,7 +38,8 @@ class SignupBloc extends Bloc<SignupEvent, SignupState> {
         email: event.email.toString(),
         password: event.password.toString(),
       );
-      // _authBloc.add(AuthEvent.initUser(user: _authBloc.state.user));
+      // _authBloc.emit(AuthState.authenticated(user: _authBloc.state.user!));
+
 
       emit(const SignupState.success());
     } on BadRequestException catch (e) {

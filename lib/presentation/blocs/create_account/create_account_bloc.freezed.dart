@@ -18,7 +18,7 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$CreateAccountEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(Map<String, dynamic>? account) createFields,
+    required TResult Function(UserAccount account) createFields,
     required TResult Function(String id) checkIfUserCreatedProfile,
     required TResult Function() accountCreated,
     required TResult Function() reset,
@@ -26,7 +26,7 @@ mixin _$CreateAccountEvent {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(Map<String, dynamic>? account)? createFields,
+    TResult? Function(UserAccount account)? createFields,
     TResult? Function(String id)? checkIfUserCreatedProfile,
     TResult? Function()? accountCreated,
     TResult? Function()? reset,
@@ -34,7 +34,7 @@ mixin _$CreateAccountEvent {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(Map<String, dynamic>? account)? createFields,
+    TResult Function(UserAccount account)? createFields,
     TResult Function(String id)? checkIfUserCreatedProfile,
     TResult Function()? accountCreated,
     TResult Function()? reset,
@@ -95,7 +95,9 @@ abstract class _$$_CreateFieldsCopyWith<$Res> {
           _$_CreateFields value, $Res Function(_$_CreateFields) then) =
       __$$_CreateFieldsCopyWithImpl<$Res>;
   @useResult
-  $Res call({Map<String, dynamic>? account});
+  $Res call({UserAccount account});
+
+  $UserAccountCopyWith<$Res> get account;
 }
 
 /// @nodoc
@@ -109,32 +111,32 @@ class __$$_CreateFieldsCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? account = freezed,
+    Object? account = null,
   }) {
     return _then(_$_CreateFields(
-      account: freezed == account
-          ? _value._account
+      account: null == account
+          ? _value.account
           : account // ignore: cast_nullable_to_non_nullable
-              as Map<String, dynamic>?,
+              as UserAccount,
     ));
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $UserAccountCopyWith<$Res> get account {
+    return $UserAccountCopyWith<$Res>(_value.account, (value) {
+      return _then(_value.copyWith(account: value));
+    });
   }
 }
 
 /// @nodoc
 
 class _$_CreateFields implements _CreateFields {
-  const _$_CreateFields({required final Map<String, dynamic>? account})
-      : _account = account;
+  const _$_CreateFields({required this.account});
 
-  final Map<String, dynamic>? _account;
   @override
-  Map<String, dynamic>? get account {
-    final value = _account;
-    if (value == null) return null;
-    if (_account is EqualUnmodifiableMapView) return _account;
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableMapView(value);
-  }
+  final UserAccount account;
 
   @override
   String toString() {
@@ -146,12 +148,11 @@ class _$_CreateFields implements _CreateFields {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_CreateFields &&
-            const DeepCollectionEquality().equals(other._account, _account));
+            (identical(other.account, account) || other.account == account));
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, const DeepCollectionEquality().hash(_account));
+  int get hashCode => Object.hash(runtimeType, account);
 
   @JsonKey(ignore: true)
   @override
@@ -162,7 +163,7 @@ class _$_CreateFields implements _CreateFields {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(Map<String, dynamic>? account) createFields,
+    required TResult Function(UserAccount account) createFields,
     required TResult Function(String id) checkIfUserCreatedProfile,
     required TResult Function() accountCreated,
     required TResult Function() reset,
@@ -173,7 +174,7 @@ class _$_CreateFields implements _CreateFields {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(Map<String, dynamic>? account)? createFields,
+    TResult? Function(UserAccount account)? createFields,
     TResult? Function(String id)? checkIfUserCreatedProfile,
     TResult? Function()? accountCreated,
     TResult? Function()? reset,
@@ -184,7 +185,7 @@ class _$_CreateFields implements _CreateFields {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(Map<String, dynamic>? account)? createFields,
+    TResult Function(UserAccount account)? createFields,
     TResult Function(String id)? checkIfUserCreatedProfile,
     TResult Function()? accountCreated,
     TResult Function()? reset,
@@ -238,10 +239,10 @@ class _$_CreateFields implements _CreateFields {
 }
 
 abstract class _CreateFields implements CreateAccountEvent {
-  const factory _CreateFields({required final Map<String, dynamic>? account}) =
+  const factory _CreateFields({required final UserAccount account}) =
       _$_CreateFields;
 
-  Map<String, dynamic>? get account;
+  UserAccount get account;
   @JsonKey(ignore: true)
   _$$_CreateFieldsCopyWith<_$_CreateFields> get copyWith =>
       throw _privateConstructorUsedError;
@@ -314,7 +315,7 @@ class _$_CheckIfUserCreatedAccount implements _CheckIfUserCreatedAccount {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(Map<String, dynamic>? account) createFields,
+    required TResult Function(UserAccount account) createFields,
     required TResult Function(String id) checkIfUserCreatedProfile,
     required TResult Function() accountCreated,
     required TResult Function() reset,
@@ -325,7 +326,7 @@ class _$_CheckIfUserCreatedAccount implements _CheckIfUserCreatedAccount {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(Map<String, dynamic>? account)? createFields,
+    TResult? Function(UserAccount account)? createFields,
     TResult? Function(String id)? checkIfUserCreatedProfile,
     TResult? Function()? accountCreated,
     TResult? Function()? reset,
@@ -336,7 +337,7 @@ class _$_CheckIfUserCreatedAccount implements _CheckIfUserCreatedAccount {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(Map<String, dynamic>? account)? createFields,
+    TResult Function(UserAccount account)? createFields,
     TResult Function(String id)? checkIfUserCreatedProfile,
     TResult Function()? accountCreated,
     TResult Function()? reset,
@@ -437,7 +438,7 @@ class _$_AccountCreated implements _AccountCreated {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(Map<String, dynamic>? account) createFields,
+    required TResult Function(UserAccount account) createFields,
     required TResult Function(String id) checkIfUserCreatedProfile,
     required TResult Function() accountCreated,
     required TResult Function() reset,
@@ -448,7 +449,7 @@ class _$_AccountCreated implements _AccountCreated {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(Map<String, dynamic>? account)? createFields,
+    TResult? Function(UserAccount account)? createFields,
     TResult? Function(String id)? checkIfUserCreatedProfile,
     TResult? Function()? accountCreated,
     TResult? Function()? reset,
@@ -459,7 +460,7 @@ class _$_AccountCreated implements _AccountCreated {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(Map<String, dynamic>? account)? createFields,
+    TResult Function(UserAccount account)? createFields,
     TResult Function(String id)? checkIfUserCreatedProfile,
     TResult Function()? accountCreated,
     TResult Function()? reset,
@@ -552,7 +553,7 @@ class _$_Reset implements _Reset {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(Map<String, dynamic>? account) createFields,
+    required TResult Function(UserAccount account) createFields,
     required TResult Function(String id) checkIfUserCreatedProfile,
     required TResult Function() accountCreated,
     required TResult Function() reset,
@@ -563,7 +564,7 @@ class _$_Reset implements _Reset {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(Map<String, dynamic>? account)? createFields,
+    TResult? Function(UserAccount account)? createFields,
     TResult? Function(String id)? checkIfUserCreatedProfile,
     TResult? Function()? accountCreated,
     TResult? Function()? reset,
@@ -574,7 +575,7 @@ class _$_Reset implements _Reset {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(Map<String, dynamic>? account)? createFields,
+    TResult Function(UserAccount account)? createFields,
     TResult Function(String id)? checkIfUserCreatedProfile,
     TResult Function()? accountCreated,
     TResult Function()? reset,

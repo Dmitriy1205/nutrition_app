@@ -13,8 +13,8 @@ import '../../../common/theme.dart';
 import '../../blocs/sign_in/signin_bloc.dart';
 import '../../widgets/app_elevated_button.dart';
 import '../../widgets/bottomCornerGradient.dart';
-import '../../widgets/loading_indicator.dart';
 import 'forgot_password.dart';
+
 
 class EmailSignInScreen extends StatefulWidget {
   const EmailSignInScreen({super.key});
@@ -25,20 +25,12 @@ class EmailSignInScreen extends StatefulWidget {
 
 class _EmailSignInScreenState extends State<EmailSignInScreen> {
   final SigninBloc _bloc = sl<SigninBloc>();
-
   final _formKey = GlobalKey<FormState>();
 
   final _emailController = TextEditingController();
 
   final _passwordController = TextEditingController();
   bool isObscure = true;
-
-  @override
-  void dispose() {
-    _emailController.dispose();
-    _passwordController.dispose();
-    super.dispose();
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -59,19 +51,19 @@ class _EmailSignInScreenState extends State<EmailSignInScreen> {
                   ),
                 );
               },
+              success: (_)=>Navigator.pop(context),
               orElse: () {});
         },
         builder: (context, state) {
-          return state.maybeMap(
-            loading: (_) => const LoadingIndicator(),
-            orElse: () => Stack(children: [
+          return Stack(
+            children: [
               const BottomCornerGradient(),
               SizedBox(
                 height: MediaQuery.of(context).size.height,
                 width: MediaQuery.of(context).size.width,
                 child: Padding(
-                  padding:
-                      const EdgeInsets.only(left: 34, right: 34, bottom: 34,top: 34),
+                  padding: const EdgeInsets.only(
+                      left: 34, right: 34, bottom: 34, top: 34),
                   child: ListView(
                     children: [
                       Align(
@@ -126,7 +118,6 @@ class _EmailSignInScreenState extends State<EmailSignInScreen> {
                                 contentPadding: EdgeInsets.symmetric(
                                     vertical: 17, horizontal: 15),
                                 hintText: AppStrings.yourEmail,
-
                               ),
                               validator: context.validateEmailAddress,
                             ),
@@ -147,7 +138,7 @@ class _EmailSignInScreenState extends State<EmailSignInScreen> {
                               obscureText: isObscure,
                               style: AppTheme.themeData.textTheme.labelSmall!
                                   .copyWith(fontSize: 14),
-                              decoration:  InputDecoration(
+                              decoration: InputDecoration(
                                 contentPadding: const EdgeInsets.symmetric(
                                     vertical: 17, horizontal: 15),
                                 hintText: AppStrings.yourPass,
@@ -161,7 +152,6 @@ class _EmailSignInScreenState extends State<EmailSignInScreen> {
                                       ? SvgPicture.asset(AppIcons.closedEye)
                                       : SvgPicture.asset(AppIcons.openEye),
                                 ),
-
                               ),
                               validator: (value) {
                                 if (value!.isEmpty) {
@@ -173,22 +163,54 @@ class _EmailSignInScreenState extends State<EmailSignInScreen> {
                             const SizedBox(
                               height: 20,
                             ),
-                            AppElevatedButton(
-                                text: AppStrings.signIn,
-                                style: AppTheme.themeData.textTheme.titleMedium!
-                                    .copyWith(color: AppColors.white),
-                                onPressed: () {
-                                  if (!_formKey.currentState!.validate()) {
-                                    return;
-                                  }
-                                  _formKey.currentState!.save();
-                                  _bloc.add(
-                                    SigninEvent.signInWithEmailAndPassword(
-                                      email: _emailController.text,
-                                      password: _passwordController.text,
+                            Center(
+                              child: AnimatedContainer(
+                                duration: Duration(milliseconds: 300),
+                                width: state.maybeMap(
+                                  loading: (_) => 70,
+                                  orElse: () =>
+                                      MediaQuery.of(context).size.width,
+                                ),
+                                height: 60,
+                                child: state.maybeMap(
+                                  loading: (_) => Container(
+                                    height: 50,
+                                    width: 50,
+                                    decoration: BoxDecoration(
+                                        color: AppColors.violet,
+                                        borderRadius:
+                                            BorderRadius.circular(40)),
+                                    child: const Center(
+                                      child: CircularProgressIndicator(
+                                        valueColor:
+                                            AlwaysStoppedAnimation<Color>(
+                                                AppColors.white),
+                                      ),
                                     ),
-                                  );
-                                }),
+                                  ),
+                                  orElse: () => AppElevatedButton(
+                                      text: AppStrings.signIn,
+                                      style: AppTheme
+                                          .themeData.textTheme.titleMedium!
+                                          .copyWith(color: AppColors.white),
+                                      onPressed: () {
+                                        if (!_formKey.currentState!
+                                            .validate()) {
+                                          return;
+                                        }
+                                        _formKey.currentState!.save();
+
+                                        _bloc.add(
+                                          SigninEvent
+                                              .signInWithEmailAndPassword(
+                                            email: _emailController.text,
+                                            password: _passwordController.text,
+                                          ),
+                                        );
+                                      }),
+                                ),
+                              ),
+                            ),
                             Padding(
                               padding: const EdgeInsets.only(top: 10),
                               child: SizedBox(
@@ -258,10 +280,18 @@ class _EmailSignInScreenState extends State<EmailSignInScreen> {
                   ),
                 ),
               ),
-            ]),
+            ],
           );
         },
       ),
     );
+  }
+
+  @override
+  void dispose() {
+    _emailController.dispose();
+    _passwordController.dispose();
+    _bloc.close();
+    super.dispose();
   }
 }

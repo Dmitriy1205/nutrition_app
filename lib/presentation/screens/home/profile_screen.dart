@@ -130,7 +130,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
               ),
               child: Form(
                 key: _formKey,
-
                 child: ListView(
                   // physics: const ClampingScrollPhysics(),
                   children: [
@@ -139,11 +138,12 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     // ),
                     //
                     Align(
-                        alignment: Alignment.center,
-                        child: Text(
-                          AppStrings.profile.toUpperCase(),
-                          style: AppTheme.themeData.textTheme.headlineLarge,
-                        ),),
+                      alignment: Alignment.center,
+                      child: Text(
+                        AppStrings.profile.toUpperCase(),
+                        style: AppTheme.themeData.textTheme.headlineLarge,
+                      ),
+                    ),
                     //
                     // Align(
                     //     alignment: Alignment.center,

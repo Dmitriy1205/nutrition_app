@@ -11,10 +11,10 @@ class UserRepository {
       : _firestoreService = firestoreService;
 
   Future<void> createUser(
-      {required String userId, required  data}) async {
+      {required String userId, required UserAccount data}) async {
     try {
       await _firestoreService.write(
-          collection: collectionName, data: data, userId: userId);
+          collection: collectionName, data: data.toJson(), userId: userId);
     } on Exception catch (e) {
       throw BadRequestException(message: e.toString());
     }

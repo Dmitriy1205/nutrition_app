@@ -69,7 +69,7 @@ class CreateAccountBloc extends Bloc<CreateAccountEvent, CreateAccountState> {
 
       await _userRepository.createUser(
           data: event.account!, userId: currentUser.uid);
-      emit(const CreateAccountState.created());
+      emit(const CreateAccountState.success());
     } on BadRequestException catch (e) {
       emit(CreateAccountState.error(error: e.message));
       emit(previousState);

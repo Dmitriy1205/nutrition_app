@@ -21,10 +21,10 @@ class SigninBloc extends Bloc<SigninEvent, SigninState> {
 
   Future<void> _mapBlocToState(SigninEvent event, Emitter<SigninState> emit) =>
       event.map(
-        signInWithEmailAndPassword: (e) => _signUpWithEmailAndPassword(e, emit),
+        signInWithEmailAndPassword: (e) => _signInWithEmailAndPassword(e, emit),
       );
 
-  Future<void> _signUpWithEmailAndPassword(
+  Future<void> _signInWithEmailAndPassword(
       SigninEvent event, Emitter<SigninState> emit) async {
     emit(const SigninState.loading());
 

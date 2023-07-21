@@ -20,6 +20,15 @@ class _AccountCreationState extends State<AccountCreation> {
   final _pageController = PageController();
   int _currentPage = 0;
 
+  String name = '';
+  String birthDate = '';
+  Map<String, dynamic> location = {};
+  String selectedDay = '';
+
+  String selectedLength = '';
+  String selectedPeriod = '';
+  bool irregularCycle = false;
+
   @override
   void initState() {
     super.initState();
@@ -98,7 +107,8 @@ class _AccountCreationState extends State<AccountCreation> {
                             child: LinearProgressIndicator(
                               value: (_currentPage + 1) / 3,
                               backgroundColor: AppColors.white,
-                              valueColor: const AlwaysStoppedAnimation<Color>(
+                              valueColor:
+                              const AlwaysStoppedAnimation<Color>(
                                   AppColors.violet),
                             ),
                           ),
@@ -115,20 +125,42 @@ class _AccountCreationState extends State<AccountCreation> {
                     controller: _pageController,
                     pageSnapping: false,
                     physics: const NeverScrollableScrollPhysics(),
-                    children:  [
-                      First(nextPage: () {
-                       return _pageController.nextPage(
-                          duration: const Duration(milliseconds: 200),
-                          curve: Curves.ease,
-                        );
-                      },),
-                      Second(nextPage: () {
-                        return _pageController.nextPage(
-                          duration: const Duration(milliseconds: 200),
-                          curve: Curves.ease,
-                        );
-                      },),
-                      Third(),
+                    children: [
+                      First(
+                        nextPage:
+                            (String n, String b, Map<String, dynamic> l) {
+                          setState(() {
+                            name = n;
+                            birthDate = b;
+                            location = l;
+                          });
+                          _pageController.nextPage(
+                            duration: const Duration(milliseconds: 200),
+                            curve: Curves.ease,
+                          );
+                        },
+                      ),
+                      Second(
+                        nextPage: (String d, String l, String p, bool i) {
+                          selectedDay = d;
+                          selectedLength = l;
+                          selectedPeriod = p;
+                          irregularCycle = i;
+                          _pageController.nextPage(
+                            duration: const Duration(milliseconds: 200),
+                            curve: Curves.ease,
+                          );
+                        },
+                      ),
+                      Third(
+                        name: name,
+                        birthDate: birthDate,
+                        location: location,
+                        irregularCycle: irregularCycle,
+                        selectedDay: selectedDay,
+                        selectedLength: selectedLength,
+                        selectedPeriod: selectedPeriod,
+                      ),
                     ],
                   ),
                 ),
