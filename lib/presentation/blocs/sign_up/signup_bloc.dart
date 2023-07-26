@@ -3,7 +3,6 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 
 import '../../../common/exceptions.dart';
 import '../../../data/repositories/auth_repository.dart';
-import '../auth/auth_bloc.dart';
 
 part 'signup_event.dart';
 
@@ -13,12 +12,10 @@ part 'signup_bloc.freezed.dart';
 
 class SignupBloc extends Bloc<SignupEvent, SignupState> {
   final AuthRepository _authRepository;
-  final AuthBloc _authBloc;
 
   SignupBloc({
     required AuthRepository auth,
-    required AuthBloc authBloc,
-  })  : _authBloc = authBloc,
+  })  :
         _authRepository = auth,
         super(const SignupState.initial()) {
     on<SignupEvent>(_mapBlocToState);

@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:nutrition_app/presentation/blocs/create_account/create_account_bloc.dart';
 import 'package:nutrition_app/presentation/blocs/profile/profile_bloc.dart';
-import 'package:nutrition_app/presentation/blocs/user/user_bloc.dart';
 
 import '../common/services/service_locator.dart';
 import '../presentation/blocs/auth/auth_bloc.dart';
+import '../presentation/blocs/mood/mood_bloc.dart';
 
 class Providers extends StatelessWidget {
   final Widget child;
@@ -29,6 +29,8 @@ class Providers extends StatelessWidget {
         //   lazy: false,
         // ),
         BlocProvider(create: (context)=> sl<ProfileBloc>(),
+          lazy: false,),
+        BlocProvider(create: (context)=> sl<MoodBloc>(),
           lazy: false,),
       ],
       child: child,

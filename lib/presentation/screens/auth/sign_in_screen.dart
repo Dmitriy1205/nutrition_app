@@ -2,23 +2,16 @@ import 'dart:io';
 
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:nutrition_app/common/colors.dart';
-import 'package:nutrition_app/common/extensions/validation.dart';
 import 'package:nutrition_app/common/strings.dart';
 import 'package:nutrition_app/presentation/screens/auth/email_sign_in_screen.dart';
 import 'package:nutrition_app/presentation/screens/auth/sign_up_screen.dart';
 import 'package:nutrition_app/presentation/widgets/bottomCornerGradient.dart';
 
-import '../../../common/services/service_locator.dart';
 import '../../../common/theme.dart';
-import '../../blocs/sign_in/signin_bloc.dart';
 import '../../widgets/app_elevated_button.dart';
 import '../../widgets/apple_signin_button.dart';
 import '../../widgets/google_signin_button.dart';
-import '../../widgets/loading_indicator.dart';
-import 'forgot_password.dart';
-
 class SignInScreen extends StatefulWidget {
   const SignInScreen({Key? key}) : super(key: key);
 
@@ -48,14 +41,14 @@ class _SignInScreenState extends State<SignInScreen> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      SizedBox(height: 94,),
+                      const SizedBox(height: 94,),
                       Text(
                         AppStrings.start,
                         style: AppTheme.themeData.textTheme.headlineLarge,
                       ),
-                      Text(AppStrings.weHappy),
+                      const Text(AppStrings.weHappy),
 
-                      Spacer(),
+                      const Spacer(),
                       const SizedBox(
                         height: 30,
                       ),

@@ -8,7 +8,7 @@ class AppCheckbox extends StatelessWidget {
   final ValueChanged<bool?>? onChanged;
   final Color borderColor;
 
-  const AppCheckbox({
+  const AppCheckbox({super.key,
     required this.value,
     required this.onChanged,
     required this.borderColor,

@@ -11,17 +11,6 @@ import 'package:nutrition_app/presentation/widgets/loading_indicator.dart';
 import '../presentation/blocs/auth/auth_bloc.dart';
 import '../presentation/screens/auth/sign_in_screen.dart';
 
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:nutrition_app/app/providers.dart';
-import 'package:nutrition_app/common/theme.dart';
-import 'package:nutrition_app/presentation/blocs/create_account/create_account_bloc.dart';
-import 'package:nutrition_app/presentation/screens/account_creation.dart';
-import 'package:nutrition_app/presentation/screens/home/home_screen.dart';
-
-import '../presentation/blocs/auth/auth_bloc.dart';
-import '../presentation/screens/auth/sign_in_screen.dart';
-
 class MyApp extends StatelessWidget {
   MyApp({super.key});
 
@@ -56,7 +45,7 @@ class MyApp extends StatelessWidget {
     return BlocBuilder<CreateAccountBloc, CreateAccountState>(
       builder: (context, state) {
         return state.maybeMap(
-            loading: (_) =>  Scaffold(
+            loading: (_) => Scaffold(
                   body: Stack(
                     alignment: Alignment.center,
                     children: [
@@ -80,10 +69,29 @@ class MyApp extends StatelessWidget {
                     ],
                   ),
                 ),
-            success: (_) => const HomeScreen(),
+            success: (_) => const Material(
+                color: Colors.white, child: HomeScreen()),
             profileNotCreated: (_) => const AccountCreation(),
-            orElse: () => const Scaffold(
-                backgroundColor: AppColors.white, body: LoadingIndicator()));
+            orElse: () => Container(
+                  decoration: const BoxDecoration(
+                    color: Colors.white,
+                    gradient: LinearGradient(
+                      colors: [
+                        Color(0xFFDEF3F2),
+                        Color(0xFFD6CFFF),
+                      ],
+                      stops: [
+                        0.3,
+                        0.9,
+                      ],
+                      begin: Alignment.bottomLeft,
+                      end: Alignment.centerRight,
+                    ),
+                  ),
+                  child: const Scaffold(
+                      backgroundColor: Colors.transparent,
+                      body: LoadingIndicator()),
+                ));
       },
     );
   }

@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -165,7 +164,7 @@ class _EmailSignInScreenState extends State<EmailSignInScreen> {
                             ),
                             Center(
                               child: AnimatedContainer(
-                                duration: Duration(milliseconds: 300),
+                                duration: const Duration(milliseconds: 300),
                                 width: state.maybeMap(
                                   loading: (_) => 70,
                                   orElse: () =>

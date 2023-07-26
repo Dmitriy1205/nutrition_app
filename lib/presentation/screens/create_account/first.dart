@@ -2,13 +2,11 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:intl/intl.dart';
 import 'package:nutrition_app/common/extensions/validation.dart';
 import 'package:nutrition_app/common/icons.dart';
 import 'package:nutrition_app/common/strings.dart';
-import 'package:nutrition_app/presentation/blocs/create_account/create_account_bloc.dart';
 import 'package:nutrition_app/presentation/widgets/app_elevated_button.dart';
 
 import '../../../common/colors.dart';

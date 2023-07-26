@@ -1,12 +1,34 @@
 class Mood {
   final String name;
+  final String icon;
   final List<String> foodList;
 
-  const Mood({required this.name, required this.foodList});
+  const Mood( {required this.name, required this.foodList,required this.icon,});
 }
 
 const List<Mood> moodList = [
-  Mood(name: 'Tired', foodList: [
+  Mood(
+    name: 'Sleepy',
+    icon: 'assets/icons/mood/sleepy.svg',
+    foodList: [
+      'Dark Chocolate',
+      'Almonds',
+      'Salmon',
+      'Blueberries',
+      'Kale',
+      'Brown Rice',
+      'Turkey',
+      'Chickpeas',
+      'Lentils',
+      'Avocado',
+      'Greek Yogurt',
+      'Chia Pudding',
+      'Coconut',
+    ],),
+  Mood(
+    name: 'Tired',
+    icon: 'assets/icons/mood/tired.svg',
+    foodList: [
     'Bananas',
     'Chia Seeds',
     'Cashews',
@@ -19,8 +41,11 @@ const List<Mood> moodList = [
     'Apple',
     'Sunflower Seeds',
     'Avocado',
-  ]),
-  Mood(name: 'Irritated', foodList: [
+  ],),
+  Mood(
+    name: 'Irritated',
+    icon: 'assets/icons/mood/irritated.svg',
+    foodList: [
     'Almond Butter',
     'Baked Apples',
     'Smoothie Bowl',
@@ -31,8 +56,11 @@ const List<Mood> moodList = [
     'Berries',
     'Apple',
     'Mackerel',
-  ]),
-  Mood(name: 'Anxious', foodList: [
+  ],),
+  Mood(
+    name: 'Anxious',
+    icon: 'assets/icons/mood/anxious.svg',
+    foodList: [
     'Salmon',
     'Pumpkin Seeds',
     'Custard',
@@ -48,8 +76,11 @@ const List<Mood> moodList = [
     'Pancakes',
     'Brazil Nuts',
     'Whole Wheat Bread',
-  ]),
-  Mood(name: 'Hungry', foodList: [
+  ],),
+  Mood(
+    name: 'Hungry',
+    icon: 'assets/icons/mood/hungry.svg',
+    foodList: [
     'Sandwich',
     'Sweet Potatoes',
     'Cottage Cheese',
@@ -65,8 +96,11 @@ const List<Mood> moodList = [
     'Walnuts',
     'Pumpkin Seeds',
     'Stew',
-  ]),
-  Mood(name: 'Sick', foodList: [
+  ],),
+  Mood(
+    name: 'Sick',
+    icon: 'assets/icons/mood/sick.svg',
+    foodList: [
     'Soup',
     'Warm Bowl',
     'Smoothie',
@@ -81,8 +115,11 @@ const List<Mood> moodList = [
     'Cacao',
     'Orange',
     'Stew',
-  ]),
-  Mood(name: 'Sad', foodList: [
+  ],),
+  Mood(
+    name: 'Sad',
+    icon: 'assets/icons/mood/sad.svg',
+    foodList: [
     'Banana',
     'Salmon',
     'Cocoa',
@@ -100,8 +137,11 @@ const List<Mood> moodList = [
     'Greek Yogurt',
     'Cashews',
     'Almonds',
-  ]),
-  Mood(name: 'Energised', foodList: [
+  ],),
+  Mood(
+    name: 'Energised',
+    icon: 'assets/icons/mood/energized.svg',
+    foodList: [
     'Bowl',
     'Smoothie',
     'Salad',
@@ -119,8 +159,43 @@ const List<Mood> moodList = [
     'Kimchi',
     'Chickpeas',
     'Broccoli',
-  ]),
-  Mood(name: ':) OK', foodList: [
+  ],),
+  Mood(
+    name: 'Calm',
+    icon: 'assets/icons/mood/calm.svg',
+    foodList: [
+      'Dark Chocolate',
+      'Almonds',
+      'Salmon',
+      'Blueberries',
+      'Kale',
+      'Brown Rice',
+      'Turkey',
+      'Chickpeas',
+      'Lentils',
+      'Avocado',
+      'Greek Yogurt',
+      'Chia Pudding',
+      'Coconut',
+      'Sandwich',
+      'Blackberries',
+      'Mango',
+      'Bowl',
+      'Kiwis',
+      'Salad',
+      'Oranges',
+      'Pasta',
+      'Beets',
+      'Toast',
+      'Carrots',
+      'Bell Pepper',
+      'Zucchini',
+      'Broccoli',
+    ],),
+  Mood(
+    name: 'OK',
+    icon: 'assets/icons/mood/ok.svg',
+    foodList: [
     'Hummus',
     'Wrap',
     'Eggs',
@@ -136,5 +211,5 @@ const List<Mood> moodList = [
     'Mushrooms',
     'Greek Yogurt',
     'Beets',
-  ]),
+  ],),
   ];

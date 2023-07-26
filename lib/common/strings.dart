@@ -15,7 +15,7 @@ class AppStrings {
   static const String password = 'Password';
   static const String confirmPassword = 'Confirm password';
   static const String joinQuestionaire = 'Check-in!✏️';
-  static const String or = 'Or';
+  static const String or = 'or';
   static const String dontHaveAccount = 'Don\'t Have an Account ? ';
   static const String alreadyHaveAccount = 'Already Have Account ? ';
   static const String reset = 'RESET';
@@ -41,6 +41,7 @@ class AppStrings {
   static const String location = 'Location';
   static const String accountConfirmation = 'Account\nConfirmation';
   static const String letsPersonalize = 'Let`s personalise your recipes';
+  static const String letsPersonalizeMeal = 'Lets personalise your meal';
   static const String irregularCycle = 'I have an irregular cycle';
   static const String cycleRegularity = 'Share Information\nabout your cycle';
   static const String foodPreferences = 'Tell us about your\nfood preferences';
@@ -65,6 +66,22 @@ class AppStrings {
   static const String yourEmail = 'Your email';
   static const String yourPass = 'Your password';
   static const String enterName = 'Enter your name';
+  static const String letUsKnow = 'Let us Know How Do\nYou Feel Today?';
+  static const String chooseYourFood = 'Choose your product preferences for recipes';
+  static const String writeFealing = 'Or add your mood';
+  static const String writeWishes = 'Add your cravings';
+  static const String orWriteWishes = 'Or add your cravings';
+  static const String edit = 'Edit';
+  static const String iFeel = 'I feel';
+  static const String seletWhatUp = 'Select what’s you up today';
+  static const String chooseYourRecipe = 'Choose your recipe';
+  static const String regenerate = 'Regenerate';
+  static const String pleaseWait = 'Please wait, we generate\nrecipe for you';
+  static const String howDoYouFeel = 'How do you feel today?';
+  static const String badRecipe = 'Bad recipe';
+  static const String saveToGallery = 'Save to gallery';
+  static const String done = 'Done';
+
   // static const String welcomeBack = 'Welcome back! Please enter your details';
 
 

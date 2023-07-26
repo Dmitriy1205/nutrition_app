@@ -1,6 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-import '../exceptions.dart';
 
 class FirestoreService {
   final FirebaseFirestore _firestore;

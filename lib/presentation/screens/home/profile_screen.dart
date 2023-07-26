@@ -103,7 +103,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return Scaffold(backgroundColor: Colors.transparent,
       body: BlocConsumer<ProfileBloc, ProfileState>(
         listener: (context, state) {
           state.maybeMap(

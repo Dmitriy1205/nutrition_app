@@ -7,6 +7,7 @@ class AppTheme {
     colorScheme: ThemeData().colorScheme.copyWith(
       primary: const Color(0xFFF2F2F2),
       background: const Color(0xFFFFFFFF),
+      onSurface: const Color(0xFFFFFFFF),
     ),
     scaffoldBackgroundColor: const Color(0xFFFFFFFF),
     textSelectionTheme:

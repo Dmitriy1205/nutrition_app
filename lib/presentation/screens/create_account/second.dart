@@ -328,7 +328,7 @@ class _SecondState extends State<Second> {
                       text: AppStrings.next,
                       style: AppTheme.themeData.textTheme.titleMedium!
                           .copyWith(color: AppColors.white),
-                      onPressed: !irregularCycle
+                      onPressed: irregularCycle
                           ? () {
                               if (!_formKey.currentState!.validate()) {
                                 return;

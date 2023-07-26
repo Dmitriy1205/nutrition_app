@@ -1,13 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:nutrition_app/presentation/screens/create_account/first.dart';
 import 'package:nutrition_app/presentation/screens/create_account/second.dart';
 import 'package:nutrition_app/presentation/screens/create_account/third.dart';
-import 'package:nutrition_app/presentation/screens/home/home_screen.dart';
 
 import '../../common/colors.dart';
-import '../blocs/create_account/create_account_bloc.dart';
-import '../widgets/loading_indicator.dart';
+import '../widgets/custom_linear_indicator.dart';
 
 class AccountCreation extends StatefulWidget {
   const AccountCreation({super.key});
@@ -103,15 +100,17 @@ class _AccountCreationState extends State<AccountCreation> {
                         child: SizedBox(
                           height: 17,
                           child: ClipRRect(
-                            borderRadius: BorderRadius.circular(40),
-                            child: LinearProgressIndicator(
-                              value: (_currentPage + 1) / 3,
-                              backgroundColor: AppColors.white,
-                              valueColor:
-                              const AlwaysStoppedAnimation<Color>(
-                                  AppColors.violet),
-                            ),
-                          ),
+                              borderRadius: BorderRadius.circular(40),
+                              child: CustomLinearIndicator(
+                                  progress: (_currentPage + 1) / 3, screenQuantity: 3,)
+                              // LinearProgressIndicator(
+                              //   value: (_currentPage + 1) / 3,
+                              //   backgroundColor: AppColors.white,
+                              //   valueColor:
+                              //   const AlwaysStoppedAnimation<Color>(
+                              //       AppColors.violet),
+                              // ),
+                              ),
                         ),
                       ),
                     ],
@@ -127,8 +126,7 @@ class _AccountCreationState extends State<AccountCreation> {
                     physics: const NeverScrollableScrollPhysics(),
                     children: [
                       First(
-                        nextPage:
-                            (String n, String b, Map<String, dynamic> l) {
+                        nextPage: (String n, String b, Map<String, dynamic> l) {
                           setState(() {
                             name = n;
                             birthDate = b;

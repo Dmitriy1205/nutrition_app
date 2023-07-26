@@ -107,7 +107,7 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                     const SizedBox(
                       height: 6,
                     ),
-                    Text(
+                    const Text(
                       AppStrings.enterYourEmailAddress,
                     ),
                     // const SizedBox(

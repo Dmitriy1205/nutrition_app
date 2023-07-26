@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -11,7 +10,6 @@ import '../../../data/models/account/account.dart';
 import '../../blocs/create_account/create_account_bloc.dart';
 import '../../widgets/app_checkbox.dart';
 import '../../widgets/app_elevated_button.dart';
-import '../../widgets/loading_indicator.dart';
 
 class Third extends StatefulWidget {
   final String name;

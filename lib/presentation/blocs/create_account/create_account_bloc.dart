@@ -2,7 +2,6 @@ import 'dart:async';
 
 import 'package:bloc/bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:nutrition_app/data/models/cities/cities.dart';
 import 'package:nutrition_app/data/repositories/user_repository.dart';
 
 import '../../../common/exceptions.dart';
@@ -68,7 +67,7 @@ class CreateAccountBloc extends Bloc<CreateAccountEvent, CreateAccountState> {
       var currentUser = _authBloc.state.user!;
 
       await _userRepository.createUser(
-          data: event.account!, userId: currentUser.uid);
+          data: event.account, userId: currentUser.uid);
       emit(const CreateAccountState.success());
     } on BadRequestException catch (e) {
       emit(CreateAccountState.error(error: e.message));

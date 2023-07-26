@@ -24,9 +24,9 @@ class RecipeDescription extends StatelessWidget {
                     onPressed: () {
                       Navigator.pop(context);
                     },
-                    icon: Icon(Icons.arrow_back_outlined)),
+                    icon: const Icon(Icons.arrow_back_outlined)),
 
-                SizedBox(
+                const SizedBox(
                   width: 40,
                 ),
               ],
@@ -42,7 +42,7 @@ class RecipeDescription extends StatelessWidget {
                       style: AppTheme.themeData.textTheme.headlineLarge,
                     ),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 40,
                   ),
                   Center(
@@ -51,7 +51,7 @@ class RecipeDescription extends StatelessWidget {
                       style: AppTheme.themeData.textTheme.headlineMedium!.copyWith(color: AppColors.blackBlue),
                     ),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 20,
                   ),
                   Text(
@@ -59,7 +59,7 @@ class RecipeDescription extends StatelessWidget {
                 ''',
                     style: AppTheme.themeData.textTheme.titleSmall,
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 40,
                   ),
                   Center(

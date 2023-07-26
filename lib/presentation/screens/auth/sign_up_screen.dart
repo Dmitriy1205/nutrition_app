@@ -14,7 +14,6 @@ import '../../../common/theme.dart';
 import '../../blocs/sign_up/signup_bloc.dart';
 import '../../widgets/app_elevated_button.dart';
 import '../../widgets/bottomCornerGradient.dart';
-import '../../widgets/loading_indicator.dart';
 import 'email_sign_in_screen.dart';
 
 class SignUpScreen extends StatefulWidget {

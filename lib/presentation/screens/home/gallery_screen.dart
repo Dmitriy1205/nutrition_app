@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:nutrition_app/presentation/screens/home/recipe_screen.dart';
 import 'package:nutrition_app/presentation/screens/recipe_description.dart';
 
 import '../../../common/strings.dart';
@@ -28,8 +27,9 @@ class GalleryScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.transparent,
       body: Padding(
-        padding: EdgeInsets.symmetric(horizontal: 10),
+        padding: const EdgeInsets.symmetric(horizontal: 10),
         child: ListView(
           children: [
             Align(
@@ -44,7 +44,7 @@ class GalleryScreen extends StatelessWidget {
                   child: Text(AppStrings.savedRecipes.toUpperCase(),
                       style: AppTheme.themeData.textTheme.headlineLarge!
                           .copyWith(fontSize: 17))),
-              leading: SizedBox(),
+              leading: const SizedBox(),
               children: [
                 GridView.builder(
                   shrinkWrap: true,
@@ -72,7 +72,7 @@ class GalleryScreen extends StatelessWidget {
                                   .copyWith(fontSize: 13)),
                           ClipRRect(
                             borderRadius: BorderRadius.circular(8),
-                            child: Container(
+                            child: SizedBox(
                               height: 105,
                               width: 130,
                               child: Image.asset(
@@ -114,7 +114,7 @@ class GalleryScreen extends StatelessWidget {
                                 .copyWith(fontSize: 13)),
                         ClipRRect(
                           borderRadius: BorderRadius.circular(8),
-                          child: Container(
+                          child: SizedBox(
                             height: 105,
                             width: 130,
                             child: Image.asset(

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:nutrition_app/common/colors.dart';
 
 class Picker {
   Future<DateTime?> birthDatePicker(BuildContext context) {
