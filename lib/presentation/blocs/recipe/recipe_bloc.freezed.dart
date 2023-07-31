@@ -16,22 +16,29 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$RecipeEvent {
+  String get recipeName => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() generateRecipe,
-    required TResult Function() generateImage,
+    required TResult Function(
+            String phase, String mood, List<String> exclude, String recipeName)
+        generateRecipe,
+    required TResult Function(String recipeName) generateImage,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? generateRecipe,
-    TResult? Function()? generateImage,
+    TResult? Function(
+            String phase, String mood, List<String> exclude, String recipeName)?
+        generateRecipe,
+    TResult? Function(String recipeName)? generateImage,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? generateRecipe,
-    TResult Function()? generateImage,
+    TResult Function(
+            String phase, String mood, List<String> exclude, String recipeName)?
+        generateRecipe,
+    TResult Function(String recipeName)? generateImage,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -54,6 +61,10 @@ mixin _$RecipeEvent {
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
+
+  @JsonKey(ignore: true)
+  $RecipeEventCopyWith<RecipeEvent> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -61,6 +72,8 @@ abstract class $RecipeEventCopyWith<$Res> {
   factory $RecipeEventCopyWith(
           RecipeEvent value, $Res Function(RecipeEvent) then) =
       _$RecipeEventCopyWithImpl<$Res, RecipeEvent>;
+  @useResult
+  $Res call({String recipeName});
 }
 
 /// @nodoc
@@ -72,13 +85,31 @@ class _$RecipeEventCopyWithImpl<$Res, $Val extends RecipeEvent>
   final $Val _value;
   // ignore: unused_field
   final $Res Function($Val) _then;
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? recipeName = null,
+  }) {
+    return _then(_value.copyWith(
+      recipeName: null == recipeName
+          ? _value.recipeName
+          : recipeName // ignore: cast_nullable_to_non_nullable
+              as String,
+    ) as $Val);
+  }
 }
 
 /// @nodoc
-abstract class _$$_GenerateRecipeCopyWith<$Res> {
+abstract class _$$_GenerateRecipeCopyWith<$Res>
+    implements $RecipeEventCopyWith<$Res> {
   factory _$$_GenerateRecipeCopyWith(
           _$_GenerateRecipe value, $Res Function(_$_GenerateRecipe) then) =
       __$$_GenerateRecipeCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call(
+      {String phase, String mood, List<String> exclude, String recipeName});
 }
 
 /// @nodoc
@@ -88,54 +119,121 @@ class __$$_GenerateRecipeCopyWithImpl<$Res>
   __$$_GenerateRecipeCopyWithImpl(
       _$_GenerateRecipe _value, $Res Function(_$_GenerateRecipe) _then)
       : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? phase = null,
+    Object? mood = null,
+    Object? exclude = null,
+    Object? recipeName = null,
+  }) {
+    return _then(_$_GenerateRecipe(
+      phase: null == phase
+          ? _value.phase
+          : phase // ignore: cast_nullable_to_non_nullable
+              as String,
+      mood: null == mood
+          ? _value.mood
+          : mood // ignore: cast_nullable_to_non_nullable
+              as String,
+      exclude: null == exclude
+          ? _value._exclude
+          : exclude // ignore: cast_nullable_to_non_nullable
+              as List<String>,
+      recipeName: null == recipeName
+          ? _value.recipeName
+          : recipeName // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
 }
 
 /// @nodoc
 
 class _$_GenerateRecipe implements _GenerateRecipe {
-  const _$_GenerateRecipe();
+  const _$_GenerateRecipe(
+      {required this.phase,
+      required this.mood,
+      required final List<String> exclude,
+      required this.recipeName})
+      : _exclude = exclude;
+
+  @override
+  final String phase;
+  @override
+  final String mood;
+  final List<String> _exclude;
+  @override
+  List<String> get exclude {
+    if (_exclude is EqualUnmodifiableListView) return _exclude;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_exclude);
+  }
+
+  @override
+  final String recipeName;
 
   @override
   String toString() {
-    return 'RecipeEvent.generateRecipe()';
+    return 'RecipeEvent.generateRecipe(phase: $phase, mood: $mood, exclude: $exclude, recipeName: $recipeName)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$_GenerateRecipe);
+        (other.runtimeType == runtimeType &&
+            other is _$_GenerateRecipe &&
+            (identical(other.phase, phase) || other.phase == phase) &&
+            (identical(other.mood, mood) || other.mood == mood) &&
+            const DeepCollectionEquality().equals(other._exclude, _exclude) &&
+            (identical(other.recipeName, recipeName) ||
+                other.recipeName == recipeName));
   }
 
   @override
-  int get hashCode => runtimeType.hashCode;
+  int get hashCode => Object.hash(runtimeType, phase, mood,
+      const DeepCollectionEquality().hash(_exclude), recipeName);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_GenerateRecipeCopyWith<_$_GenerateRecipe> get copyWith =>
+      __$$_GenerateRecipeCopyWithImpl<_$_GenerateRecipe>(this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() generateRecipe,
-    required TResult Function() generateImage,
+    required TResult Function(
+            String phase, String mood, List<String> exclude, String recipeName)
+        generateRecipe,
+    required TResult Function(String recipeName) generateImage,
   }) {
-    return generateRecipe();
+    return generateRecipe(phase, mood, exclude, recipeName);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? generateRecipe,
-    TResult? Function()? generateImage,
+    TResult? Function(
+            String phase, String mood, List<String> exclude, String recipeName)?
+        generateRecipe,
+    TResult? Function(String recipeName)? generateImage,
   }) {
-    return generateRecipe?.call();
+    return generateRecipe?.call(phase, mood, exclude, recipeName);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? generateRecipe,
-    TResult Function()? generateImage,
+    TResult Function(
+            String phase, String mood, List<String> exclude, String recipeName)?
+        generateRecipe,
+    TResult Function(String recipeName)? generateImage,
     required TResult orElse(),
   }) {
     if (generateRecipe != null) {
-      return generateRecipe();
+      return generateRecipe(phase, mood, exclude, recipeName);
     }
     return orElse();
   }
@@ -173,14 +271,32 @@ class _$_GenerateRecipe implements _GenerateRecipe {
 }
 
 abstract class _GenerateRecipe implements RecipeEvent {
-  const factory _GenerateRecipe() = _$_GenerateRecipe;
+  const factory _GenerateRecipe(
+      {required final String phase,
+      required final String mood,
+      required final List<String> exclude,
+      required final String recipeName}) = _$_GenerateRecipe;
+
+  String get phase;
+  String get mood;
+  List<String> get exclude;
+  @override
+  String get recipeName;
+  @override
+  @JsonKey(ignore: true)
+  _$$_GenerateRecipeCopyWith<_$_GenerateRecipe> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$_GenerateImageCopyWith<$Res> {
+abstract class _$$_GenerateImageCopyWith<$Res>
+    implements $RecipeEventCopyWith<$Res> {
   factory _$$_GenerateImageCopyWith(
           _$_GenerateImage value, $Res Function(_$_GenerateImage) then) =
       __$$_GenerateImageCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call({String recipeName});
 }
 
 /// @nodoc
@@ -190,54 +306,85 @@ class __$$_GenerateImageCopyWithImpl<$Res>
   __$$_GenerateImageCopyWithImpl(
       _$_GenerateImage _value, $Res Function(_$_GenerateImage) _then)
       : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? recipeName = null,
+  }) {
+    return _then(_$_GenerateImage(
+      recipeName: null == recipeName
+          ? _value.recipeName
+          : recipeName // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
 }
 
 /// @nodoc
 
 class _$_GenerateImage implements _GenerateImage {
-  const _$_GenerateImage();
+  const _$_GenerateImage({required this.recipeName});
+
+  @override
+  final String recipeName;
 
   @override
   String toString() {
-    return 'RecipeEvent.generateImage()';
+    return 'RecipeEvent.generateImage(recipeName: $recipeName)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$_GenerateImage);
+        (other.runtimeType == runtimeType &&
+            other is _$_GenerateImage &&
+            (identical(other.recipeName, recipeName) ||
+                other.recipeName == recipeName));
   }
 
   @override
-  int get hashCode => runtimeType.hashCode;
+  int get hashCode => Object.hash(runtimeType, recipeName);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_GenerateImageCopyWith<_$_GenerateImage> get copyWith =>
+      __$$_GenerateImageCopyWithImpl<_$_GenerateImage>(this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() generateRecipe,
-    required TResult Function() generateImage,
+    required TResult Function(
+            String phase, String mood, List<String> exclude, String recipeName)
+        generateRecipe,
+    required TResult Function(String recipeName) generateImage,
   }) {
-    return generateImage();
+    return generateImage(recipeName);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? generateRecipe,
-    TResult? Function()? generateImage,
+    TResult? Function(
+            String phase, String mood, List<String> exclude, String recipeName)?
+        generateRecipe,
+    TResult? Function(String recipeName)? generateImage,
   }) {
-    return generateImage?.call();
+    return generateImage?.call(recipeName);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? generateRecipe,
-    TResult Function()? generateImage,
+    TResult Function(
+            String phase, String mood, List<String> exclude, String recipeName)?
+        generateRecipe,
+    TResult Function(String recipeName)? generateImage,
     required TResult orElse(),
   }) {
     if (generateImage != null) {
-      return generateImage();
+      return generateImage(recipeName);
     }
     return orElse();
   }
@@ -275,7 +422,15 @@ class _$_GenerateImage implements _GenerateImage {
 }
 
 abstract class _GenerateImage implements RecipeEvent {
-  const factory _GenerateImage() = _$_GenerateImage;
+  const factory _GenerateImage({required final String recipeName}) =
+      _$_GenerateImage;
+
+  @override
+  String get recipeName;
+  @override
+  @JsonKey(ignore: true)
+  _$$_GenerateImageCopyWith<_$_GenerateImage> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -283,24 +438,30 @@ mixin _$RecipeState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
-    required TResult Function() generating,
-    required TResult Function() success,
+    required TResult Function() textGenerating,
+    required TResult Function() imageGenerating,
+    required TResult Function(String recipeText) textGenerated,
+    required TResult Function(String recipeImage) imageGenerated,
     required TResult Function(String error) error,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
-    TResult? Function()? generating,
-    TResult? Function()? success,
+    TResult? Function()? textGenerating,
+    TResult? Function()? imageGenerating,
+    TResult? Function(String recipeText)? textGenerated,
+    TResult? Function(String recipeImage)? imageGenerated,
     TResult? Function(String error)? error,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function()? generating,
-    TResult Function()? success,
+    TResult Function()? textGenerating,
+    TResult Function()? imageGenerating,
+    TResult Function(String recipeText)? textGenerated,
+    TResult Function(String recipeImage)? imageGenerated,
     TResult Function(String error)? error,
     required TResult orElse(),
   }) =>
@@ -308,24 +469,30 @@ mixin _$RecipeState {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Initial value) initial,
-    required TResult Function(_Generating value) generating,
-    required TResult Function(_Success value) success,
+    required TResult Function(_TextGenerating value) textGenerating,
+    required TResult Function(_ImageGenerating value) imageGenerating,
+    required TResult Function(_TextGenerated value) textGenerated,
+    required TResult Function(_ImageGenerated value) imageGenerated,
     required TResult Function(_ErrorState value) error,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initial value)? initial,
-    TResult? Function(_Generating value)? generating,
-    TResult? Function(_Success value)? success,
+    TResult? Function(_TextGenerating value)? textGenerating,
+    TResult? Function(_ImageGenerating value)? imageGenerating,
+    TResult? Function(_TextGenerated value)? textGenerated,
+    TResult? Function(_ImageGenerated value)? imageGenerated,
     TResult? Function(_ErrorState value)? error,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initial value)? initial,
-    TResult Function(_Generating value)? generating,
-    TResult Function(_Success value)? success,
+    TResult Function(_TextGenerating value)? textGenerating,
+    TResult Function(_ImageGenerating value)? imageGenerating,
+    TResult Function(_TextGenerated value)? textGenerated,
+    TResult Function(_ImageGenerated value)? imageGenerated,
     TResult Function(_ErrorState value)? error,
     required TResult orElse(),
   }) =>
@@ -367,8 +534,8 @@ class __$$_InitialCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_Initial implements _Initial {
-  const _$_Initial();
+class _$_Initial extends _Initial {
+  const _$_Initial() : super._();
 
   @override
   String toString() {
@@ -388,8 +555,10 @@ class _$_Initial implements _Initial {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
-    required TResult Function() generating,
-    required TResult Function() success,
+    required TResult Function() textGenerating,
+    required TResult Function() imageGenerating,
+    required TResult Function(String recipeText) textGenerated,
+    required TResult Function(String recipeImage) imageGenerated,
     required TResult Function(String error) error,
   }) {
     return initial();
@@ -399,8 +568,10 @@ class _$_Initial implements _Initial {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
-    TResult? Function()? generating,
-    TResult? Function()? success,
+    TResult? Function()? textGenerating,
+    TResult? Function()? imageGenerating,
+    TResult? Function(String recipeText)? textGenerated,
+    TResult? Function(String recipeImage)? imageGenerated,
     TResult? Function(String error)? error,
   }) {
     return initial?.call();
@@ -410,8 +581,10 @@ class _$_Initial implements _Initial {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function()? generating,
-    TResult Function()? success,
+    TResult Function()? textGenerating,
+    TResult Function()? imageGenerating,
+    TResult Function(String recipeText)? textGenerated,
+    TResult Function(String recipeImage)? imageGenerated,
     TResult Function(String error)? error,
     required TResult orElse(),
   }) {
@@ -425,8 +598,10 @@ class _$_Initial implements _Initial {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Initial value) initial,
-    required TResult Function(_Generating value) generating,
-    required TResult Function(_Success value) success,
+    required TResult Function(_TextGenerating value) textGenerating,
+    required TResult Function(_ImageGenerating value) imageGenerating,
+    required TResult Function(_TextGenerated value) textGenerated,
+    required TResult Function(_ImageGenerated value) imageGenerated,
     required TResult Function(_ErrorState value) error,
   }) {
     return initial(this);
@@ -436,8 +611,10 @@ class _$_Initial implements _Initial {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initial value)? initial,
-    TResult? Function(_Generating value)? generating,
-    TResult? Function(_Success value)? success,
+    TResult? Function(_TextGenerating value)? textGenerating,
+    TResult? Function(_ImageGenerating value)? imageGenerating,
+    TResult? Function(_TextGenerated value)? textGenerated,
+    TResult? Function(_ImageGenerated value)? imageGenerated,
     TResult? Function(_ErrorState value)? error,
   }) {
     return initial?.call(this);
@@ -447,8 +624,10 @@ class _$_Initial implements _Initial {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initial value)? initial,
-    TResult Function(_Generating value)? generating,
-    TResult Function(_Success value)? success,
+    TResult Function(_TextGenerating value)? textGenerating,
+    TResult Function(_ImageGenerating value)? imageGenerating,
+    TResult Function(_TextGenerated value)? textGenerated,
+    TResult Function(_ImageGenerated value)? imageGenerated,
     TResult Function(_ErrorState value)? error,
     required TResult orElse(),
   }) {
@@ -459,40 +638,41 @@ class _$_Initial implements _Initial {
   }
 }
 
-abstract class _Initial implements RecipeState {
+abstract class _Initial extends RecipeState {
   const factory _Initial() = _$_Initial;
+  const _Initial._() : super._();
 }
 
 /// @nodoc
-abstract class _$$_GeneratingCopyWith<$Res> {
-  factory _$$_GeneratingCopyWith(
-          _$_Generating value, $Res Function(_$_Generating) then) =
-      __$$_GeneratingCopyWithImpl<$Res>;
+abstract class _$$_TextGeneratingCopyWith<$Res> {
+  factory _$$_TextGeneratingCopyWith(
+          _$_TextGenerating value, $Res Function(_$_TextGenerating) then) =
+      __$$_TextGeneratingCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$_GeneratingCopyWithImpl<$Res>
-    extends _$RecipeStateCopyWithImpl<$Res, _$_Generating>
-    implements _$$_GeneratingCopyWith<$Res> {
-  __$$_GeneratingCopyWithImpl(
-      _$_Generating _value, $Res Function(_$_Generating) _then)
+class __$$_TextGeneratingCopyWithImpl<$Res>
+    extends _$RecipeStateCopyWithImpl<$Res, _$_TextGenerating>
+    implements _$$_TextGeneratingCopyWith<$Res> {
+  __$$_TextGeneratingCopyWithImpl(
+      _$_TextGenerating _value, $Res Function(_$_TextGenerating) _then)
       : super(_value, _then);
 }
 
 /// @nodoc
 
-class _$_Generating implements _Generating {
-  const _$_Generating();
+class _$_TextGenerating extends _TextGenerating {
+  const _$_TextGenerating() : super._();
 
   @override
   String toString() {
-    return 'RecipeState.generating()';
+    return 'RecipeState.textGenerating()';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$_Generating);
+        (other.runtimeType == runtimeType && other is _$_TextGenerating);
   }
 
   @override
@@ -502,35 +682,41 @@ class _$_Generating implements _Generating {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
-    required TResult Function() generating,
-    required TResult Function() success,
+    required TResult Function() textGenerating,
+    required TResult Function() imageGenerating,
+    required TResult Function(String recipeText) textGenerated,
+    required TResult Function(String recipeImage) imageGenerated,
     required TResult Function(String error) error,
   }) {
-    return generating();
+    return textGenerating();
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
-    TResult? Function()? generating,
-    TResult? Function()? success,
+    TResult? Function()? textGenerating,
+    TResult? Function()? imageGenerating,
+    TResult? Function(String recipeText)? textGenerated,
+    TResult? Function(String recipeImage)? imageGenerated,
     TResult? Function(String error)? error,
   }) {
-    return generating?.call();
+    return textGenerating?.call();
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function()? generating,
-    TResult Function()? success,
+    TResult Function()? textGenerating,
+    TResult Function()? imageGenerating,
+    TResult Function(String recipeText)? textGenerated,
+    TResult Function(String recipeImage)? imageGenerated,
     TResult Function(String error)? error,
     required TResult orElse(),
   }) {
-    if (generating != null) {
-      return generating();
+    if (textGenerating != null) {
+      return textGenerating();
     }
     return orElse();
   }
@@ -539,73 +725,81 @@ class _$_Generating implements _Generating {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Initial value) initial,
-    required TResult Function(_Generating value) generating,
-    required TResult Function(_Success value) success,
+    required TResult Function(_TextGenerating value) textGenerating,
+    required TResult Function(_ImageGenerating value) imageGenerating,
+    required TResult Function(_TextGenerated value) textGenerated,
+    required TResult Function(_ImageGenerated value) imageGenerated,
     required TResult Function(_ErrorState value) error,
   }) {
-    return generating(this);
+    return textGenerating(this);
   }
 
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initial value)? initial,
-    TResult? Function(_Generating value)? generating,
-    TResult? Function(_Success value)? success,
+    TResult? Function(_TextGenerating value)? textGenerating,
+    TResult? Function(_ImageGenerating value)? imageGenerating,
+    TResult? Function(_TextGenerated value)? textGenerated,
+    TResult? Function(_ImageGenerated value)? imageGenerated,
     TResult? Function(_ErrorState value)? error,
   }) {
-    return generating?.call(this);
+    return textGenerating?.call(this);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initial value)? initial,
-    TResult Function(_Generating value)? generating,
-    TResult Function(_Success value)? success,
+    TResult Function(_TextGenerating value)? textGenerating,
+    TResult Function(_ImageGenerating value)? imageGenerating,
+    TResult Function(_TextGenerated value)? textGenerated,
+    TResult Function(_ImageGenerated value)? imageGenerated,
     TResult Function(_ErrorState value)? error,
     required TResult orElse(),
   }) {
-    if (generating != null) {
-      return generating(this);
+    if (textGenerating != null) {
+      return textGenerating(this);
     }
     return orElse();
   }
 }
 
-abstract class _Generating implements RecipeState {
-  const factory _Generating() = _$_Generating;
+abstract class _TextGenerating extends RecipeState {
+  const factory _TextGenerating() = _$_TextGenerating;
+  const _TextGenerating._() : super._();
 }
 
 /// @nodoc
-abstract class _$$_SuccessCopyWith<$Res> {
-  factory _$$_SuccessCopyWith(
-          _$_Success value, $Res Function(_$_Success) then) =
-      __$$_SuccessCopyWithImpl<$Res>;
+abstract class _$$_ImageGeneratingCopyWith<$Res> {
+  factory _$$_ImageGeneratingCopyWith(
+          _$_ImageGenerating value, $Res Function(_$_ImageGenerating) then) =
+      __$$_ImageGeneratingCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$_SuccessCopyWithImpl<$Res>
-    extends _$RecipeStateCopyWithImpl<$Res, _$_Success>
-    implements _$$_SuccessCopyWith<$Res> {
-  __$$_SuccessCopyWithImpl(_$_Success _value, $Res Function(_$_Success) _then)
+class __$$_ImageGeneratingCopyWithImpl<$Res>
+    extends _$RecipeStateCopyWithImpl<$Res, _$_ImageGenerating>
+    implements _$$_ImageGeneratingCopyWith<$Res> {
+  __$$_ImageGeneratingCopyWithImpl(
+      _$_ImageGenerating _value, $Res Function(_$_ImageGenerating) _then)
       : super(_value, _then);
 }
 
 /// @nodoc
 
-class _$_Success implements _Success {
-  const _$_Success();
+class _$_ImageGenerating extends _ImageGenerating {
+  const _$_ImageGenerating() : super._();
 
   @override
   String toString() {
-    return 'RecipeState.success()';
+    return 'RecipeState.imageGenerating()';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$_Success);
+        (other.runtimeType == runtimeType && other is _$_ImageGenerating);
   }
 
   @override
@@ -615,35 +809,41 @@ class _$_Success implements _Success {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
-    required TResult Function() generating,
-    required TResult Function() success,
+    required TResult Function() textGenerating,
+    required TResult Function() imageGenerating,
+    required TResult Function(String recipeText) textGenerated,
+    required TResult Function(String recipeImage) imageGenerated,
     required TResult Function(String error) error,
   }) {
-    return success();
+    return imageGenerating();
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
-    TResult? Function()? generating,
-    TResult? Function()? success,
+    TResult? Function()? textGenerating,
+    TResult? Function()? imageGenerating,
+    TResult? Function(String recipeText)? textGenerated,
+    TResult? Function(String recipeImage)? imageGenerated,
     TResult? Function(String error)? error,
   }) {
-    return success?.call();
+    return imageGenerating?.call();
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function()? generating,
-    TResult Function()? success,
+    TResult Function()? textGenerating,
+    TResult Function()? imageGenerating,
+    TResult Function(String recipeText)? textGenerated,
+    TResult Function(String recipeImage)? imageGenerated,
     TResult Function(String error)? error,
     required TResult orElse(),
   }) {
-    if (success != null) {
-      return success();
+    if (imageGenerating != null) {
+      return imageGenerating();
     }
     return orElse();
   }
@@ -652,42 +852,369 @@ class _$_Success implements _Success {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Initial value) initial,
-    required TResult Function(_Generating value) generating,
-    required TResult Function(_Success value) success,
+    required TResult Function(_TextGenerating value) textGenerating,
+    required TResult Function(_ImageGenerating value) imageGenerating,
+    required TResult Function(_TextGenerated value) textGenerated,
+    required TResult Function(_ImageGenerated value) imageGenerated,
     required TResult Function(_ErrorState value) error,
   }) {
-    return success(this);
+    return imageGenerating(this);
   }
 
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initial value)? initial,
-    TResult? Function(_Generating value)? generating,
-    TResult? Function(_Success value)? success,
+    TResult? Function(_TextGenerating value)? textGenerating,
+    TResult? Function(_ImageGenerating value)? imageGenerating,
+    TResult? Function(_TextGenerated value)? textGenerated,
+    TResult? Function(_ImageGenerated value)? imageGenerated,
     TResult? Function(_ErrorState value)? error,
   }) {
-    return success?.call(this);
+    return imageGenerating?.call(this);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initial value)? initial,
-    TResult Function(_Generating value)? generating,
-    TResult Function(_Success value)? success,
+    TResult Function(_TextGenerating value)? textGenerating,
+    TResult Function(_ImageGenerating value)? imageGenerating,
+    TResult Function(_TextGenerated value)? textGenerated,
+    TResult Function(_ImageGenerated value)? imageGenerated,
     TResult Function(_ErrorState value)? error,
     required TResult orElse(),
   }) {
-    if (success != null) {
-      return success(this);
+    if (imageGenerating != null) {
+      return imageGenerating(this);
     }
     return orElse();
   }
 }
 
-abstract class _Success implements RecipeState {
-  const factory _Success() = _$_Success;
+abstract class _ImageGenerating extends RecipeState {
+  const factory _ImageGenerating() = _$_ImageGenerating;
+  const _ImageGenerating._() : super._();
+}
+
+/// @nodoc
+abstract class _$$_TextGeneratedCopyWith<$Res> {
+  factory _$$_TextGeneratedCopyWith(
+          _$_TextGenerated value, $Res Function(_$_TextGenerated) then) =
+      __$$_TextGeneratedCopyWithImpl<$Res>;
+  @useResult
+  $Res call({String recipeText});
+}
+
+/// @nodoc
+class __$$_TextGeneratedCopyWithImpl<$Res>
+    extends _$RecipeStateCopyWithImpl<$Res, _$_TextGenerated>
+    implements _$$_TextGeneratedCopyWith<$Res> {
+  __$$_TextGeneratedCopyWithImpl(
+      _$_TextGenerated _value, $Res Function(_$_TextGenerated) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? recipeText = null,
+  }) {
+    return _then(_$_TextGenerated(
+      recipeText: null == recipeText
+          ? _value.recipeText
+          : recipeText // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$_TextGenerated extends _TextGenerated {
+  const _$_TextGenerated({required this.recipeText}) : super._();
+
+  @override
+  final String recipeText;
+
+  @override
+  String toString() {
+    return 'RecipeState.textGenerated(recipeText: $recipeText)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_TextGenerated &&
+            (identical(other.recipeText, recipeText) ||
+                other.recipeText == recipeText));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, recipeText);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_TextGeneratedCopyWith<_$_TextGenerated> get copyWith =>
+      __$$_TextGeneratedCopyWithImpl<_$_TextGenerated>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initial,
+    required TResult Function() textGenerating,
+    required TResult Function() imageGenerating,
+    required TResult Function(String recipeText) textGenerated,
+    required TResult Function(String recipeImage) imageGenerated,
+    required TResult Function(String error) error,
+  }) {
+    return textGenerated(recipeText);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? initial,
+    TResult? Function()? textGenerating,
+    TResult? Function()? imageGenerating,
+    TResult? Function(String recipeText)? textGenerated,
+    TResult? Function(String recipeImage)? imageGenerated,
+    TResult? Function(String error)? error,
+  }) {
+    return textGenerated?.call(recipeText);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function()? textGenerating,
+    TResult Function()? imageGenerating,
+    TResult Function(String recipeText)? textGenerated,
+    TResult Function(String recipeImage)? imageGenerated,
+    TResult Function(String error)? error,
+    required TResult orElse(),
+  }) {
+    if (textGenerated != null) {
+      return textGenerated(recipeText);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Initial value) initial,
+    required TResult Function(_TextGenerating value) textGenerating,
+    required TResult Function(_ImageGenerating value) imageGenerating,
+    required TResult Function(_TextGenerated value) textGenerated,
+    required TResult Function(_ImageGenerated value) imageGenerated,
+    required TResult Function(_ErrorState value) error,
+  }) {
+    return textGenerated(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Initial value)? initial,
+    TResult? Function(_TextGenerating value)? textGenerating,
+    TResult? Function(_ImageGenerating value)? imageGenerating,
+    TResult? Function(_TextGenerated value)? textGenerated,
+    TResult? Function(_ImageGenerated value)? imageGenerated,
+    TResult? Function(_ErrorState value)? error,
+  }) {
+    return textGenerated?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Initial value)? initial,
+    TResult Function(_TextGenerating value)? textGenerating,
+    TResult Function(_ImageGenerating value)? imageGenerating,
+    TResult Function(_TextGenerated value)? textGenerated,
+    TResult Function(_ImageGenerated value)? imageGenerated,
+    TResult Function(_ErrorState value)? error,
+    required TResult orElse(),
+  }) {
+    if (textGenerated != null) {
+      return textGenerated(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _TextGenerated extends RecipeState {
+  const factory _TextGenerated({required final String recipeText}) =
+      _$_TextGenerated;
+  const _TextGenerated._() : super._();
+
+  String get recipeText;
+  @JsonKey(ignore: true)
+  _$$_TextGeneratedCopyWith<_$_TextGenerated> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$_ImageGeneratedCopyWith<$Res> {
+  factory _$$_ImageGeneratedCopyWith(
+          _$_ImageGenerated value, $Res Function(_$_ImageGenerated) then) =
+      __$$_ImageGeneratedCopyWithImpl<$Res>;
+  @useResult
+  $Res call({String recipeImage});
+}
+
+/// @nodoc
+class __$$_ImageGeneratedCopyWithImpl<$Res>
+    extends _$RecipeStateCopyWithImpl<$Res, _$_ImageGenerated>
+    implements _$$_ImageGeneratedCopyWith<$Res> {
+  __$$_ImageGeneratedCopyWithImpl(
+      _$_ImageGenerated _value, $Res Function(_$_ImageGenerated) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? recipeImage = null,
+  }) {
+    return _then(_$_ImageGenerated(
+      recipeImage: null == recipeImage
+          ? _value.recipeImage
+          : recipeImage // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$_ImageGenerated extends _ImageGenerated {
+  const _$_ImageGenerated({required this.recipeImage}) : super._();
+
+  @override
+  final String recipeImage;
+
+  @override
+  String toString() {
+    return 'RecipeState.imageGenerated(recipeImage: $recipeImage)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_ImageGenerated &&
+            (identical(other.recipeImage, recipeImage) ||
+                other.recipeImage == recipeImage));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, recipeImage);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_ImageGeneratedCopyWith<_$_ImageGenerated> get copyWith =>
+      __$$_ImageGeneratedCopyWithImpl<_$_ImageGenerated>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initial,
+    required TResult Function() textGenerating,
+    required TResult Function() imageGenerating,
+    required TResult Function(String recipeText) textGenerated,
+    required TResult Function(String recipeImage) imageGenerated,
+    required TResult Function(String error) error,
+  }) {
+    return imageGenerated(recipeImage);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? initial,
+    TResult? Function()? textGenerating,
+    TResult? Function()? imageGenerating,
+    TResult? Function(String recipeText)? textGenerated,
+    TResult? Function(String recipeImage)? imageGenerated,
+    TResult? Function(String error)? error,
+  }) {
+    return imageGenerated?.call(recipeImage);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function()? textGenerating,
+    TResult Function()? imageGenerating,
+    TResult Function(String recipeText)? textGenerated,
+    TResult Function(String recipeImage)? imageGenerated,
+    TResult Function(String error)? error,
+    required TResult orElse(),
+  }) {
+    if (imageGenerated != null) {
+      return imageGenerated(recipeImage);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Initial value) initial,
+    required TResult Function(_TextGenerating value) textGenerating,
+    required TResult Function(_ImageGenerating value) imageGenerating,
+    required TResult Function(_TextGenerated value) textGenerated,
+    required TResult Function(_ImageGenerated value) imageGenerated,
+    required TResult Function(_ErrorState value) error,
+  }) {
+    return imageGenerated(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Initial value)? initial,
+    TResult? Function(_TextGenerating value)? textGenerating,
+    TResult? Function(_ImageGenerating value)? imageGenerating,
+    TResult? Function(_TextGenerated value)? textGenerated,
+    TResult? Function(_ImageGenerated value)? imageGenerated,
+    TResult? Function(_ErrorState value)? error,
+  }) {
+    return imageGenerated?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Initial value)? initial,
+    TResult Function(_TextGenerating value)? textGenerating,
+    TResult Function(_ImageGenerating value)? imageGenerating,
+    TResult Function(_TextGenerated value)? textGenerated,
+    TResult Function(_ImageGenerated value)? imageGenerated,
+    TResult Function(_ErrorState value)? error,
+    required TResult orElse(),
+  }) {
+    if (imageGenerated != null) {
+      return imageGenerated(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _ImageGenerated extends RecipeState {
+  const factory _ImageGenerated({required final String recipeImage}) =
+      _$_ImageGenerated;
+  const _ImageGenerated._() : super._();
+
+  String get recipeImage;
+  @JsonKey(ignore: true)
+  _$$_ImageGeneratedCopyWith<_$_ImageGenerated> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -723,8 +1250,8 @@ class __$$_ErrorStateCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_ErrorState implements _ErrorState {
-  const _$_ErrorState({required this.error});
+class _$_ErrorState extends _ErrorState {
+  const _$_ErrorState({required this.error}) : super._();
 
   @override
   final String error;
@@ -755,8 +1282,10 @@ class _$_ErrorState implements _ErrorState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
-    required TResult Function() generating,
-    required TResult Function() success,
+    required TResult Function() textGenerating,
+    required TResult Function() imageGenerating,
+    required TResult Function(String recipeText) textGenerated,
+    required TResult Function(String recipeImage) imageGenerated,
     required TResult Function(String error) error,
   }) {
     return error(this.error);
@@ -766,8 +1295,10 @@ class _$_ErrorState implements _ErrorState {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
-    TResult? Function()? generating,
-    TResult? Function()? success,
+    TResult? Function()? textGenerating,
+    TResult? Function()? imageGenerating,
+    TResult? Function(String recipeText)? textGenerated,
+    TResult? Function(String recipeImage)? imageGenerated,
     TResult? Function(String error)? error,
   }) {
     return error?.call(this.error);
@@ -777,8 +1308,10 @@ class _$_ErrorState implements _ErrorState {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function()? generating,
-    TResult Function()? success,
+    TResult Function()? textGenerating,
+    TResult Function()? imageGenerating,
+    TResult Function(String recipeText)? textGenerated,
+    TResult Function(String recipeImage)? imageGenerated,
     TResult Function(String error)? error,
     required TResult orElse(),
   }) {
@@ -792,8 +1325,10 @@ class _$_ErrorState implements _ErrorState {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Initial value) initial,
-    required TResult Function(_Generating value) generating,
-    required TResult Function(_Success value) success,
+    required TResult Function(_TextGenerating value) textGenerating,
+    required TResult Function(_ImageGenerating value) imageGenerating,
+    required TResult Function(_TextGenerated value) textGenerated,
+    required TResult Function(_ImageGenerated value) imageGenerated,
     required TResult Function(_ErrorState value) error,
   }) {
     return error(this);
@@ -803,8 +1338,10 @@ class _$_ErrorState implements _ErrorState {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initial value)? initial,
-    TResult? Function(_Generating value)? generating,
-    TResult? Function(_Success value)? success,
+    TResult? Function(_TextGenerating value)? textGenerating,
+    TResult? Function(_ImageGenerating value)? imageGenerating,
+    TResult? Function(_TextGenerated value)? textGenerated,
+    TResult? Function(_ImageGenerated value)? imageGenerated,
     TResult? Function(_ErrorState value)? error,
   }) {
     return error?.call(this);
@@ -814,8 +1351,10 @@ class _$_ErrorState implements _ErrorState {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initial value)? initial,
-    TResult Function(_Generating value)? generating,
-    TResult Function(_Success value)? success,
+    TResult Function(_TextGenerating value)? textGenerating,
+    TResult Function(_ImageGenerating value)? imageGenerating,
+    TResult Function(_TextGenerated value)? textGenerated,
+    TResult Function(_ImageGenerated value)? imageGenerated,
     TResult Function(_ErrorState value)? error,
     required TResult orElse(),
   }) {
@@ -826,8 +1365,9 @@ class _$_ErrorState implements _ErrorState {
   }
 }
 
-abstract class _ErrorState implements RecipeState {
+abstract class _ErrorState extends RecipeState {
   const factory _ErrorState({required final String error}) = _$_ErrorState;
+  const _ErrorState._() : super._();
 
   String get error;
   @JsonKey(ignore: true)

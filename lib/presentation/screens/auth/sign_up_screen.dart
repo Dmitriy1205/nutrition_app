@@ -206,6 +206,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
                               validator: (value) {
                                 if (value!.isEmpty) {
                                   return ' Password cant be empty';
+                                }else if( value != _passwordController.text){
+                                  return ' Password is different';
                                 }
                                 return null;
                               },

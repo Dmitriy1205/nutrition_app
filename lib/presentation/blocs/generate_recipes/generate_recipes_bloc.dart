@@ -1,6 +1,8 @@
 import 'package:bloc/bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:nutrition_app/common/functions.dart';
 
+import '../../../common/exceptions.dart';
 import '../../../data/repositories/recipe_repository.dart';
 
 part 'generate_recipes_event.dart';
@@ -15,9 +17,33 @@ class GenerateRecipesBloc
 
   GenerateRecipesBloc({required RecipeRepository recipeRepository})
       : _recipeRepository = recipeRepository,
-        super(const GenerateRecipesState.initial()) {
-    on<GenerateRecipesEvent>((event, emit) {
-      // TODO: implement event handler
-    });
+        super(const GenerateRecipesState.generating()) {
+    on<GenerateRecipesEvent>(_mapBlocToState);
+  }
+
+  Future<void> _mapBlocToState(
+      GenerateRecipesEvent event, Emitter<GenerateRecipesState> emit) async {
+    await event.map(
+      generateRecipes: (e) => _generateRecipes(e, emit),
+    );
+  }
+
+  Future<void> _generateRecipes(
+      _GenerateRecipes event, Emitter<GenerateRecipesState> emit) async {
+    emit(const GenerateRecipesState.generating());
+    try {
+      final String currentTime = getMealTime();
+      final List<String> generatedRecipes =
+          await _recipeRepository.generateRecipes(
+        season: event.season,
+        cravings: event.cravings,
+        currentTime: currentTime,
+        exclude: event.exclude,
+      );
+      print('=================> $currentTime');
+      emit(GenerateRecipesState.generated(recipes: generatedRecipes));
+    } on BadRequestException catch (e) {
+      emit(GenerateRecipesState.error(error: e.message));
+    }
   }
 }

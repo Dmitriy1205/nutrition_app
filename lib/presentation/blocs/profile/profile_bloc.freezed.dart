@@ -485,7 +485,8 @@ mixin _$ProfileState {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(UserAccount user) initialized,
+    required TResult Function(UserAccount user, String season, String phase)
+        initialized,
     required TResult Function() success,
     required TResult Function(String error) error,
   }) =>
@@ -494,7 +495,8 @@ mixin _$ProfileState {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(UserAccount user)? initialized,
+    TResult? Function(UserAccount user, String season, String phase)?
+        initialized,
     TResult? Function()? success,
     TResult? Function(String error)? error,
   }) =>
@@ -503,7 +505,8 @@ mixin _$ProfileState {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(UserAccount user)? initialized,
+    TResult Function(UserAccount user, String season, String phase)?
+        initialized,
     TResult Function()? success,
     TResult Function(String error)? error,
     required TResult orElse(),
@@ -596,7 +599,8 @@ class _$_Initial extends _Initial {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(UserAccount user) initialized,
+    required TResult Function(UserAccount user, String season, String phase)
+        initialized,
     required TResult Function() success,
     required TResult Function(String error) error,
   }) {
@@ -608,7 +612,8 @@ class _$_Initial extends _Initial {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(UserAccount user)? initialized,
+    TResult? Function(UserAccount user, String season, String phase)?
+        initialized,
     TResult? Function()? success,
     TResult? Function(String error)? error,
   }) {
@@ -620,7 +625,8 @@ class _$_Initial extends _Initial {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(UserAccount user)? initialized,
+    TResult Function(UserAccount user, String season, String phase)?
+        initialized,
     TResult Function()? success,
     TResult Function(String error)? error,
     required TResult orElse(),
@@ -717,7 +723,8 @@ class _$_LoadingState extends _LoadingState {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(UserAccount user) initialized,
+    required TResult Function(UserAccount user, String season, String phase)
+        initialized,
     required TResult Function() success,
     required TResult Function(String error) error,
   }) {
@@ -729,7 +736,8 @@ class _$_LoadingState extends _LoadingState {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(UserAccount user)? initialized,
+    TResult? Function(UserAccount user, String season, String phase)?
+        initialized,
     TResult? Function()? success,
     TResult? Function(String error)? error,
   }) {
@@ -741,7 +749,8 @@ class _$_LoadingState extends _LoadingState {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(UserAccount user)? initialized,
+    TResult Function(UserAccount user, String season, String phase)?
+        initialized,
     TResult Function()? success,
     TResult Function(String error)? error,
     required TResult orElse(),
@@ -804,7 +813,7 @@ abstract class _$$_InitializeCopyWith<$Res> {
           _$_Initialize value, $Res Function(_$_Initialize) then) =
       __$$_InitializeCopyWithImpl<$Res>;
   @useResult
-  $Res call({UserAccount user});
+  $Res call({UserAccount user, String season, String phase});
 
   $UserAccountCopyWith<$Res> get user;
 }
@@ -821,12 +830,22 @@ class __$$_InitializeCopyWithImpl<$Res>
   @override
   $Res call({
     Object? user = null,
+    Object? season = null,
+    Object? phase = null,
   }) {
     return _then(_$_Initialize(
       user: null == user
           ? _value.user
           : user // ignore: cast_nullable_to_non_nullable
               as UserAccount,
+      season: null == season
+          ? _value.season
+          : season // ignore: cast_nullable_to_non_nullable
+              as String,
+      phase: null == phase
+          ? _value.phase
+          : phase // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
   }
 
@@ -842,14 +861,20 @@ class __$$_InitializeCopyWithImpl<$Res>
 /// @nodoc
 
 class _$_Initialize extends _Initialize {
-  const _$_Initialize({required this.user}) : super._();
+  const _$_Initialize(
+      {required this.user, required this.season, required this.phase})
+      : super._();
 
   @override
   final UserAccount user;
+  @override
+  final String season;
+  @override
+  final String phase;
 
   @override
   String toString() {
-    return 'ProfileState.initialized(user: $user)';
+    return 'ProfileState.initialized(user: $user, season: $season, phase: $phase)';
   }
 
   @override
@@ -857,11 +882,13 @@ class _$_Initialize extends _Initialize {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_Initialize &&
-            (identical(other.user, user) || other.user == user));
+            (identical(other.user, user) || other.user == user) &&
+            (identical(other.season, season) || other.season == season) &&
+            (identical(other.phase, phase) || other.phase == phase));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, user);
+  int get hashCode => Object.hash(runtimeType, user, season, phase);
 
   @JsonKey(ignore: true)
   @override
@@ -874,11 +901,12 @@ class _$_Initialize extends _Initialize {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(UserAccount user) initialized,
+    required TResult Function(UserAccount user, String season, String phase)
+        initialized,
     required TResult Function() success,
     required TResult Function(String error) error,
   }) {
-    return initialized(user);
+    return initialized(user, season, phase);
   }
 
   @override
@@ -886,11 +914,12 @@ class _$_Initialize extends _Initialize {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(UserAccount user)? initialized,
+    TResult? Function(UserAccount user, String season, String phase)?
+        initialized,
     TResult? Function()? success,
     TResult? Function(String error)? error,
   }) {
-    return initialized?.call(user);
+    return initialized?.call(user, season, phase);
   }
 
   @override
@@ -898,13 +927,14 @@ class _$_Initialize extends _Initialize {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(UserAccount user)? initialized,
+    TResult Function(UserAccount user, String season, String phase)?
+        initialized,
     TResult Function()? success,
     TResult Function(String error)? error,
     required TResult orElse(),
   }) {
     if (initialized != null) {
-      return initialized(user);
+      return initialized(user, season, phase);
     }
     return orElse();
   }
@@ -951,10 +981,15 @@ class _$_Initialize extends _Initialize {
 }
 
 abstract class _Initialize extends ProfileState {
-  const factory _Initialize({required final UserAccount user}) = _$_Initialize;
+  const factory _Initialize(
+      {required final UserAccount user,
+      required final String season,
+      required final String phase}) = _$_Initialize;
   const _Initialize._() : super._();
 
   UserAccount get user;
+  String get season;
+  String get phase;
   @JsonKey(ignore: true)
   _$$_InitializeCopyWith<_$_Initialize> get copyWith =>
       throw _privateConstructorUsedError;
@@ -999,7 +1034,8 @@ class _$_Success extends _Success {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(UserAccount user) initialized,
+    required TResult Function(UserAccount user, String season, String phase)
+        initialized,
     required TResult Function() success,
     required TResult Function(String error) error,
   }) {
@@ -1011,7 +1047,8 @@ class _$_Success extends _Success {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(UserAccount user)? initialized,
+    TResult? Function(UserAccount user, String season, String phase)?
+        initialized,
     TResult? Function()? success,
     TResult? Function(String error)? error,
   }) {
@@ -1023,7 +1060,8 @@ class _$_Success extends _Success {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(UserAccount user)? initialized,
+    TResult Function(UserAccount user, String season, String phase)?
+        initialized,
     TResult Function()? success,
     TResult Function(String error)? error,
     required TResult orElse(),
@@ -1146,7 +1184,8 @@ class _$_ErrorState extends _ErrorState {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(UserAccount user) initialized,
+    required TResult Function(UserAccount user, String season, String phase)
+        initialized,
     required TResult Function() success,
     required TResult Function(String error) error,
   }) {
@@ -1158,7 +1197,8 @@ class _$_ErrorState extends _ErrorState {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(UserAccount user)? initialized,
+    TResult? Function(UserAccount user, String season, String phase)?
+        initialized,
     TResult? Function()? success,
     TResult? Function(String error)? error,
   }) {
@@ -1170,7 +1210,8 @@ class _$_ErrorState extends _ErrorState {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(UserAccount user)? initialized,
+    TResult Function(UserAccount user, String season, String phase)?
+        initialized,
     TResult Function()? success,
     TResult Function(String error)? error,
     required TResult orElse(),

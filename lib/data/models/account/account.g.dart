@@ -20,6 +20,7 @@ _$_Account _$$_AccountFromJson(Map<String, dynamic> json) => _$_Account(
       foodDontIt: (json['foodDontIt'] as List<dynamic>?)
           ?.map((e) => e as String)
           .toList(),
+      currentDate: json['currentDate'] as String?,
     );
 
 Map<String, dynamic> _$$_AccountToJson(_$_Account instance) =>
@@ -34,4 +35,5 @@ Map<String, dynamic> _$$_AccountToJson(_$_Account instance) =>
       'haveAllergy': instance.haveAllergy,
       'allergy': instance.allergy,
       'foodDontIt': instance.foodDontIt,
+      'currentDate': instance.currentDate,
     };

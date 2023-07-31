@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:bloc/bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:nutrition_app/common/functions.dart';
 
 import '../../../common/exceptions.dart';
 import '../../../data/models/account/account.dart';
@@ -59,10 +60,33 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
   Future<void> _fetchData(_FetchData event, Emitter<ProfileState> emit) async {
     emit(const ProfileState.loading());
     try {
+      String phase;
       final currentUser = _authBloc.state.user!.uid;
       final user = await _userRepository.getAccount(id: currentUser);
 
-      emit(ProfileState.initialized(user: user));
+      DateTime dateOfSaving = parseDateString(user.currentDate!);
+
+      final String season = getSeasonFromLocation(
+        latitudeString: user.location!['lat'],
+      );
+
+      if (user.irregularCycle == false) {
+        CyclePhase cyclePhase = getCurrentCyclePhase(
+          dateOfSaving: dateOfSaving,
+          dayOfCycle: int.parse(user.dayCycle!),
+          cycleLength: int.parse(user.cycleLength!),
+          periodLength: int.parse(user.periodLength!),
+        );
+
+        phase = cyclePhaseToString(cyclePhase);
+        print('phase ---- $phase');
+      } else {
+        //TODO: add moon period calculation
+        phase = '';
+        print('season ---- $season');
+      }
+      print('dateOfSaving ---- $dateOfSaving');
+      emit(ProfileState.initialized(user: user, season: season, phase: phase));
     } on BadRequestException catch (e) {
       emit(ProfileState.error(error: e.message));
     }
@@ -76,7 +100,9 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
       await _userRepository.updateAccount(
           userId: currentUser, data: event.account!);
       final user = await _userRepository.getAccount(id: currentUser);
-      emit(ProfileState.initialized(user: user));
+      final String season = '';
+      final String phase = '';
+      emit(ProfileState.initialized(user: user, season: season, phase: phase));
     } on BadRequestException catch (e) {
       emit(ProfileState.error(error: e.message));
     }

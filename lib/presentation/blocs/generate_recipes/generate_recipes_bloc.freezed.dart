@@ -16,19 +16,28 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$GenerateRecipesEvent {
+  String get season => throw _privateConstructorUsedError;
+  List<String> get cravings => throw _privateConstructorUsedError;
+  List<String> get exclude => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() generateRecipes,
+    required TResult Function(
+            String season, List<String> cravings, List<String> exclude)
+        generateRecipes,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? generateRecipes,
+    TResult? Function(
+            String season, List<String> cravings, List<String> exclude)?
+        generateRecipes,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? generateRecipes,
+    TResult Function(
+            String season, List<String> cravings, List<String> exclude)?
+        generateRecipes,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -48,6 +57,10 @@ mixin _$GenerateRecipesEvent {
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
+
+  @JsonKey(ignore: true)
+  $GenerateRecipesEventCopyWith<GenerateRecipesEvent> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -55,6 +68,8 @@ abstract class $GenerateRecipesEventCopyWith<$Res> {
   factory $GenerateRecipesEventCopyWith(GenerateRecipesEvent value,
           $Res Function(GenerateRecipesEvent) then) =
       _$GenerateRecipesEventCopyWithImpl<$Res, GenerateRecipesEvent>;
+  @useResult
+  $Res call({String season, List<String> cravings, List<String> exclude});
 }
 
 /// @nodoc
@@ -67,13 +82,40 @@ class _$GenerateRecipesEventCopyWithImpl<$Res,
   final $Val _value;
   // ignore: unused_field
   final $Res Function($Val) _then;
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? season = null,
+    Object? cravings = null,
+    Object? exclude = null,
+  }) {
+    return _then(_value.copyWith(
+      season: null == season
+          ? _value.season
+          : season // ignore: cast_nullable_to_non_nullable
+              as String,
+      cravings: null == cravings
+          ? _value.cravings
+          : cravings // ignore: cast_nullable_to_non_nullable
+              as List<String>,
+      exclude: null == exclude
+          ? _value.exclude
+          : exclude // ignore: cast_nullable_to_non_nullable
+              as List<String>,
+    ) as $Val);
+  }
 }
 
 /// @nodoc
-abstract class _$$_GenerateRecipesCopyWith<$Res> {
+abstract class _$$_GenerateRecipesCopyWith<$Res>
+    implements $GenerateRecipesEventCopyWith<$Res> {
   factory _$$_GenerateRecipesCopyWith(
           _$_GenerateRecipes value, $Res Function(_$_GenerateRecipes) then) =
       __$$_GenerateRecipesCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call({String season, List<String> cravings, List<String> exclude});
 }
 
 /// @nodoc
@@ -83,51 +125,117 @@ class __$$_GenerateRecipesCopyWithImpl<$Res>
   __$$_GenerateRecipesCopyWithImpl(
       _$_GenerateRecipes _value, $Res Function(_$_GenerateRecipes) _then)
       : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? season = null,
+    Object? cravings = null,
+    Object? exclude = null,
+  }) {
+    return _then(_$_GenerateRecipes(
+      season: null == season
+          ? _value.season
+          : season // ignore: cast_nullable_to_non_nullable
+              as String,
+      cravings: null == cravings
+          ? _value._cravings
+          : cravings // ignore: cast_nullable_to_non_nullable
+              as List<String>,
+      exclude: null == exclude
+          ? _value._exclude
+          : exclude // ignore: cast_nullable_to_non_nullable
+              as List<String>,
+    ));
+  }
 }
 
 /// @nodoc
 
 class _$_GenerateRecipes implements _GenerateRecipes {
-  const _$_GenerateRecipes();
+  const _$_GenerateRecipes(
+      {required this.season,
+      required final List<String> cravings,
+      required final List<String> exclude})
+      : _cravings = cravings,
+        _exclude = exclude;
+
+  @override
+  final String season;
+  final List<String> _cravings;
+  @override
+  List<String> get cravings {
+    if (_cravings is EqualUnmodifiableListView) return _cravings;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_cravings);
+  }
+
+  final List<String> _exclude;
+  @override
+  List<String> get exclude {
+    if (_exclude is EqualUnmodifiableListView) return _exclude;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_exclude);
+  }
 
   @override
   String toString() {
-    return 'GenerateRecipesEvent.generateRecipes()';
+    return 'GenerateRecipesEvent.generateRecipes(season: $season, cravings: $cravings, exclude: $exclude)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$_GenerateRecipes);
+        (other.runtimeType == runtimeType &&
+            other is _$_GenerateRecipes &&
+            (identical(other.season, season) || other.season == season) &&
+            const DeepCollectionEquality().equals(other._cravings, _cravings) &&
+            const DeepCollectionEquality().equals(other._exclude, _exclude));
   }
 
   @override
-  int get hashCode => runtimeType.hashCode;
+  int get hashCode => Object.hash(
+      runtimeType,
+      season,
+      const DeepCollectionEquality().hash(_cravings),
+      const DeepCollectionEquality().hash(_exclude));
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_GenerateRecipesCopyWith<_$_GenerateRecipes> get copyWith =>
+      __$$_GenerateRecipesCopyWithImpl<_$_GenerateRecipes>(this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() generateRecipes,
+    required TResult Function(
+            String season, List<String> cravings, List<String> exclude)
+        generateRecipes,
   }) {
-    return generateRecipes();
+    return generateRecipes(season, cravings, exclude);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? generateRecipes,
+    TResult? Function(
+            String season, List<String> cravings, List<String> exclude)?
+        generateRecipes,
   }) {
-    return generateRecipes?.call();
+    return generateRecipes?.call(season, cravings, exclude);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? generateRecipes,
+    TResult Function(
+            String season, List<String> cravings, List<String> exclude)?
+        generateRecipes,
     required TResult orElse(),
   }) {
     if (generateRecipes != null) {
-      return generateRecipes();
+      return generateRecipes(season, cravings, exclude);
     }
     return orElse();
   }
@@ -162,7 +270,21 @@ class _$_GenerateRecipes implements _GenerateRecipes {
 }
 
 abstract class _GenerateRecipes implements GenerateRecipesEvent {
-  const factory _GenerateRecipes() = _$_GenerateRecipes;
+  const factory _GenerateRecipes(
+      {required final String season,
+      required final List<String> cravings,
+      required final List<String> exclude}) = _$_GenerateRecipes;
+
+  @override
+  String get season;
+  @override
+  List<String> get cravings;
+  @override
+  List<String> get exclude;
+  @override
+  @JsonKey(ignore: true)
+  _$$_GenerateRecipesCopyWith<_$_GenerateRecipes> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -171,7 +293,7 @@ mixin _$GenerateRecipesState {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() generating,
-    required TResult Function() generated,
+    required TResult Function(List<String> recipes) generated,
     required TResult Function(String error) error,
   }) =>
       throw _privateConstructorUsedError;
@@ -179,7 +301,7 @@ mixin _$GenerateRecipesState {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? generating,
-    TResult? Function()? generated,
+    TResult? Function(List<String> recipes)? generated,
     TResult? Function(String error)? error,
   }) =>
       throw _privateConstructorUsedError;
@@ -187,7 +309,7 @@ mixin _$GenerateRecipesState {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? generating,
-    TResult Function()? generated,
+    TResult Function(List<String> recipes)? generated,
     TResult Function(String error)? error,
     required TResult orElse(),
   }) =>
@@ -255,8 +377,8 @@ class __$$_InitialCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_Initial implements _Initial {
-  const _$_Initial();
+class _$_Initial extends _Initial {
+  const _$_Initial() : super._();
 
   @override
   String toString() {
@@ -277,7 +399,7 @@ class _$_Initial implements _Initial {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() generating,
-    required TResult Function() generated,
+    required TResult Function(List<String> recipes) generated,
     required TResult Function(String error) error,
   }) {
     return initial();
@@ -288,7 +410,7 @@ class _$_Initial implements _Initial {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? generating,
-    TResult? Function()? generated,
+    TResult? Function(List<String> recipes)? generated,
     TResult? Function(String error)? error,
   }) {
     return initial?.call();
@@ -299,7 +421,7 @@ class _$_Initial implements _Initial {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? generating,
-    TResult Function()? generated,
+    TResult Function(List<String> recipes)? generated,
     TResult Function(String error)? error,
     required TResult orElse(),
   }) {
@@ -347,8 +469,9 @@ class _$_Initial implements _Initial {
   }
 }
 
-abstract class _Initial implements GenerateRecipesState {
+abstract class _Initial extends GenerateRecipesState {
   const factory _Initial() = _$_Initial;
+  const _Initial._() : super._();
 }
 
 /// @nodoc
@@ -369,8 +492,8 @@ class __$$_GeneratingCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_Generating implements _Generating {
-  const _$_Generating();
+class _$_Generating extends _Generating {
+  const _$_Generating() : super._();
 
   @override
   String toString() {
@@ -391,7 +514,7 @@ class _$_Generating implements _Generating {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() generating,
-    required TResult Function() generated,
+    required TResult Function(List<String> recipes) generated,
     required TResult Function(String error) error,
   }) {
     return generating();
@@ -402,7 +525,7 @@ class _$_Generating implements _Generating {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? generating,
-    TResult? Function()? generated,
+    TResult? Function(List<String> recipes)? generated,
     TResult? Function(String error)? error,
   }) {
     return generating?.call();
@@ -413,7 +536,7 @@ class _$_Generating implements _Generating {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? generating,
-    TResult Function()? generated,
+    TResult Function(List<String> recipes)? generated,
     TResult Function(String error)? error,
     required TResult orElse(),
   }) {
@@ -461,8 +584,9 @@ class _$_Generating implements _Generating {
   }
 }
 
-abstract class _Generating implements GenerateRecipesState {
+abstract class _Generating extends GenerateRecipesState {
   const factory _Generating() = _$_Generating;
+  const _Generating._() : super._();
 }
 
 /// @nodoc
@@ -470,6 +594,8 @@ abstract class _$$_GeneratedCopyWith<$Res> {
   factory _$$_GeneratedCopyWith(
           _$_Generated value, $Res Function(_$_Generated) then) =
       __$$_GeneratedCopyWithImpl<$Res>;
+  @useResult
+  $Res call({List<String> recipes});
 }
 
 /// @nodoc
@@ -479,36 +605,68 @@ class __$$_GeneratedCopyWithImpl<$Res>
   __$$_GeneratedCopyWithImpl(
       _$_Generated _value, $Res Function(_$_Generated) _then)
       : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? recipes = null,
+  }) {
+    return _then(_$_Generated(
+      recipes: null == recipes
+          ? _value._recipes
+          : recipes // ignore: cast_nullable_to_non_nullable
+              as List<String>,
+    ));
+  }
 }
 
 /// @nodoc
 
-class _$_Generated implements _Generated {
-  const _$_Generated();
+class _$_Generated extends _Generated {
+  const _$_Generated({required final List<String> recipes})
+      : _recipes = recipes,
+        super._();
+
+  final List<String> _recipes;
+  @override
+  List<String> get recipes {
+    if (_recipes is EqualUnmodifiableListView) return _recipes;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_recipes);
+  }
 
   @override
   String toString() {
-    return 'GenerateRecipesState.generated()';
+    return 'GenerateRecipesState.generated(recipes: $recipes)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$_Generated);
+        (other.runtimeType == runtimeType &&
+            other is _$_Generated &&
+            const DeepCollectionEquality().equals(other._recipes, _recipes));
   }
 
   @override
-  int get hashCode => runtimeType.hashCode;
+  int get hashCode =>
+      Object.hash(runtimeType, const DeepCollectionEquality().hash(_recipes));
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_GeneratedCopyWith<_$_Generated> get copyWith =>
+      __$$_GeneratedCopyWithImpl<_$_Generated>(this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() generating,
-    required TResult Function() generated,
+    required TResult Function(List<String> recipes) generated,
     required TResult Function(String error) error,
   }) {
-    return generated();
+    return generated(recipes);
   }
 
   @override
@@ -516,10 +674,10 @@ class _$_Generated implements _Generated {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? generating,
-    TResult? Function()? generated,
+    TResult? Function(List<String> recipes)? generated,
     TResult? Function(String error)? error,
   }) {
-    return generated?.call();
+    return generated?.call(recipes);
   }
 
   @override
@@ -527,12 +685,12 @@ class _$_Generated implements _Generated {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? generating,
-    TResult Function()? generated,
+    TResult Function(List<String> recipes)? generated,
     TResult Function(String error)? error,
     required TResult orElse(),
   }) {
     if (generated != null) {
-      return generated();
+      return generated(recipes);
     }
     return orElse();
   }
@@ -575,8 +733,15 @@ class _$_Generated implements _Generated {
   }
 }
 
-abstract class _Generated implements GenerateRecipesState {
-  const factory _Generated() = _$_Generated;
+abstract class _Generated extends GenerateRecipesState {
+  const factory _Generated({required final List<String> recipes}) =
+      _$_Generated;
+  const _Generated._() : super._();
+
+  List<String> get recipes;
+  @JsonKey(ignore: true)
+  _$$_GeneratedCopyWith<_$_Generated> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -612,8 +777,8 @@ class __$$_ErrorStateCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_ErrorState implements _ErrorState {
-  const _$_ErrorState({required this.error});
+class _$_ErrorState extends _ErrorState {
+  const _$_ErrorState({required this.error}) : super._();
 
   @override
   final String error;
@@ -645,7 +810,7 @@ class _$_ErrorState implements _ErrorState {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() generating,
-    required TResult Function() generated,
+    required TResult Function(List<String> recipes) generated,
     required TResult Function(String error) error,
   }) {
     return error(this.error);
@@ -656,7 +821,7 @@ class _$_ErrorState implements _ErrorState {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? generating,
-    TResult? Function()? generated,
+    TResult? Function(List<String> recipes)? generated,
     TResult? Function(String error)? error,
   }) {
     return error?.call(this.error);
@@ -667,7 +832,7 @@ class _$_ErrorState implements _ErrorState {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? generating,
-    TResult Function()? generated,
+    TResult Function(List<String> recipes)? generated,
     TResult Function(String error)? error,
     required TResult orElse(),
   }) {
@@ -715,8 +880,9 @@ class _$_ErrorState implements _ErrorState {
   }
 }
 
-abstract class _ErrorState implements GenerateRecipesState {
+abstract class _ErrorState extends GenerateRecipesState {
   const factory _ErrorState({required final String error}) = _$_ErrorState;
+  const _ErrorState._() : super._();
 
   String get error;
   @JsonKey(ignore: true)

@@ -4,8 +4,8 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:nutrition_app/common/colors.dart';
 import 'package:nutrition_app/common/icons.dart';
 import 'package:nutrition_app/presentation/blocs/auth/auth_bloc.dart';
+import 'package:nutrition_app/presentation/screens/home/phase_tab/phase_screen.dart';
 import 'package:nutrition_app/presentation/screens/home/profile_screen.dart';
-import 'package:nutrition_app/presentation/screens/home/recipe_tab/mood_screen.dart';
 import 'package:nutrition_app/presentation/screens/home/recipe_tab/recipe_tab.dart';
 
 import '../../../common/strings.dart';
@@ -23,7 +23,7 @@ class _HomeScreenState extends State<HomeScreen> {
   int _selectedIndex = 0;
   final List<Widget> _pages = <Widget>[
     const RecipeTab(),
-    GalleryScreen(),
+    PhaseScreen(),
     GalleryScreen(),
     const ProfileScreen(),
   ];
@@ -35,10 +35,10 @@ class _HomeScreenState extends State<HomeScreen> {
         color: Colors.white,
         gradient: LinearGradient(
           colors: [
-            Color(0xFFDEF3F2).withOpacity(0.5),
-            Color(0xFFD6CFFF).withOpacity(0.5),
+            const Color(0xFFDEF3F2).withOpacity(0.5),
+            const Color(0xFFD6CFFF).withOpacity(0.5),
           ],
-          stops: [
+          stops: const [
             0.3,
             0.7,
           ],
@@ -65,7 +65,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       return [
                         const PopupMenuItem<int>(
                           value: 0,
-                          child: Text(AppStrings.logout),
+                          child: Text(AppStrings.logout,style: TextStyle(color: Colors.black),),
                         ),
                       ];
                     },
@@ -83,31 +83,6 @@ class _HomeScreenState extends State<HomeScreen> {
           index: _selectedIndex,
           children: _pages,
         ),
-        // body: FloatingNavBar(
-        //   borderRadius: 30,
-        //   resizeToAvoidBottomInset: true,
-        //   color: AppColors.red,
-        //   selectedIconColor: Colors.white,
-        //   unselectedIconColor: Colors.white.withOpacity(0.6),
-        //   items: [
-        //     FloatingNavBarItem(
-        //       iconData: Icons.person,
-        //       title: 'My Profile',
-        //       page: const ProfileScreen(),
-        //     ),
-        //     FloatingNavBarItem(
-        //         iconData: Icons.no_food,
-        //         title: 'My Recipe',
-        //         page: const RecipeScreen()),
-        //     FloatingNavBarItem(
-        //         iconData: Icons.browse_gallery,
-        //         title: 'My Gallery',
-        //         page: const GalleryScreen()),
-        //   ],
-        //   horizontalPadding: 10.0,
-        //   hapticFeedback: true,
-        //   showTitle: true,
-        // ),
         bottomNavigationBar: Container(
           decoration: BoxDecoration(
             color: Colors.white,
@@ -195,7 +170,7 @@ showAlertDialog(BuildContext context) {
     title: Text(AppStrings.warning,
         style: AppTheme.themeData.textTheme.titleSmall),
     content: Text(AppStrings.areYouSure,
-        style: AppTheme.themeData.textTheme.bodySmall),
+        style: AppTheme.themeData.textTheme.bodySmall!.copyWith(color: Colors.black)),
     actions: [
       cancelButton,
       continueButton,

@@ -21,6 +21,7 @@ class UserAccount with _$UserAccount {
     bool? haveAllergy,
     List<String>? allergy,
     List<String>? foodDontIt,
+    String? currentDate,
   }) = _Account;
 
   factory UserAccount.fromJson(Map<String, dynamic> json) =>
