@@ -1,4 +1,7 @@
+import 'dart:math';
+
 import 'package:intl/intl.dart';
+import 'package:nutrition_app/common/strings.dart';
 
 enum Hemisphere { northern, southern }
 
@@ -7,6 +10,13 @@ enum CyclePhase {
   follicular,
   ovulatory,
   luteal,
+}
+
+String generateRandomPhrase({required String ingredient}) {
+  String randomPhrase = phrases[Random().nextInt(phrases.length)];
+  String generatedPhrase =
+      randomPhrase.replaceFirst("{ingredient}", ingredient);
+  return generatedPhrase;
 }
 
 String extractRecipeName(String recipeText) {
@@ -44,6 +54,7 @@ DateTime parseDateString(String dateString) {
   List<int> dateParts = dateString.split('-').map(int.parse).toList();
   return DateTime(dateParts[0], dateParts[1], dateParts[2]);
 }
+
 List<int> generateRandomFoodList(int maxIndex) {
   List<int> indices = List.generate(maxIndex, (index) => index);
   indices.shuffle(); // Shuffle the indices

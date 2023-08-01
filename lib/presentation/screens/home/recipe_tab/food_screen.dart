@@ -165,21 +165,42 @@ class _FoodScreenState extends State<FoodScreen> {
                   ],
                 ),
                 const SizedBox(
-                  height: 40,
+                  height: 24,
                 ),
-                Text(
-                  AppStrings.chooseYourFood,
-                  textAlign: TextAlign.center,
-                  style: AppTheme.themeData.textTheme.headlineLarge!
-                      .copyWith(fontSize: 24, fontWeight: FontWeight.w700),
+                RichText(
+                  text: TextSpan(
+                    style: AppTheme.themeData.textTheme.headlineLarge!
+                        .copyWith(fontSize: 20, fontWeight: FontWeight.w700),
+                    children: [
+                      const TextSpan(text: '${AppStrings.chooseYourFood}  '),
+                      WidgetSpan(
+                        alignment: PlaceholderAlignment.bottom,
+                        child: Transform.translate(
+                          offset: Offset(0, 1),
+                          child: Container(
+                            margin: EdgeInsets.only(top: 8),
+                            padding: const EdgeInsets.symmetric(horizontal: 5,vertical: 2),
+                            color: AppColors.transparentBlue,
+                            child: Text(
+                              AppStrings.basedOnMood.toUpperCase(),
+                              style: AppTheme.themeData.textTheme.headlineLarge!
+                                  .copyWith(
+                                      color: AppColors.violet,
+                                      fontSize: 12,
+                                      fontWeight: FontWeight.w700),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
                 const SizedBox(
-                  height: 30,
+                  height: 56,
                 ),
                 Wrap(
                   spacing: 15.0,
                   alignment: WrapAlignment.center,
-                 // verticalDirection: VerticalDirection.up,
                   runSpacing: 2.0,
                   children: List<Widget>.generate(randomlySelectedFoods.length,
                       (index) {

@@ -126,41 +126,42 @@ class _MoodScreenState extends State<MoodScreen> {
                 const SizedBox(
                   height: 40,
                 ),
-                Padding(
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 0, vertical: 6),
-                  child: Text(
-                    AppStrings.writeFealing,
-                    style: AppTheme.themeData.textTheme.headlineLarge!
-                        .copyWith(fontSize: 24, fontWeight: FontWeight.w700),
-                  ),
-                ),
-                const SizedBox(
-                  height: 40,
-                ),
-                TextFormField(
-                  autovalidateMode: AutovalidateMode.onUserInteraction,
-                  controller: nameController,
-                  style: AppTheme.themeData.textTheme.labelSmall!
-                      .copyWith(fontSize: 14),
-                  decoration: const InputDecoration(
-                    fillColor: AppColors.white,
-                    filled: true,
-                    contentPadding:
-                        EdgeInsets.symmetric(vertical: 17, horizontal: 15),
-                    prefix: SizedBox(
-                      width: 10,
-                    ),
-                  ),
-                  onChanged: (v) {
-                    setState(() {
-                      selectedMoodName = v;
-                    });
-                  },
-                ),
-                const SizedBox(
-                  height: 150,
-                ),
+                //TODO: remove if needed down comment there is "Or Add Your Mood" texfield
+                // Padding(
+                //   padding:
+                //       const EdgeInsets.symmetric(horizontal: 0, vertical: 6),
+                //   child: Text(
+                //     AppStrings.writeFealing,
+                //     style: AppTheme.themeData.textTheme.headlineLarge!
+                //         .copyWith(fontSize: 24, fontWeight: FontWeight.w700),
+                //   ),
+                // ),
+                // const SizedBox(
+                //   height: 40,
+                // ),
+                // TextFormField(
+                //   autovalidateMode: AutovalidateMode.onUserInteraction,
+                //   controller: nameController,
+                //   style: AppTheme.themeData.textTheme.labelSmall!
+                //       .copyWith(fontSize: 14),
+                //   decoration: const InputDecoration(
+                //     fillColor: AppColors.white,
+                //     filled: true,
+                //     contentPadding:
+                //         EdgeInsets.symmetric(vertical: 17, horizontal: 15),
+                //     prefix: SizedBox(
+                //       width: 10,
+                //     ),
+                //   ),
+                //   onChanged: (v) {
+                //     setState(() {
+                //       selectedMoodName = v;
+                //     });
+                //   },
+                // ),
+                // const SizedBox(
+                //   height: 150,
+                // ),
               ],
             ),
             Positioned(

@@ -36,7 +36,7 @@ class _SecondState extends State<Second> {
   void initState() {
     selectedDay = AppStrings.daysOfCycle[0];
     selectedLength = AppStrings.lengthOfCycle[0];
-    selectedPeriod = AppStrings.periodOfCycle[0];
+    selectedPeriod = AppStrings.periodLengthOfCycle[0];
     super.initState();
   }
 
@@ -297,7 +297,7 @@ class _SecondState extends State<Second> {
                       padding: EdgeInsets.only(right: 8.0),
                       child: FaIcon(FontAwesomeIcons.chevronDown),
                     ),
-                    items: AppStrings.periodOfCycle
+                    items: AppStrings.periodLengthOfCycle
                         .map(
                           (day) => DropdownMenuItem<String>(
                             value: day,

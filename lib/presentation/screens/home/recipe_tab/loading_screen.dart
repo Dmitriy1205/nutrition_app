@@ -1,5 +1,11 @@
+import 'dart:async';
+import 'dart:math';
+
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:nutrition_app/common/functions.dart';
 import 'package:nutrition_app/common/strings.dart';
+import 'package:nutrition_app/presentation/blocs/mood/mood_bloc.dart';
 import 'package:shimmer/shimmer.dart';
 import '../../../../common/theme.dart';
 
@@ -11,7 +17,19 @@ class LoadingScreen extends StatefulWidget {
 }
 
 class _LoadingScreenState extends State<LoadingScreen> {
-  String selectedRecipeName = '';
+  String generatedPhrase = '';
+
+  @override
+  void initState() {
+    List<String> ingredients = context.read<MoodBloc>().state.recipe!.product!;
+
+    Timer.periodic(const Duration(seconds: 4), (timer) {
+      String ingredient = ingredients[Random().nextInt(ingredients.length)];
+      setState(() {
+        generatedPhrase = generateRandomPhrase(ingredient: ingredient);
+      });
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -58,24 +76,29 @@ class _LoadingScreenState extends State<LoadingScreen> {
                   alignment: AlignmentDirectional.center,
                   children: [
                     Container(
-
-                    width: MediaQuery.of(context).size.width,
-                    height: 250.0,
-                    child: Shimmer.fromColors(
-                      baseColor: Color(0xFFD6CFFF).withOpacity(0.3),
-                      highlightColor: Color(0xFFDEF3F2).withOpacity(0.3),
-                      child: Container(
-
-                        decoration: BoxDecoration(
-                            color: Colors.black,
-                            borderRadius: BorderRadius.circular(15)),
+                      width: MediaQuery.of(context).size.width,
+                      height: 250.0,
+                      child: Shimmer.fromColors(
+                        baseColor: Color(0xFFD6CFFF).withOpacity(0.1),
+                        highlightColor: Colors.white.withOpacity(0.5),
+                        child: Container(
+                          decoration: BoxDecoration(
+                              color: Colors.black,
+                              borderRadius: BorderRadius.circular(15)),
+                        ),
                       ),
                     ),
-                  ),Center(
-                    child: Text('Phrases that appear while waiting',textAlign: TextAlign.center,
-                        style: AppTheme.themeData.textTheme.headlineLarge!
-                            .copyWith(fontSize: 18, fontWeight: FontWeight.w700)),
-                  ),],
+                    Center(
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                        child: Text(generatedPhrase,
+                            textAlign: TextAlign.center,
+                            style: AppTheme.themeData.textTheme.headlineLarge!
+                                .copyWith(
+                                    fontSize: 18, fontWeight: FontWeight.w700)),
+                      ),
+                    ),
+                  ],
                 ),
               ],
             ),

@@ -499,7 +499,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                               child: FaIcon(
                                                   FontAwesomeIcons.chevronDown),
                                             ),
-                                            items: AppStrings.periodOfCycle
+                                            items: AppStrings.periodLengthOfCycle
                                                 .map(
                                                   (day) =>
                                                       DropdownMenuItem<String>(
