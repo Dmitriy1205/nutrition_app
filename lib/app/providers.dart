@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:nutrition_app/presentation/blocs/create_account/create_account_bloc.dart';
 import 'package:nutrition_app/presentation/blocs/profile/profile_bloc.dart';
 import 'package:nutrition_app/presentation/blocs/recipe/recipe_bloc.dart';
+import 'package:nutrition_app/presentation/blocs/tutorial/tutorial_bloc.dart';
 
 import '../common/services/service_locator.dart';
 import '../presentation/blocs/auth/auth_bloc.dart';
@@ -27,6 +28,10 @@ class Providers extends StatelessWidget {
         ),
         BlocProvider(
           create: (context) => sl<RecipeBloc>(),
+          lazy: false,
+        ),
+        BlocProvider(
+          create: (context) => sl<TutorialBloc>(),
           lazy: false,
         ),
         BlocProvider(create: (context)=> sl<ProfileBloc>(),

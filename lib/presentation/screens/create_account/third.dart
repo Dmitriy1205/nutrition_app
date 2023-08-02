@@ -9,6 +9,7 @@ import '../../../common/strings.dart';
 import '../../../common/theme.dart';
 import '../../../data/models/account/account.dart';
 import '../../blocs/create_account/create_account_bloc.dart';
+import '../../blocs/tutorial/tutorial_bloc.dart';
 import '../../widgets/app_checkbox.dart';
 import '../../widgets/app_elevated_button.dart';
 
@@ -218,6 +219,7 @@ class _ThirdState extends State<Third> {
                                 ),
                               ),
                             );
+                        context.read<TutorialBloc>().add(const TutorialEvent.createTutorial());
                       }),
                 ),
               ],

@@ -89,6 +89,8 @@ class AppStrings {
   static const String saveToGallery = 'Save to gallery';
   static const String done = 'Done';
   static const String basedOnMood = 'Based on your mood and phase';
+  static const String upgradeToPremium = 'Upgrade to premium!';
+  static const String enjoyAll = 'Enjoy all benefits without restrictions';
 
   // static const String welcomeBack = 'Welcome back! Please enter your details';
 

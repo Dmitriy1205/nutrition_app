@@ -3,7 +3,6 @@ import 'dart:async';
 import 'package:bloc/bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:nutrition_app/common/functions.dart';
-
 import '../../../common/exceptions.dart';
 import '../../../data/models/account/account.dart';
 import '../../../data/repositories/user_repository.dart';
@@ -63,6 +62,7 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
       String phase;
       final currentUser = _authBloc.state.user!.uid;
       final user = await _userRepository.getAccount(id: currentUser);
+
 
       DateTime dateOfSaving = parseDateString(user.currentDate!);
 

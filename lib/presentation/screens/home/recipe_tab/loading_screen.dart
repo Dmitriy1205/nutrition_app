@@ -22,7 +22,7 @@ class _LoadingScreenState extends State<LoadingScreen> {
   @override
   void initState() {
     List<String> ingredients = context.read<MoodBloc>().state.recipe!.product!;
-
+    generatedPhrase = generateRandomPhrase(ingredient: ingredients[0]);
     Timer.periodic(const Duration(seconds: 4), (timer) {
       String ingredient = ingredients[Random().nextInt(ingredients.length)];
       setState(() {

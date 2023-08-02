@@ -1,6 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-
 class FirestoreService {
   final FirebaseFirestore _firestore;
 
@@ -13,7 +12,28 @@ class FirestoreService {
     required Map<String, dynamic> data,
   }) async {
     try {
-      await _firestore.collection(collection).doc(userId).set(data,SetOptions(merge: true));
+      await _firestore
+          .collection(collection)
+          .doc(userId)
+          .set(data, SetOptions(merge: true));
+    } on FirebaseException catch (e) {
+      throw Exception(e);
+    }
+  }
+
+  Future<void> writeSubCollection({
+    required String collection,
+    required String userId,
+    required String subCollection,
+    required Map<String, dynamic> data,
+  }) async {
+    try {
+      await _firestore
+          .collection(collection)
+          .doc(userId)
+          .collection(subCollection)
+          .doc('0')
+          .set(data);
     } on FirebaseException catch (e) {
       throw Exception(e);
     }
@@ -31,12 +51,48 @@ class FirestoreService {
     }
   }
 
+  Future<DocumentSnapshot<Map<String, dynamic>>> readSubCollection({
+    required String collectionName,
+    required String docId,
+    required String subCollection,
+  }) async {
+    try {
+      final data = await _firestore
+          .collection(collectionName)
+          .doc(docId)
+          .collection(subCollection)
+          .doc('0')
+          .get();
+      return data;
+    } on FirebaseException catch (e) {
+      throw Exception(e);
+    }
+  }
+
   Future<void> update(
       {required String collectionName,
       required String userId,
       required Map<String, dynamic> data}) async {
     try {
-      _firestore.collection(collectionName).doc(userId).update(data);
+      await _firestore.collection(collectionName).doc(userId).update(data);
+    } on FirebaseException catch (e) {
+      throw Exception(e);
+    }
+  }
+
+  Future<void> updateFieldSubCollection({
+    required String collection,
+    required String userId,
+    required String subCollection,
+    required Map<String, dynamic> data,
+  }) async {
+    try {
+      await _firestore
+          .collection(collection)
+          .doc(userId)
+          .collection(subCollection)
+          .doc('0')
+          .update(data);
     } on FirebaseException catch (e) {
       throw Exception(e);
     }

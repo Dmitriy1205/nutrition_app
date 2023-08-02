@@ -9,6 +9,7 @@ import 'package:nutrition_app/presentation/screens/home/home_screen.dart';
 import 'package:nutrition_app/presentation/widgets/loading_indicator.dart';
 
 import '../presentation/blocs/auth/auth_bloc.dart';
+import '../presentation/blocs/tutorial/tutorial_bloc.dart';
 import '../presentation/screens/auth/sign_in_screen.dart';
 
 class MyApp extends StatelessWidget {
@@ -69,8 +70,11 @@ class MyApp extends StatelessWidget {
                     ],
                   ),
                 ),
-            success: (_) => const Material(
-                color: Colors.white, child: HomeScreen()),
+            success: (_) {
+
+              return const Material(
+                  color: Colors.white, child: HomeScreen());
+            },
             profileNotCreated: (_) => const AccountCreation(),
             orElse: () => Container(
                   decoration: const BoxDecoration(

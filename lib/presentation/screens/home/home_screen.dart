@@ -4,6 +4,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:nutrition_app/common/colors.dart';
 import 'package:nutrition_app/common/icons.dart';
 import 'package:nutrition_app/presentation/blocs/auth/auth_bloc.dart';
+import 'package:nutrition_app/presentation/blocs/tutorial/tutorial_bloc.dart';
 import 'package:nutrition_app/presentation/screens/home/phase_tab/phase_screen.dart';
 import 'package:nutrition_app/presentation/screens/home/profile_screen.dart';
 import 'package:nutrition_app/presentation/screens/home/recipe_tab/recipe_tab.dart';
@@ -27,7 +28,14 @@ class _HomeScreenState extends State<HomeScreen> {
     GalleryScreen(),
     const ProfileScreen(),
   ];
+@override
+  void initState() {
+  //TODO: dont  forget to move it to create account
+  context.read<TutorialBloc>().add(TutorialEvent.getTutorial());
 
+
+    super.initState();
+  }
   @override
   Widget build(BuildContext context) {
     return DecoratedBox(

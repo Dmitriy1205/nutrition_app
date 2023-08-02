@@ -7,6 +7,7 @@ import 'package:nutrition_app/presentation/blocs/create_account/create_account_b
 import 'package:nutrition_app/presentation/blocs/generate_recipes/generate_recipes_bloc.dart';
 import 'package:nutrition_app/presentation/blocs/profile/profile_bloc.dart';
 import 'package:nutrition_app/presentation/blocs/recipe/recipe_bloc.dart';
+import 'package:nutrition_app/presentation/blocs/tutorial/tutorial_bloc.dart';
 
 import '../../data/repositories/auth_repository.dart';
 import '../../data/repositories/recipe_repository.dart';
@@ -49,5 +50,7 @@ Future<void> init() async {
       userRepository: sl(), authBloc: sl(), createAccountBloc: sl()));
   sl.registerLazySingleton(() => MoodBloc());
   sl.registerFactory(() => GenerateRecipesBloc(recipeRepository: sl()));
-  sl.registerFactory(() => RecipeBloc(recipeRepository: sl(), authRepository: sl()));
+  sl.registerFactory(
+      () => RecipeBloc(recipeRepository: sl(), authRepository: sl()));
+  sl.registerFactory(() => TutorialBloc(userRepository: sl(), authBloc: sl()));
 }
