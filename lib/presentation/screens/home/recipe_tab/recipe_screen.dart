@@ -30,6 +30,7 @@ class _RecipeScreenState extends State<RecipeScreen> {
   int currentPage = 0;
   int itemsPerPage = 3;
   late List<String> excludeList;
+  List<String> recipes = [];
 
   @override
   void initState() {
@@ -85,21 +86,21 @@ class _RecipeScreenState extends State<RecipeScreen> {
                     ),
                     Text(
                       AppStrings.seletWhatUp,
-                      textAlign: TextAlign.center,
+                      // textAlign: TextAlign.center,
                       style: AppTheme.themeData.textTheme.headlineLarge!
                           .copyWith(fontSize: 24, fontWeight: FontWeight.w700),
                     ),
+                    // const SizedBox(
+                    //   height:50,
+                    // ),
+                    // Text(
+                    //   AppStrings.chooseYourRecipe,
+                    //   textAlign: TextAlign.center,
+                    //   style: AppTheme.themeData.textTheme.headlineLarge!
+                    //       .copyWith(fontSize: 20, fontWeight: FontWeight.w700),
+                    // ),
                     const SizedBox(
-                      height: 40,
-                    ),
-                    Text(
-                      AppStrings.chooseYourRecipe,
-                      textAlign: TextAlign.center,
-                      style: AppTheme.themeData.textTheme.headlineLarge!
-                          .copyWith(fontSize: 20, fontWeight: FontWeight.w700),
-                    ),
-                    const SizedBox(
-                      height: 50,
+                      height: 108,
                     ),
                     state.maybeMap(
                       generating: (_) => ListView.builder(
@@ -128,50 +129,56 @@ class _RecipeScreenState extends State<RecipeScreen> {
                       orElse: () => ListView.builder(
                         shrinkWrap: true,
                         physics: const NeverScrollableScrollPhysics(),
-                        itemCount: state.recipes!.length,
+                        itemCount: itemsPerPage,
                         itemBuilder: (context, index) {
-                          final product = state.recipes!;
-                          final realIndex =
-                              (currentPage + index) % product.length;
-                          return Visibility(
-                            visible: index >= currentPage &&
-                                index < currentPage + itemsPerPage,
-                            child: Padding(
-                              padding: const EdgeInsets.only(bottom: 16.0),
-                              child: GestureDetector(
-                                onTap: () {
-                                  setState(() {
-                                    selectedRecipeName = product[index];
-                                  });
-                                },
-                                child: Container(
-                                  decoration: BoxDecoration(
-                                      color:
-                                          selectedRecipeName == product[index]
-                                              ? AppColors.violet
-                                              : AppColors.white,
-                                      borderRadius: BorderRadius.circular(15)),
-                                  height: 77,
-                                  child: Center(
-                                    child: SizedBox(
-                                      width: 200,
-                                      child: Text(
-                                        product[realIndex],
-                                        textAlign: TextAlign.center,
-                                        style: AppTheme
-                                            .themeData.textTheme.titleSmall!
-                                            .copyWith(
-                                                color: selectedRecipeName ==
-                                                        product[index]
-                                                    ? AppColors.white
-                                                    : Colors.black),
-                                      ),
+                          if (recipes.isEmpty) {
+                            recipes = List.generate(state.recipes!.length,
+                                (index) => state.recipes![index]);
+                          }
+
+                          // final product = state.recipes!;
+                          // final realIndex =
+                          //     (currentPage + index) % product.length;
+                          return
+                              // Visibility(
+                              // visible: index >= currentPage &&
+                              //     index < currentPage + itemsPerPage,
+                              // child:
+                              Padding(
+                            padding: const EdgeInsets.only(bottom: 16.0),
+                            child: GestureDetector(
+                              onTap: () {
+                                setState(() {
+                                  selectedRecipeName = recipes[index];
+                                });
+                              },
+                              child: Container(
+                                decoration: BoxDecoration(
+                                    color: selectedRecipeName == recipes[index]
+                                        ? AppColors.violet
+                                        : AppColors.white,
+                                    borderRadius: BorderRadius.circular(15)),
+                                height: 77,
+                                child: Center(
+                                  child: SizedBox(
+                                    width: 200,
+                                    child: Text(
+                                      recipes[index],
+                                      textAlign: TextAlign.center,
+                                      style: AppTheme
+                                          .themeData.textTheme.titleSmall!
+                                          .copyWith(
+                                              color: selectedRecipeName ==
+                                                      recipes[index]
+                                                  ? AppColors.white
+                                                  : Colors.black),
                                     ),
                                   ),
                                 ),
                               ),
                             ),
                           );
+                          // );
                         },
                       ),
                     ),
@@ -201,12 +208,11 @@ class _RecipeScreenState extends State<RecipeScreen> {
                                                   .state
                                                   .recipe!
                                                   .mood!,
-                                              exclude: excludeList ,
+                                              exclude: excludeList,
                                               recipeName: selectedRecipeName),
                                         );
 
                                     widget.nextPage();
-
                                   }
                                 : null),
                       ),
@@ -231,9 +237,38 @@ class _RecipeScreenState extends State<RecipeScreen> {
                               recognizer: TapGestureRecognizer()
                                 ..onTap = () {
                                   setState(() {
-                                    currentPage = (currentPage + 1) %
-                                        ((state.recipes!.length / itemsPerPage)
-                                            .ceil());
+                                    if (recipes.length == 3) {
+                                      excludeList = context
+                                              .read<ProfileBloc>()
+                                              .state
+                                              .user!
+                                              .foodDontIt! +
+                                          context
+                                              .read<ProfileBloc>()
+                                              .state
+                                              .user!
+                                              .allergy!;
+                                      _bloc.add(
+                                          GenerateRecipesEvent.generateRecipes(
+                                        season: context
+                                            .read<ProfileBloc>()
+                                            .state
+                                            .season!,
+                                        cravings: context
+                                            .read<MoodBloc>()
+                                            .state
+                                            .recipe!
+                                            .product!,
+                                        exclude: excludeList,
+                                      ));
+                                    }
+
+                                    recipes.removeRange(0, 3);
+                                    print(recipes);
+
+                                    // currentPage = (currentPage + 1) %
+                                    //     ((state.recipes!.length / itemsPerPage)
+                                    //         .ceil());
                                   });
                                 }),
                         ),

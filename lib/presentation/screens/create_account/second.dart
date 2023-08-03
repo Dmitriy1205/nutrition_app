@@ -35,8 +35,8 @@ class _SecondState extends State<Second> {
   @override
   void initState() {
     selectedDay = AppStrings.daysOfCycle[0];
-    selectedLength = AppStrings.lengthOfCycle[0];
-    selectedPeriod = AppStrings.periodLengthOfCycle[0];
+    selectedLength = AppStrings.lengthOfCycle[7];
+    selectedPeriod = AppStrings.periodLengthOfCycle[2];
     super.initState();
   }
 

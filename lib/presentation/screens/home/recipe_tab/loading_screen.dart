@@ -65,7 +65,7 @@ class _LoadingScreenState extends State<LoadingScreen> {
                 ),
                 Text(
                   AppStrings.pleaseWait,
-                  textAlign: TextAlign.center,
+                  // textAlign: TextAlign.center,
                   style: AppTheme.themeData.textTheme.headlineLarge!
                       .copyWith(fontSize: 24, fontWeight: FontWeight.w700),
                 ),

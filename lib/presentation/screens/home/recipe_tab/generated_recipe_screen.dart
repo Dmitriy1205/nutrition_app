@@ -18,12 +18,13 @@ import '../../../blocs/tutorial/tutorial_bloc.dart';
 
 class GeneratedRecipeScreen extends StatefulWidget {
   final void Function() nextPage;
+  final void Function() onDone;
   final void Function() previousPage;
 
   const GeneratedRecipeScreen({
     super.key,
     required this.nextPage,
-    required this.previousPage,
+    required this.previousPage, required this.onDone,
   });
 
   @override
@@ -267,7 +268,7 @@ class _GeneratedRecipeScreenState extends State<GeneratedRecipeScreen> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: ingredientsList.map((ingredient) {
                             return Text(
-                              ingredient.replaceAll('•', '•   '),
+                              ingredient.replaceAll('-', '•   '),
                               strutStyle: const StrutStyle(height: 2.2),
                               style: const TextStyle(
                                 fontSize: 16,
@@ -379,7 +380,7 @@ class _GeneratedRecipeScreenState extends State<GeneratedRecipeScreen> {
                                       ),
                                     ),
                                     TextSpan(
-                                      text: restOfText,
+                                      text: restOfText.replaceAll("sautÃ©", "saute").replaceAll("Â", ""),
                                     ),
                                   ],
                                 ),
@@ -504,7 +505,7 @@ class _GeneratedRecipeScreenState extends State<GeneratedRecipeScreen> {
                             style: AppTheme.themeData.textTheme.titleMedium!
                                 .copyWith(color: AppColors.violet),
                             onPressed: () {
-                              widget.previousPage();
+                              widget.onDone();
                             }),
                         const SizedBox(
                           height: 40,

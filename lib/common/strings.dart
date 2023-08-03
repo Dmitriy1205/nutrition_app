@@ -80,7 +80,7 @@ class AppStrings {
   static const String orWriteWishes = 'Or add your cravings';
   static const String edit = 'Edit';
   static const String iFeel = 'I feel';
-  static const String seletWhatUp = 'Select what’s you up today';
+  static const String seletWhatUp = 'Choose Your Meal';
   static const String chooseYourRecipe = 'Choose your recipe';
   static const String regenerate = 'Regenerate';
   static const String pleaseWait = 'Please wait, we generate\nrecipe for you';

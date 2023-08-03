@@ -131,17 +131,23 @@ class _RecipeTabState extends State<RecipeTab> {
                         curve: Curves.ease,
                       );
                     }),
-                    GeneratedRecipeScreen(previousPage: () {
-                      _pageController.previousPage(
-                        duration: const Duration(milliseconds: 200),
-                        curve: Curves.ease,
-                      );
-                    }, nextPage: () {
-                      _pageController.nextPage(
-                        duration: const Duration(milliseconds: 200),
-                        curve: Curves.ease,
-                      );
-                    }),
+                    GeneratedRecipeScreen(
+                      previousPage: () {
+                        _pageController.previousPage(
+                          duration: const Duration(milliseconds: 200),
+                          curve: Curves.ease,
+                        );
+                      },
+                      nextPage: () {
+                        _pageController.nextPage(
+                          duration: const Duration(milliseconds: 200),
+                          curve: Curves.ease,
+                        );
+                      },
+                      onDone: () {
+                        _pageController.jumpToPage(1);
+                      },
+                    ),
                   ],
                 ),
               ),
