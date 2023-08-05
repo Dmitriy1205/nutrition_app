@@ -11,6 +11,7 @@ _$_Tutorial _$$_TutorialFromJson(Map<String, dynamic> json) => _$_Tutorial(
       isFoodChoose: json['isFoodChoose'] as bool?,
       isRegenerateRecipe: json['isRegenerateRecipe'] as bool?,
       isRecipeButton: json['isRecipeButton'] as bool?,
+      isShowBottomBar: json['isShowBottomBar'] as bool?,
     );
 
 Map<String, dynamic> _$$_TutorialToJson(_$_Tutorial instance) =>
@@ -19,4 +20,5 @@ Map<String, dynamic> _$$_TutorialToJson(_$_Tutorial instance) =>
       'isFoodChoose': instance.isFoodChoose,
       'isRegenerateRecipe': instance.isRegenerateRecipe,
       'isRecipeButton': instance.isRecipeButton,
+      'isShowBottomBar': instance.isShowBottomBar,
     };

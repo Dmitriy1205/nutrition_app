@@ -12,6 +12,7 @@ class Tutorial with _$Tutorial{
     bool? isFoodChoose,
     bool? isRegenerateRecipe,
     bool? isRecipeButton,
+    bool? isShowBottomBar,
   }) = _Tutorial;
 
   factory Tutorial.fromJson(Map<String, dynamic> json) =>

@@ -13,11 +13,12 @@ import 'package:super_tooltip/super_tooltip.dart';
 import '../../../../common/colors.dart';
 import '../../../../common/theme.dart';
 import '../../../../data/models/mood.dart';
+import '../../../blocs/generate_recipes/generate_recipes_bloc.dart';
 import '../../../blocs/mood/mood_bloc.dart';
 import '../../../blocs/tutorial/tutorial_bloc.dart';
 
 class FoodScreen extends StatefulWidget {
-  final void Function() nextPage;
+  final void Function(List<String>) nextPage;
   final void Function() previousPage;
 
   const FoodScreen(
@@ -45,9 +46,11 @@ class _FoodScreenState extends State<FoodScreen> {
       SuperTooltipController();
   final SuperTooltipController secondTooltipController =
       SuperTooltipController();
-
+  late List<String> excludeList;
   @override
   void initState() {
+    excludeList = context.read<ProfileBloc>().state.user!.foodDontIt! +
+        context.read<ProfileBloc>().state.user!.allergy!;
     isEditTut = context.read<TutorialBloc>().state.tutorial!.isEditMood!;
     isFoodTut = context.read<TutorialBloc>().state.tutorial!.isFoodChoose!;
     Phase currentPhaseObject = phaseList.firstWhere(
@@ -542,7 +545,12 @@ class _FoodScreenState extends State<FoodScreen> {
                                             .mood!,
                                         RecipeFields.product: addedCravings
                                       }));
-                                  widget.nextPage();
+                                  context.read<GenerateRecipesBloc>().add(GenerateRecipesEvent.generateRecipes(
+                                    season: context.read<ProfileBloc>().state.season!,
+                                    cravings: addedCravings,
+                                    exclude: excludeList,
+                                  ));
+                                  widget.nextPage(excludeList);
                                 }
                               : null)),
                 ),

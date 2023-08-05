@@ -72,6 +72,7 @@ class UserRepository {
             isFoodChoose: true,
             isRegenerateRecipe: true,
             isRecipeButton: true,
+            isShowBottomBar: true,
           ).toJson());
     } on Exception catch (e) {
       throw BadRequestException(message: e.toString());

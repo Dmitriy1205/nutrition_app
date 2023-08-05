@@ -16,6 +16,9 @@ void main() async {
     options: DefaultFirebaseOptions.currentPlatform,
   );
   await sl.init();
+  SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
+      statusBarIconBrightness: Brightness.dark
+  ));
   await SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
   runApp( MyApp());
 }

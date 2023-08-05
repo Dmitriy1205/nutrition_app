@@ -71,7 +71,6 @@ class MyApp extends StatelessWidget {
                   ),
                 ),
             success: (_) {
-
               return const Material(
                   color: Colors.white, child: HomeScreen());
             },

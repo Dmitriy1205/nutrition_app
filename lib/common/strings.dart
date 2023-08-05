@@ -83,14 +83,14 @@ class AppStrings {
   static const String seletWhatUp = 'Choose Your Meal';
   static const String chooseYourRecipe = 'Choose your recipe';
   static const String regenerate = 'Regenerate';
-  static const String pleaseWait = 'Please wait, we generate\nrecipe for you';
+  static const String pleaseWait = 'Please wait, we generate\nthe recipe for you';
   static const String howDoYouFeel = 'How do you feel today?';
   static const String badRecipe = 'Bad recipe';
   static const String saveToGallery = 'Save to gallery';
   static const String done = 'Done';
   static const String basedOnMood = 'Based on your mood and phase';
   static const String upgradeToPremium = 'Upgrade to premium!';
-  static const String enjoyAll = 'Enjoy all benefits without restrictions';
+  static const String enjoyAll = 'Unlock unlimited real-time recipes';
 
   // static const String welcomeBack = 'Welcome back! Please enter your details';
 

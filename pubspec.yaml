@@ -32,6 +32,7 @@ dependencies:
   http: ^1.1.0
   shimmer: ^3.0.0
   super_tooltip: ^2.0.4
+  cached_network_image: ^3.2.3
 
   #signin
   google_sign_in: ^6.0.2

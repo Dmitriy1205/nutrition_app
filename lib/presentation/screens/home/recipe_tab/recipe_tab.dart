@@ -17,7 +17,7 @@ class RecipeTab extends StatefulWidget {
 class _RecipeTabState extends State<RecipeTab> {
   final _pageController = PageController(initialPage: 0);
   int _currentPage = 0;
-
+  List<String> excludeList = [];
   String name = '';
   String birthDate = '';
   Map<String, dynamic> location = {};
@@ -114,7 +114,11 @@ class _RecipeTabState extends State<RecipeTab> {
                         duration: const Duration(milliseconds: 200),
                         curve: Curves.ease,
                       );
-                    }, nextPage: () {
+                    }, nextPage: (list) {
+                      setState(() {
+                        excludeList  = list;
+                      });
+
                       _pageController.nextPage(
                         duration: const Duration(milliseconds: 200),
                         curve: Curves.ease,
@@ -126,11 +130,12 @@ class _RecipeTabState extends State<RecipeTab> {
                         curve: Curves.ease,
                       );
                     }, nextPage: () {
+
                       _pageController.nextPage(
                         duration: const Duration(milliseconds: 200),
                         curve: Curves.ease,
                       );
-                    }),
+                    }, excludeList: excludeList,),
                     GeneratedRecipeScreen(
                       previousPage: () {
                         _pageController.previousPage(

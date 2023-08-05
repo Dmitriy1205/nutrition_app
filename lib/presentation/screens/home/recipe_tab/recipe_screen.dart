@@ -14,33 +14,32 @@ import '../../../blocs/mood/mood_bloc.dart';
 import '../../../blocs/profile/profile_bloc.dart';
 
 class RecipeScreen extends StatefulWidget {
+  final List<String> excludeList;
   final void Function() nextPage;
   final void Function() previousPage;
 
   const RecipeScreen(
-      {super.key, required this.nextPage, required this.previousPage});
+      {super.key,
+      required this.nextPage,
+      required this.previousPage,
+      required this.excludeList});
 
   @override
   State<RecipeScreen> createState() => _RecipeScreenState();
 }
 
 class _RecipeScreenState extends State<RecipeScreen> {
-  final _bloc = sl<GenerateRecipesBloc>();
+  // final _bloc = sl<GenerateRecipesBloc>();
   String selectedRecipeName = '';
   int currentPage = 0;
   int itemsPerPage = 3;
-  late List<String> excludeList;
+
   List<String> recipes = [];
 
   @override
   void initState() {
-    excludeList = context.read<ProfileBloc>().state.user!.foodDontIt! +
-        context.read<ProfileBloc>().state.user!.allergy!;
-    _bloc.add(GenerateRecipesEvent.generateRecipes(
-      season: context.read<ProfileBloc>().state.season!,
-      cravings: context.read<MoodBloc>().state.recipe!.product!,
-      exclude: excludeList,
-    ));
+    recipes.clear();
+
     super.initState();
   }
 
@@ -49,7 +48,7 @@ class _RecipeScreenState extends State<RecipeScreen> {
     return Scaffold(
       backgroundColor: Colors.transparent,
       body: BlocBuilder<GenerateRecipesBloc, GenerateRecipesState>(
-        bloc: _bloc,
+        // bloc: _bloc,
         builder: (context, state) {
           return Padding(
             padding: const EdgeInsets.symmetric(horizontal: 24),
@@ -208,7 +207,7 @@ class _RecipeScreenState extends State<RecipeScreen> {
                                                   .state
                                                   .recipe!
                                                   .mood!,
-                                              exclude: excludeList,
+                                              exclude: widget.excludeList,
                                               recipeName: selectedRecipeName),
                                         );
 
@@ -238,29 +237,31 @@ class _RecipeScreenState extends State<RecipeScreen> {
                                 ..onTap = () {
                                   setState(() {
                                     if (recipes.length == 3) {
-                                      excludeList = context
-                                              .read<ProfileBloc>()
-                                              .state
-                                              .user!
-                                              .foodDontIt! +
-                                          context
-                                              .read<ProfileBloc>()
-                                              .state
-                                              .user!
-                                              .allergy!;
-                                      _bloc.add(
-                                          GenerateRecipesEvent.generateRecipes(
-                                        season: context
-                                            .read<ProfileBloc>()
-                                            .state
-                                            .season!,
-                                        cravings: context
-                                            .read<MoodBloc>()
-                                            .state
-                                            .recipe!
-                                            .product!,
-                                        exclude: excludeList,
-                                      ));
+                                      // widget.excludeList = context
+                                      //         .read<ProfileBloc>()
+                                      //         .state
+                                      //         .user!
+                                      //         .foodDontIt! +
+                                      //     context
+                                      //         .read<ProfileBloc>()
+                                      //         .state
+                                      //         .user!
+                                      //         .allergy!;
+
+                                      context.read<GenerateRecipesBloc>().add(
+                                              GenerateRecipesEvent
+                                                  .generateRecipes(
+                                            season: context
+                                                .read<ProfileBloc>()
+                                                .state
+                                                .season!,
+                                            cravings: context
+                                                .read<MoodBloc>()
+                                                .state
+                                                .recipe!
+                                                .product!,
+                                            exclude: widget.excludeList,
+                                          ));
                                     }
 
                                     recipes.removeRange(0, 3);

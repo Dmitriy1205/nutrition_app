@@ -24,6 +24,7 @@ mixin _$Tutorial {
   bool? get isFoodChoose => throw _privateConstructorUsedError;
   bool? get isRegenerateRecipe => throw _privateConstructorUsedError;
   bool? get isRecipeButton => throw _privateConstructorUsedError;
+  bool? get isShowBottomBar => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -40,7 +41,8 @@ abstract class $TutorialCopyWith<$Res> {
       {bool? isEditMood,
       bool? isFoodChoose,
       bool? isRegenerateRecipe,
-      bool? isRecipeButton});
+      bool? isRecipeButton,
+      bool? isShowBottomBar});
 }
 
 /// @nodoc
@@ -60,6 +62,7 @@ class _$TutorialCopyWithImpl<$Res, $Val extends Tutorial>
     Object? isFoodChoose = freezed,
     Object? isRegenerateRecipe = freezed,
     Object? isRecipeButton = freezed,
+    Object? isShowBottomBar = freezed,
   }) {
     return _then(_value.copyWith(
       isEditMood: freezed == isEditMood
@@ -78,6 +81,10 @@ class _$TutorialCopyWithImpl<$Res, $Val extends Tutorial>
           ? _value.isRecipeButton
           : isRecipeButton // ignore: cast_nullable_to_non_nullable
               as bool?,
+      isShowBottomBar: freezed == isShowBottomBar
+          ? _value.isShowBottomBar
+          : isShowBottomBar // ignore: cast_nullable_to_non_nullable
+              as bool?,
     ) as $Val);
   }
 }
@@ -93,7 +100,8 @@ abstract class _$$_TutorialCopyWith<$Res> implements $TutorialCopyWith<$Res> {
       {bool? isEditMood,
       bool? isFoodChoose,
       bool? isRegenerateRecipe,
-      bool? isRecipeButton});
+      bool? isRecipeButton,
+      bool? isShowBottomBar});
 }
 
 /// @nodoc
@@ -111,6 +119,7 @@ class __$$_TutorialCopyWithImpl<$Res>
     Object? isFoodChoose = freezed,
     Object? isRegenerateRecipe = freezed,
     Object? isRecipeButton = freezed,
+    Object? isShowBottomBar = freezed,
   }) {
     return _then(_$_Tutorial(
       isEditMood: freezed == isEditMood
@@ -129,6 +138,10 @@ class __$$_TutorialCopyWithImpl<$Res>
           ? _value.isRecipeButton
           : isRecipeButton // ignore: cast_nullable_to_non_nullable
               as bool?,
+      isShowBottomBar: freezed == isShowBottomBar
+          ? _value.isShowBottomBar
+          : isShowBottomBar // ignore: cast_nullable_to_non_nullable
+              as bool?,
     ));
   }
 }
@@ -140,7 +153,8 @@ class _$_Tutorial implements _Tutorial {
       {this.isEditMood,
       this.isFoodChoose,
       this.isRegenerateRecipe,
-      this.isRecipeButton});
+      this.isRecipeButton,
+      this.isShowBottomBar});
 
   factory _$_Tutorial.fromJson(Map<String, dynamic> json) =>
       _$$_TutorialFromJson(json);
@@ -153,10 +167,12 @@ class _$_Tutorial implements _Tutorial {
   final bool? isRegenerateRecipe;
   @override
   final bool? isRecipeButton;
+  @override
+  final bool? isShowBottomBar;
 
   @override
   String toString() {
-    return 'Tutorial(isEditMood: $isEditMood, isFoodChoose: $isFoodChoose, isRegenerateRecipe: $isRegenerateRecipe, isRecipeButton: $isRecipeButton)';
+    return 'Tutorial(isEditMood: $isEditMood, isFoodChoose: $isFoodChoose, isRegenerateRecipe: $isRegenerateRecipe, isRecipeButton: $isRecipeButton, isShowBottomBar: $isShowBottomBar)';
   }
 
   @override
@@ -171,13 +187,15 @@ class _$_Tutorial implements _Tutorial {
             (identical(other.isRegenerateRecipe, isRegenerateRecipe) ||
                 other.isRegenerateRecipe == isRegenerateRecipe) &&
             (identical(other.isRecipeButton, isRecipeButton) ||
-                other.isRecipeButton == isRecipeButton));
+                other.isRecipeButton == isRecipeButton) &&
+            (identical(other.isShowBottomBar, isShowBottomBar) ||
+                other.isShowBottomBar == isShowBottomBar));
   }
 
   @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(runtimeType, isEditMood, isFoodChoose,
-      isRegenerateRecipe, isRecipeButton);
+      isRegenerateRecipe, isRecipeButton, isShowBottomBar);
 
   @JsonKey(ignore: true)
   @override
@@ -198,7 +216,8 @@ abstract class _Tutorial implements Tutorial {
       {final bool? isEditMood,
       final bool? isFoodChoose,
       final bool? isRegenerateRecipe,
-      final bool? isRecipeButton}) = _$_Tutorial;
+      final bool? isRecipeButton,
+      final bool? isShowBottomBar}) = _$_Tutorial;
 
   factory _Tutorial.fromJson(Map<String, dynamic> json) = _$_Tutorial.fromJson;
 
@@ -210,6 +229,8 @@ abstract class _Tutorial implements Tutorial {
   bool? get isRegenerateRecipe;
   @override
   bool? get isRecipeButton;
+  @override
+  bool? get isShowBottomBar;
   @override
   @JsonKey(ignore: true)
   _$$_TutorialCopyWith<_$_Tutorial> get copyWith =>

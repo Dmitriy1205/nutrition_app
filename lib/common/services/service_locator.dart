@@ -52,5 +52,5 @@ Future<void> init() async {
   sl.registerFactory(() => GenerateRecipesBloc(recipeRepository: sl()));
   sl.registerFactory(
       () => RecipeBloc(recipeRepository: sl(), authRepository: sl()));
-  sl.registerFactory(() => TutorialBloc(userRepository: sl(), authBloc: sl()));
+  sl.registerLazySingleton(() => TutorialBloc(userRepository: sl(), authBloc: sl()));
 }

@@ -13,6 +13,8 @@ import 'package:nutrition_app/presentation/widgets/app_checkbox.dart';
 import '../../../common/strings.dart';
 import '../../../common/theme.dart';
 import '../../../data/models/cities/cities.dart';
+import '../../blocs/auth/auth_bloc.dart';
+import '../../blocs/tutorial/tutorial_bloc.dart';
 import '../../widgets/birthdate_picker.dart';
 import '../../widgets/loading_indicator.dart';
 
@@ -52,8 +54,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
   @override
   void initState() {
+
     readJson();
     user = context.read<ProfileBloc>().state.user!;
+
     nameController.text = user.name!;
     birthDateController.text = user.birthDate!;
     searchController.text =
@@ -139,9 +143,35 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     //
                     Align(
                       alignment: Alignment.center,
-                      child: Text(
-                        AppStrings.profile.toUpperCase(),
-                        style: AppTheme.themeData.textTheme.headlineLarge,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          SizedBox(width: 20,),
+                          Text(
+                            AppStrings.profile.toUpperCase(),
+                            style: AppTheme.themeData.textTheme.headlineLarge,
+                          ),
+                          PopupMenuButton(
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(5.0),
+                              ),
+                              itemBuilder: (context) {
+                                return [
+                                  const PopupMenuItem<int>(
+                                    value: 0,
+                                    child: Text(
+                                      AppStrings.logout,
+                                      style: TextStyle(color: Colors.black),
+                                    ),
+                                  ),
+                                ];
+                              },
+                              onSelected: (value) {
+                                if (value == 0) {
+                                  showAlertDialog(context);
+                                }
+                              }),
+                        ],
                       ),
                     ),
                     //
@@ -697,6 +727,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           haveAllergy: allergy,
                           allergy: allergyList,
                           foodDontIt: foodList,
+                          currentDate: user.currentDate,
                         ),
                       ),
                     );
@@ -753,4 +784,47 @@ class _ProfileScreenState extends State<ProfileScreen> {
       _items = (data as List).map((e) => Cities.fromJson(e)).toList();
     });
   }
+}
+showAlertDialog(BuildContext context) {
+  Widget cancelButton = TextButton(
+    child: const Text(
+      AppStrings.cancel,
+      style: TextStyle(color: AppColors.blackBlue),
+    ),
+    onPressed: () {
+      Navigator.pop(context);
+    },
+  );
+  Widget continueButton = TextButton(
+    child: const Text(
+      AppStrings.logout,
+      style: TextStyle(color: AppColors.blackBlue),
+    ),
+    onPressed: () {
+      context.read<AuthBloc>().add(const AuthEvent.logout());
+      Navigator.pop(context);
+    },
+  );
+
+  AlertDialog alert = AlertDialog(
+    shape: RoundedRectangleBorder(
+      borderRadius: BorderRadius.circular(10.0),
+    ),
+    title: Text(AppStrings.warning,
+        style: AppTheme.themeData.textTheme.titleSmall),
+    content: Text(AppStrings.areYouSure,
+        style: AppTheme.themeData.textTheme.bodySmall!
+            .copyWith(color: Colors.black)),
+    actions: [
+      cancelButton,
+      continueButton,
+    ],
+  );
+
+  showDialog(
+    context: context,
+    builder: (BuildContext context) {
+      return alert;
+    },
+  );
 }

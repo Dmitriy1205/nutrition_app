@@ -59,6 +59,7 @@ class RecipeBloc extends Bloc<RecipeEvent, RecipeState> {
     try {
       String recipeImage =
           await _recipeRepository.getRecipeImage(recipeName: event.recipeName);
+
       emit(RecipeState.imageGenerated(recipeImage: recipeImage));
     } on BadRequestException catch (e) {
       emit(RecipeState.error(error: e.message));

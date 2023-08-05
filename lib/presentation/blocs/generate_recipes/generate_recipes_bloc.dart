@@ -41,6 +41,7 @@ class GenerateRecipesBloc
         exclude: event.exclude,
       );
       print('=================> $currentTime');
+      print('=================> ${event.season}');
       emit(GenerateRecipesState.generated(recipes: generatedRecipes));
     } on BadRequestException catch (e) {
       emit(GenerateRecipesState.error(error: e.message));

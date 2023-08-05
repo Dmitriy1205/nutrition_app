@@ -10,7 +10,9 @@ import 'package:shimmer/shimmer.dart';
 import '../../../../common/theme.dart';
 
 class LoadingScreen extends StatefulWidget {
-  const LoadingScreen({super.key});
+
+  final void Function() previousPage;
+  const LoadingScreen({super.key, required this.previousPage});
 
   @override
   State<LoadingScreen> createState() => _LoadingScreenState();
@@ -18,12 +20,13 @@ class LoadingScreen extends StatefulWidget {
 
 class _LoadingScreenState extends State<LoadingScreen> {
   String generatedPhrase = '';
+  late Timer _timer;
 
   @override
   void initState() {
     List<String> ingredients = context.read<MoodBloc>().state.recipe!.product!;
     generatedPhrase = generateRandomPhrase(ingredient: ingredients[0]);
-    Timer.periodic(const Duration(seconds: 4), (timer) {
+   _timer = Timer.periodic(const Duration(seconds: 4), (timer) {
       String ingredient = ingredients[Random().nextInt(ingredients.length)];
       setState(() {
         generatedPhrase = generateRandomPhrase(ingredient: ingredient);
@@ -57,7 +60,9 @@ class _LoadingScreenState extends State<LoadingScreen> {
                         ),
                       ),
                     ),
-                    onTap: () {},
+                    onTap: () {
+                      widget.previousPage();
+                    },
                   ),
                 ),
                 const SizedBox(
@@ -106,5 +111,11 @@ class _LoadingScreenState extends State<LoadingScreen> {
         ),
       ),
     );
+  }
+
+  @override
+  void dispose() {
+    _timer.cancel();
+    super.dispose();
   }
 }
