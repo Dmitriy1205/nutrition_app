@@ -1,15 +1,16 @@
 import 'package:flutter/material.dart';
 
 class ColoredContainer extends StatelessWidget {
+  final double? radius;
   final Widget child;
 
-  const ColoredContainer({super.key, required this.child});
+  const ColoredContainer({super.key, required this.child, this.radius});
 
   @override
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(7),
+        borderRadius: BorderRadius.circular(radius ?? 7),
         color: Colors.white,
         gradient: const LinearGradient(
           colors: [

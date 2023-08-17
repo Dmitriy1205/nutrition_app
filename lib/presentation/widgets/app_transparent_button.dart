@@ -7,14 +7,16 @@ import '../../common/theme.dart';
 
 class AppTransparentButton extends StatelessWidget {
   final String text;
+  final Color? backgroundColor;
   final VoidCallback? onPressed;
   final TextStyle? style;
+  final double? padding;
 
   const AppTransparentButton({
     required this.text,
     required this.onPressed,
     super.key,
-    this.style,
+    this.style, this.backgroundColor, this.padding,
   });
 
   @override
@@ -22,9 +24,9 @@ class AppTransparentButton extends StatelessWidget {
     return ElevatedButton(
       style: ElevatedButton.styleFrom(
         surfaceTintColor: Colors.transparent,
-        backgroundColor: Colors.transparent,
+        backgroundColor: backgroundColor ?? Colors.transparent,
         shadowColor:Colors.transparent,
-        side: const BorderSide(color: AppColors.violet,width: 2),
+        side:  BorderSide(color: backgroundColor != null ? Colors.transparent : AppColors.violet,width: 2),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(10,),
         ),
@@ -35,7 +37,7 @@ class AppTransparentButton extends StatelessWidget {
         children: [
           Flexible(
             child: Padding(
-              padding: const EdgeInsets.symmetric(vertical: 20),
+              padding: EdgeInsets.symmetric(vertical:padding ?? 20),
               child: Text(
                 text,
                 style: style ?? AppTheme.themeData.textTheme.titleMedium,

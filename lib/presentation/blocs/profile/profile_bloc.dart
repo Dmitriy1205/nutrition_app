@@ -2,7 +2,8 @@ import 'dart:async';
 
 import 'package:bloc/bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:nutrition_app/common/functions.dart';
+import 'package:nutrition_app/common/functions/functions.dart';
+import 'package:nutrition_app/common/functions/moon_phase.dart';
 import '../../../common/exceptions.dart';
 import '../../../data/models/account/account.dart';
 import '../../../data/repositories/user_repository.dart';
@@ -63,7 +64,6 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
       final currentUser = _authBloc.state.user!.uid;
       final user = await _userRepository.getAccount(id: currentUser);
 
-
       DateTime dateOfSaving = parseDateString(user.currentDate!);
 
       final String season = getSeasonFromLocation(
@@ -82,8 +82,12 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
         print('phase ---- $phase');
       } else {
         //TODO: add moon period calculation
-        phase = '';
-        print('season ---- $season');
+        MoonPhase moonPhase = calculateMoonPhase(
+            double.parse(user.location!['lat']),
+            double.parse(user.location!['lng']));
+        phase = getCycleByMoon(moonPhase: moonPhase);
+        print('season ---- $moonPhase');
+        print('season ---- $phase');
       }
       print('dateOfSaving ---- $dateOfSaving');
       emit(ProfileState.initialized(user: user, season: season, phase: phase));
@@ -96,12 +100,35 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
       _UpdateData event, Emitter<ProfileState> emit) async {
     emit(const ProfileState.loading());
     try {
+      String phase;
       final currentUser = _authBloc.state.user!.uid;
       await _userRepository.updateAccount(
           userId: currentUser, data: event.account!);
       final user = await _userRepository.getAccount(id: currentUser);
-      final String season = '';
-      final String phase = '';
+      DateTime dateOfSaving = parseDateString(user.currentDate!);
+      final String season = getSeasonFromLocation(
+        latitudeString: user.location!['lat'],
+      );
+
+      if (user.irregularCycle == false) {
+        CyclePhase cyclePhase = getCurrentCyclePhase(
+          dateOfSaving: dateOfSaving,
+          dayOfCycle: int.parse(user.dayCycle!),
+          cycleLength: int.parse(user.cycleLength!),
+          periodLength: int.parse(user.periodLength!),
+        );
+
+        phase = cyclePhaseToString(cyclePhase);
+        print('phase ---- $phase');
+      } else {
+        //TODO: add moon period calculation
+        MoonPhase moonPhase = calculateMoonPhase(
+            double.parse(user.location!['lat']),
+            double.parse(user.location!['lng']));
+        phase = getCycleByMoon(moonPhase: moonPhase);
+        print('season ---- $moonPhase');
+        print('season ---- $phase');
+      }
       emit(ProfileState.initialized(user: user, season: season, phase: phase));
     } on BadRequestException catch (e) {
       emit(ProfileState.error(error: e.message));

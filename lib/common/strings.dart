@@ -61,6 +61,7 @@ class AppStrings {
   static const String gallery = 'Gallery';
   static const String next = 'Next';
   static const String save = 'Save';
+  static const String saved = 'Saved';
   static const String savedRecipes = 'Saved Recipes';
   static const String latestRecipes = 'Latest Recipes';
   static const String iam = 'I am';
@@ -83,7 +84,8 @@ class AppStrings {
   static const String seletWhatUp = 'Choose Your Meal';
   static const String chooseYourRecipe = 'Choose your recipe';
   static const String regenerate = 'Regenerate';
-  static const String pleaseWait = 'Please wait, we generate\nthe recipe for you';
+  static const String pleaseWait =
+      'Please wait, we generate\nthe recipe for you';
   static const String howDoYouFeel = 'How do you feel today?';
   static const String badRecipe = 'Bad recipe';
   static const String saveToGallery = 'Save to gallery';
@@ -91,6 +93,33 @@ class AppStrings {
   static const String basedOnMood = 'Based on your mood and phase';
   static const String upgradeToPremium = 'Upgrade to premium!';
   static const String enjoyAll = 'Unlock unlimited real-time recipes';
+  static const String editProfile = 'Edit profile';
+  static const String foodPreferencesShort = 'Food preferences';
+  static const String dietaryRestrictionsShort = 'Dietary restrictions';
+  static const String deleteMyAccount = 'Delete my account';
+  static const String deleteYourAccount = 'Delete your account';
+  static const String deleteFromSaved = 'DELETE FROM SAVED';
+  static const String delete = 'Delete';
+  static const String startDate = 'Start date';
+  static const String endDate = 'End date';
+  static const String mySubscription = 'My subscription';
+  static const String unsubscribe = 'Unsubscribe';
+  static const String premiumSubscription = 'Premium subscription';
+  static const String unlimitedCustomRecipes = 'Unlimited Custom Recipes';
+  static const String groceriesForEveryPhase = 'Groceries for every Phase';
+  static const String healthCycle = 'Health & Cycle Support with\nNeeded Nutrients';
+  static const String stillNotSure = 'Still not sure?';
+  static const String activateYourFreeTrial = 'activate your free trial';
+  static const String oneYear = '1 year, 79.99 USD';
+  static const String getYear = 'Get 12 Month / \$79.00';
+  static const String onlyMonth = 'Only 6.65 USD/month';
+  static const String oneMonth = '1 month, 9.99 USD';
+  static const String startFreeTrial = 'Start free trial';
+  static const String restorePurchase = 'Restore purchase';
+  static const String redeemCode = 'Redeem code';
+  static const String areYouSureDeleteAccount = "Are you sure you want to delete your account forever?";
+  static const String areYouSureDeleteRecipe = "Are you sure you want to delete from saved recipes?";
+  static const String areYouSureUnsubscribe = "Are you sure you want to unsubscribe your subscription?";
 
   // static const String welcomeBack = 'Welcome back! Please enter your details';
 
@@ -173,8 +202,8 @@ class AppStrings {
     '6',
     '7',
   ];
-
 }
+
 List<String> phrases = [
   "Preparing a delicious recipe with {ingredient}...",
   "Loading up the flavor with a dash of {ingredient}...",

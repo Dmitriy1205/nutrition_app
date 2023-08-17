@@ -18,7 +18,7 @@ class RecipeState with _$RecipeState {
   const factory RecipeState.textGenerated({required String recipeText}) =
       _TextGenerated;
 
-  const factory RecipeState.imageGenerated({required String recipeImage}) =
+  const factory RecipeState.imageGenerated({required String recipeImage,required String recipe}) =
       _ImageGenerated;
 
   const factory RecipeState.error({required String error}) = _ErrorState;

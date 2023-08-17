@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:nutrition_app/common/functions.dart';
+import 'package:nutrition_app/common/functions/functions.dart';
 import 'package:nutrition_app/common/strings.dart';
 import 'package:nutrition_app/data/models/phase.dart';
 import 'package:nutrition_app/data/models/recipe/recipe.dart';
@@ -512,8 +512,8 @@ class _FoodScreenState extends State<FoodScreen> {
                                 .split(',')
                                 .map((letter) => letter.trim())
                                 .toList();
-                            isSelected = List<bool>.generate(
-                                randomlySelectedFoods.length, (index) => false);
+                            // isSelected = List<bool>.generate(
+                            //     randomlySelectedFoods.length, (index) => false);
                           }
                         });
                       },

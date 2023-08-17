@@ -51,49 +51,6 @@ class _RecipeTabState extends State<RecipeTab> {
         builder: (context, state) {
           return Column(
             children: [
-              //TODO: uncomment linear indicator if needed
-              // Padding(
-              //   padding: const EdgeInsets.symmetric(horizontal: 30.0, vertical: 20),
-              //   child: Row(
-              //     children: [
-              //       AnimatedOpacity(
-              //         duration: const Duration(milliseconds: 200),
-              //         opacity: _currentPage == 0 ? 0.0 : 1.0,
-              //         child: InkWell(
-              //           borderRadius: BorderRadius.circular(20),
-              //           child: Ink(
-              //             width: 20,
-              //             height: 20,
-              //             child: const Center(
-              //               child: Icon(
-              //                 Icons.arrow_back_ios,
-              //                 size: 20,
-              //               ),
-              //             ),
-              //           ),
-              //           onTap: () {
-              //             _pageController.previousPage(
-              //                 duration: const Duration(milliseconds: 200),
-              //                 curve: Curves.ease);
-              //           },
-              //         ),
-              //       ),
-              //       const SizedBox(
-              //         width: 20,
-              //       ),
-              //       Expanded(
-              //         child: SizedBox(
-              //           height: 17,
-              //           child: ClipRRect(
-              //             borderRadius: BorderRadius.circular(40),
-              //             child: CustomLinearIndicator(
-              //                 progress: (_currentPage + 1) / 2, screenQuantity: 2, ),
-              //           ),
-              //         ),
-              //       ),
-              //     ],
-              //   ),
-              // ),
               const SizedBox(
                 height: 30,
               ),

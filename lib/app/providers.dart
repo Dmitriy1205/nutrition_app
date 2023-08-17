@@ -3,10 +3,12 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:nutrition_app/presentation/blocs/create_account/create_account_bloc.dart';
 import 'package:nutrition_app/presentation/blocs/profile/profile_bloc.dart';
 import 'package:nutrition_app/presentation/blocs/recipe/recipe_bloc.dart';
+import 'package:nutrition_app/presentation/blocs/saved_recipe/saved_recipe_bloc.dart';
 import 'package:nutrition_app/presentation/blocs/tutorial/tutorial_bloc.dart';
 
 import '../common/services/service_locator.dart';
 import '../presentation/blocs/auth/auth_bloc.dart';
+import '../presentation/blocs/cache/cache_bloc.dart';
 import '../presentation/blocs/generate_recipes/generate_recipes_bloc.dart';
 import '../presentation/blocs/mood/mood_bloc.dart';
 
@@ -39,10 +41,16 @@ class Providers extends StatelessWidget {
           create: (context) => sl<GenerateRecipesBloc>(),
           lazy: false,
         ),
-        BlocProvider(create: (context)=> sl<ProfileBloc>(),
-          lazy: false,),
-        BlocProvider(create: (context)=> sl<MoodBloc>(),
-          lazy: false,),
+        BlocProvider(
+          create: (context) => sl<ProfileBloc>(),
+          lazy: false,
+        ),
+        BlocProvider(
+          create: (context) => sl<MoodBloc>(),
+          lazy: false,
+        ),
+        BlocProvider(create: (context) => sl<SavedRecipeBloc>()),
+        BlocProvider(create: (context) => sl<CacheBloc>()),
       ],
       child: child,
     );

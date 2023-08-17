@@ -3,7 +3,7 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:nutrition_app/common/functions.dart';
+import 'package:nutrition_app/common/functions/functions.dart';
 import 'package:nutrition_app/common/strings.dart';
 import 'package:nutrition_app/presentation/blocs/mood/mood_bloc.dart';
 import 'package:shimmer/shimmer.dart';

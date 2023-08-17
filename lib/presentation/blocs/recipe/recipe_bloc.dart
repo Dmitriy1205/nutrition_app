@@ -2,7 +2,8 @@ import 'package:bloc/bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:nutrition_app/common/exceptions.dart';
 
-import '../../../common/functions.dart';
+import '../../../common/functions/functions.dart';
+import '../../../data/local/share_pref.dart';
 import '../../../data/repositories/auth_repository.dart';
 import '../../../data/repositories/recipe_repository.dart';
 
@@ -60,7 +61,7 @@ class RecipeBloc extends Bloc<RecipeEvent, RecipeState> {
       String recipeImage =
           await _recipeRepository.getRecipeImage(recipeName: event.recipeName);
 
-      emit(RecipeState.imageGenerated(recipeImage: recipeImage));
+      emit(RecipeState.imageGenerated(recipeImage: recipeImage, recipe: event.recipe));
     } on BadRequestException catch (e) {
       emit(RecipeState.error(error: e.message));
     }

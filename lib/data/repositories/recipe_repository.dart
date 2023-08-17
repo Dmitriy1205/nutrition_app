@@ -1,8 +1,10 @@
 import 'dart:convert';
 import 'package:nutrition_app/common/exceptions.dart';
 import 'package:http/http.dart' as http;
+import 'package:nutrition_app/data/models/saved_recipe/saved_recipe.dart';
 
 import '../../common/urls.dart';
+import '../models/recipe_collection/recipe_collection.dart';
 
 class RecipeRepository {
   Future<List<String>> generateRecipes({
@@ -93,6 +95,179 @@ class RecipeRepository {
       throw BadRequestException(message: e.toString());
     }
   }
+
+  Future<String> saveRecipeOnDatabase({
+    required String recipeName,
+    required String recipeText,
+    required String recipeImage,
+  }) async {
+    const url = "$apiUrl$recipeCollection";
+    final headers = {'Content-Type': 'application/json'};
+
+    try {
+      final response = await http.post(
+        Uri.parse(url),
+        headers: headers,
+        body: jsonEncode({
+          "name": recipeName,
+          "text": recipeText,
+          "img": recipeImage,
+        }),
+      );
+
+      if (response.statusCode == 201) {
+        String recipeId = jsonDecode(response.body)['_id'];
+
+        return recipeId;
+      } else {
+        throw BadRequestException(message: 'Failed to load data from API');
+      }
+    } catch (e) {
+      throw BadRequestException(message: e.toString());
+    }
+  }
+
+  Future<String> saveRecipeToUserCollection({
+    required String currentUserId,
+    required String recipeId,
+  }) async {
+    const url = "$apiUrl$savedRecipeCollection";
+    final headers = {'Content-Type': 'application/json'};
+
+    try {
+      final response = await http.post(
+        Uri.parse(url),
+        headers: headers,
+        body: jsonEncode({
+          "user_id": currentUserId,
+          "recipe_id": recipeId,
+        }),
+      );
+
+      if (response.statusCode == 201) {
+        String recipeId = jsonDecode(response.body)['_id'];
+
+        return recipeId;
+      } else {
+        throw BadRequestException(message: 'Failed to load data from API');
+      }
+    } catch (e) {
+      throw BadRequestException(message: e.toString());
+    }
+  }
+
+  Future<List<SavedRecipe>> getAllRecipes() async {
+    const url = "$apiUrl$recipeCollection";
+    final headers = {'Content-Type': 'application/json'};
+
+    try {
+      final response = await http.get(
+        Uri.parse(url),
+        headers: headers,
+      );
+
+      if (response.statusCode == 200) {
+        List<dynamic> data = jsonDecode(response.body);
+        List<SavedRecipe> savedRecipe =
+            data.map((e) => SavedRecipe.fromJson(e)).toList();
+
+        return savedRecipe;
+      } else {
+        throw BadRequestException(message: 'Failed to load data from API');
+      }
+    } catch (e) {
+      throw BadRequestException(message: e.toString());
+    }
+  }
+
+  Future<List<RecipeCollection>> getSavedRecipesFromUserCollection() async {
+    const url = "$apiUrl$savedRecipeCollection";
+    final headers = {'Content-Type': 'application/json'};
+
+    try {
+      final response = await http.get(
+        Uri.parse(url),
+        headers: headers,
+      );
+
+      if (response.statusCode == 200) {
+        List<dynamic> data = jsonDecode(response.body);
+        List<RecipeCollection> savedRecipe =
+            data.map((e) => RecipeCollection.fromJson(e)).toList();
+
+        return savedRecipe;
+      } else {
+        throw BadRequestException(message: 'Failed to load data from API');
+      }
+    } catch (e) {
+      throw BadRequestException(message: e.toString());
+    }
+  }
+
+  Future<void> deleteFromSavedRecipeCollection(
+      {required String savedRecipeId}) async {
+    final url = "$apiUrl$savedRecipeCollection$savedRecipeId";
+    final headers = {'Content-Type': 'application/json'};
+
+    try {
+      final response = await http.delete(
+        Uri.parse(url),
+        headers: headers,
+      );
+
+      if (response.statusCode == 204) {
+        print('deleted');
+      } else {
+        throw BadRequestException(message: 'Failed to load data from API');
+      }
+    } catch (e) {
+      throw BadRequestException(message: e.toString());
+    }
+  }
+
+  Future<void> deleteFromRecipeCollection({required String recipeId}) async {
+    final url = "$apiUrl$recipeCollection$recipeId";
+    final headers = {'Content-Type': 'application/json'};
+
+    try {
+      final response = await http.delete(
+        Uri.parse(url),
+        headers: headers,
+      );
+
+      if (response.statusCode == 204) {
+        print('deleted');
+      } else {
+        throw BadRequestException(message: 'Failed to load data from API');
+      }
+    } catch (e) {
+      throw BadRequestException(message: e.toString());
+    }
+  }
+
+// Future<List<RecipeCollection>> getAllRecipesQuery() async {
+//   const url = "$apiUrl$recipeQuery";
+//   final headers = {'Content-Type': 'application/json'};
+//
+//   try {
+//     final response = await http.get(
+//       Uri.parse(url),
+//       headers: headers,
+//     );
+//
+//     if (response.statusCode == 200) {
+//       List<dynamic> data = jsonDecode(response.body);
+//       List<RecipeCollection> savedRecipe = data.map((e) =>
+//           RecipeCollection.fromJson(e)).toList();
+//
+//       return savedRecipe;
+//     } else {
+//       throw BadRequestException(message: 'Failed to load data from API');
+//     }
+//   } catch (e) {
+//     throw BadRequestException(message: e.toString());
+//   }
+// }
 }
 // final Dio _dio = Dio(
 //   BaseOptions(

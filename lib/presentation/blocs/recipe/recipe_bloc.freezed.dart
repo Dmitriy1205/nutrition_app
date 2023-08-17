@@ -22,7 +22,7 @@ mixin _$RecipeEvent {
     required TResult Function(
             String phase, String mood, List<String> exclude, String recipeName)
         generateRecipe,
-    required TResult Function(String recipeName) generateImage,
+    required TResult Function(String recipeName, String recipe) generateImage,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -30,7 +30,7 @@ mixin _$RecipeEvent {
     TResult? Function(
             String phase, String mood, List<String> exclude, String recipeName)?
         generateRecipe,
-    TResult? Function(String recipeName)? generateImage,
+    TResult? Function(String recipeName, String recipe)? generateImage,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -38,7 +38,7 @@ mixin _$RecipeEvent {
     TResult Function(
             String phase, String mood, List<String> exclude, String recipeName)?
         generateRecipe,
-    TResult Function(String recipeName)? generateImage,
+    TResult Function(String recipeName, String recipe)? generateImage,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -207,7 +207,7 @@ class _$_GenerateRecipe implements _GenerateRecipe {
     required TResult Function(
             String phase, String mood, List<String> exclude, String recipeName)
         generateRecipe,
-    required TResult Function(String recipeName) generateImage,
+    required TResult Function(String recipeName, String recipe) generateImage,
   }) {
     return generateRecipe(phase, mood, exclude, recipeName);
   }
@@ -218,7 +218,7 @@ class _$_GenerateRecipe implements _GenerateRecipe {
     TResult? Function(
             String phase, String mood, List<String> exclude, String recipeName)?
         generateRecipe,
-    TResult? Function(String recipeName)? generateImage,
+    TResult? Function(String recipeName, String recipe)? generateImage,
   }) {
     return generateRecipe?.call(phase, mood, exclude, recipeName);
   }
@@ -229,7 +229,7 @@ class _$_GenerateRecipe implements _GenerateRecipe {
     TResult Function(
             String phase, String mood, List<String> exclude, String recipeName)?
         generateRecipe,
-    TResult Function(String recipeName)? generateImage,
+    TResult Function(String recipeName, String recipe)? generateImage,
     required TResult orElse(),
   }) {
     if (generateRecipe != null) {
@@ -296,7 +296,7 @@ abstract class _$$_GenerateImageCopyWith<$Res>
       __$$_GenerateImageCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String recipeName});
+  $Res call({String recipeName, String recipe});
 }
 
 /// @nodoc
@@ -311,11 +311,16 @@ class __$$_GenerateImageCopyWithImpl<$Res>
   @override
   $Res call({
     Object? recipeName = null,
+    Object? recipe = null,
   }) {
     return _then(_$_GenerateImage(
       recipeName: null == recipeName
           ? _value.recipeName
           : recipeName // ignore: cast_nullable_to_non_nullable
+              as String,
+      recipe: null == recipe
+          ? _value.recipe
+          : recipe // ignore: cast_nullable_to_non_nullable
               as String,
     ));
   }
@@ -324,14 +329,16 @@ class __$$_GenerateImageCopyWithImpl<$Res>
 /// @nodoc
 
 class _$_GenerateImage implements _GenerateImage {
-  const _$_GenerateImage({required this.recipeName});
+  const _$_GenerateImage({required this.recipeName, required this.recipe});
 
   @override
   final String recipeName;
+  @override
+  final String recipe;
 
   @override
   String toString() {
-    return 'RecipeEvent.generateImage(recipeName: $recipeName)';
+    return 'RecipeEvent.generateImage(recipeName: $recipeName, recipe: $recipe)';
   }
 
   @override
@@ -340,11 +347,12 @@ class _$_GenerateImage implements _GenerateImage {
         (other.runtimeType == runtimeType &&
             other is _$_GenerateImage &&
             (identical(other.recipeName, recipeName) ||
-                other.recipeName == recipeName));
+                other.recipeName == recipeName) &&
+            (identical(other.recipe, recipe) || other.recipe == recipe));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, recipeName);
+  int get hashCode => Object.hash(runtimeType, recipeName, recipe);
 
   @JsonKey(ignore: true)
   @override
@@ -358,9 +366,9 @@ class _$_GenerateImage implements _GenerateImage {
     required TResult Function(
             String phase, String mood, List<String> exclude, String recipeName)
         generateRecipe,
-    required TResult Function(String recipeName) generateImage,
+    required TResult Function(String recipeName, String recipe) generateImage,
   }) {
-    return generateImage(recipeName);
+    return generateImage(recipeName, recipe);
   }
 
   @override
@@ -369,9 +377,9 @@ class _$_GenerateImage implements _GenerateImage {
     TResult? Function(
             String phase, String mood, List<String> exclude, String recipeName)?
         generateRecipe,
-    TResult? Function(String recipeName)? generateImage,
+    TResult? Function(String recipeName, String recipe)? generateImage,
   }) {
-    return generateImage?.call(recipeName);
+    return generateImage?.call(recipeName, recipe);
   }
 
   @override
@@ -380,11 +388,11 @@ class _$_GenerateImage implements _GenerateImage {
     TResult Function(
             String phase, String mood, List<String> exclude, String recipeName)?
         generateRecipe,
-    TResult Function(String recipeName)? generateImage,
+    TResult Function(String recipeName, String recipe)? generateImage,
     required TResult orElse(),
   }) {
     if (generateImage != null) {
-      return generateImage(recipeName);
+      return generateImage(recipeName, recipe);
     }
     return orElse();
   }
@@ -422,11 +430,13 @@ class _$_GenerateImage implements _GenerateImage {
 }
 
 abstract class _GenerateImage implements RecipeEvent {
-  const factory _GenerateImage({required final String recipeName}) =
-      _$_GenerateImage;
+  const factory _GenerateImage(
+      {required final String recipeName,
+      required final String recipe}) = _$_GenerateImage;
 
   @override
   String get recipeName;
+  String get recipe;
   @override
   @JsonKey(ignore: true)
   _$$_GenerateImageCopyWith<_$_GenerateImage> get copyWith =>
@@ -441,7 +451,7 @@ mixin _$RecipeState {
     required TResult Function() textGenerating,
     required TResult Function() imageGenerating,
     required TResult Function(String recipeText) textGenerated,
-    required TResult Function(String recipeImage) imageGenerated,
+    required TResult Function(String recipeImage, String recipe) imageGenerated,
     required TResult Function(String error) error,
   }) =>
       throw _privateConstructorUsedError;
@@ -451,7 +461,7 @@ mixin _$RecipeState {
     TResult? Function()? textGenerating,
     TResult? Function()? imageGenerating,
     TResult? Function(String recipeText)? textGenerated,
-    TResult? Function(String recipeImage)? imageGenerated,
+    TResult? Function(String recipeImage, String recipe)? imageGenerated,
     TResult? Function(String error)? error,
   }) =>
       throw _privateConstructorUsedError;
@@ -461,7 +471,7 @@ mixin _$RecipeState {
     TResult Function()? textGenerating,
     TResult Function()? imageGenerating,
     TResult Function(String recipeText)? textGenerated,
-    TResult Function(String recipeImage)? imageGenerated,
+    TResult Function(String recipeImage, String recipe)? imageGenerated,
     TResult Function(String error)? error,
     required TResult orElse(),
   }) =>
@@ -558,7 +568,7 @@ class _$_Initial extends _Initial {
     required TResult Function() textGenerating,
     required TResult Function() imageGenerating,
     required TResult Function(String recipeText) textGenerated,
-    required TResult Function(String recipeImage) imageGenerated,
+    required TResult Function(String recipeImage, String recipe) imageGenerated,
     required TResult Function(String error) error,
   }) {
     return initial();
@@ -571,7 +581,7 @@ class _$_Initial extends _Initial {
     TResult? Function()? textGenerating,
     TResult? Function()? imageGenerating,
     TResult? Function(String recipeText)? textGenerated,
-    TResult? Function(String recipeImage)? imageGenerated,
+    TResult? Function(String recipeImage, String recipe)? imageGenerated,
     TResult? Function(String error)? error,
   }) {
     return initial?.call();
@@ -584,7 +594,7 @@ class _$_Initial extends _Initial {
     TResult Function()? textGenerating,
     TResult Function()? imageGenerating,
     TResult Function(String recipeText)? textGenerated,
-    TResult Function(String recipeImage)? imageGenerated,
+    TResult Function(String recipeImage, String recipe)? imageGenerated,
     TResult Function(String error)? error,
     required TResult orElse(),
   }) {
@@ -685,7 +695,7 @@ class _$_TextGenerating extends _TextGenerating {
     required TResult Function() textGenerating,
     required TResult Function() imageGenerating,
     required TResult Function(String recipeText) textGenerated,
-    required TResult Function(String recipeImage) imageGenerated,
+    required TResult Function(String recipeImage, String recipe) imageGenerated,
     required TResult Function(String error) error,
   }) {
     return textGenerating();
@@ -698,7 +708,7 @@ class _$_TextGenerating extends _TextGenerating {
     TResult? Function()? textGenerating,
     TResult? Function()? imageGenerating,
     TResult? Function(String recipeText)? textGenerated,
-    TResult? Function(String recipeImage)? imageGenerated,
+    TResult? Function(String recipeImage, String recipe)? imageGenerated,
     TResult? Function(String error)? error,
   }) {
     return textGenerating?.call();
@@ -711,7 +721,7 @@ class _$_TextGenerating extends _TextGenerating {
     TResult Function()? textGenerating,
     TResult Function()? imageGenerating,
     TResult Function(String recipeText)? textGenerated,
-    TResult Function(String recipeImage)? imageGenerated,
+    TResult Function(String recipeImage, String recipe)? imageGenerated,
     TResult Function(String error)? error,
     required TResult orElse(),
   }) {
@@ -812,7 +822,7 @@ class _$_ImageGenerating extends _ImageGenerating {
     required TResult Function() textGenerating,
     required TResult Function() imageGenerating,
     required TResult Function(String recipeText) textGenerated,
-    required TResult Function(String recipeImage) imageGenerated,
+    required TResult Function(String recipeImage, String recipe) imageGenerated,
     required TResult Function(String error) error,
   }) {
     return imageGenerating();
@@ -825,7 +835,7 @@ class _$_ImageGenerating extends _ImageGenerating {
     TResult? Function()? textGenerating,
     TResult? Function()? imageGenerating,
     TResult? Function(String recipeText)? textGenerated,
-    TResult? Function(String recipeImage)? imageGenerated,
+    TResult? Function(String recipeImage, String recipe)? imageGenerated,
     TResult? Function(String error)? error,
   }) {
     return imageGenerating?.call();
@@ -838,7 +848,7 @@ class _$_ImageGenerating extends _ImageGenerating {
     TResult Function()? textGenerating,
     TResult Function()? imageGenerating,
     TResult Function(String recipeText)? textGenerated,
-    TResult Function(String recipeImage)? imageGenerated,
+    TResult Function(String recipeImage, String recipe)? imageGenerated,
     TResult Function(String error)? error,
     required TResult orElse(),
   }) {
@@ -966,7 +976,7 @@ class _$_TextGenerated extends _TextGenerated {
     required TResult Function() textGenerating,
     required TResult Function() imageGenerating,
     required TResult Function(String recipeText) textGenerated,
-    required TResult Function(String recipeImage) imageGenerated,
+    required TResult Function(String recipeImage, String recipe) imageGenerated,
     required TResult Function(String error) error,
   }) {
     return textGenerated(recipeText);
@@ -979,7 +989,7 @@ class _$_TextGenerated extends _TextGenerated {
     TResult? Function()? textGenerating,
     TResult? Function()? imageGenerating,
     TResult? Function(String recipeText)? textGenerated,
-    TResult? Function(String recipeImage)? imageGenerated,
+    TResult? Function(String recipeImage, String recipe)? imageGenerated,
     TResult? Function(String error)? error,
   }) {
     return textGenerated?.call(recipeText);
@@ -992,7 +1002,7 @@ class _$_TextGenerated extends _TextGenerated {
     TResult Function()? textGenerating,
     TResult Function()? imageGenerating,
     TResult Function(String recipeText)? textGenerated,
-    TResult Function(String recipeImage)? imageGenerated,
+    TResult Function(String recipeImage, String recipe)? imageGenerated,
     TResult Function(String error)? error,
     required TResult orElse(),
   }) {
@@ -1063,7 +1073,7 @@ abstract class _$$_ImageGeneratedCopyWith<$Res> {
           _$_ImageGenerated value, $Res Function(_$_ImageGenerated) then) =
       __$$_ImageGeneratedCopyWithImpl<$Res>;
   @useResult
-  $Res call({String recipeImage});
+  $Res call({String recipeImage, String recipe});
 }
 
 /// @nodoc
@@ -1078,11 +1088,16 @@ class __$$_ImageGeneratedCopyWithImpl<$Res>
   @override
   $Res call({
     Object? recipeImage = null,
+    Object? recipe = null,
   }) {
     return _then(_$_ImageGenerated(
       recipeImage: null == recipeImage
           ? _value.recipeImage
           : recipeImage // ignore: cast_nullable_to_non_nullable
+              as String,
+      recipe: null == recipe
+          ? _value.recipe
+          : recipe // ignore: cast_nullable_to_non_nullable
               as String,
     ));
   }
@@ -1091,14 +1106,17 @@ class __$$_ImageGeneratedCopyWithImpl<$Res>
 /// @nodoc
 
 class _$_ImageGenerated extends _ImageGenerated {
-  const _$_ImageGenerated({required this.recipeImage}) : super._();
+  const _$_ImageGenerated({required this.recipeImage, required this.recipe})
+      : super._();
 
   @override
   final String recipeImage;
+  @override
+  final String recipe;
 
   @override
   String toString() {
-    return 'RecipeState.imageGenerated(recipeImage: $recipeImage)';
+    return 'RecipeState.imageGenerated(recipeImage: $recipeImage, recipe: $recipe)';
   }
 
   @override
@@ -1107,11 +1125,12 @@ class _$_ImageGenerated extends _ImageGenerated {
         (other.runtimeType == runtimeType &&
             other is _$_ImageGenerated &&
             (identical(other.recipeImage, recipeImage) ||
-                other.recipeImage == recipeImage));
+                other.recipeImage == recipeImage) &&
+            (identical(other.recipe, recipe) || other.recipe == recipe));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, recipeImage);
+  int get hashCode => Object.hash(runtimeType, recipeImage, recipe);
 
   @JsonKey(ignore: true)
   @override
@@ -1126,10 +1145,10 @@ class _$_ImageGenerated extends _ImageGenerated {
     required TResult Function() textGenerating,
     required TResult Function() imageGenerating,
     required TResult Function(String recipeText) textGenerated,
-    required TResult Function(String recipeImage) imageGenerated,
+    required TResult Function(String recipeImage, String recipe) imageGenerated,
     required TResult Function(String error) error,
   }) {
-    return imageGenerated(recipeImage);
+    return imageGenerated(recipeImage, recipe);
   }
 
   @override
@@ -1139,10 +1158,10 @@ class _$_ImageGenerated extends _ImageGenerated {
     TResult? Function()? textGenerating,
     TResult? Function()? imageGenerating,
     TResult? Function(String recipeText)? textGenerated,
-    TResult? Function(String recipeImage)? imageGenerated,
+    TResult? Function(String recipeImage, String recipe)? imageGenerated,
     TResult? Function(String error)? error,
   }) {
-    return imageGenerated?.call(recipeImage);
+    return imageGenerated?.call(recipeImage, recipe);
   }
 
   @override
@@ -1152,12 +1171,12 @@ class _$_ImageGenerated extends _ImageGenerated {
     TResult Function()? textGenerating,
     TResult Function()? imageGenerating,
     TResult Function(String recipeText)? textGenerated,
-    TResult Function(String recipeImage)? imageGenerated,
+    TResult Function(String recipeImage, String recipe)? imageGenerated,
     TResult Function(String error)? error,
     required TResult orElse(),
   }) {
     if (imageGenerated != null) {
-      return imageGenerated(recipeImage);
+      return imageGenerated(recipeImage, recipe);
     }
     return orElse();
   }
@@ -1207,11 +1226,13 @@ class _$_ImageGenerated extends _ImageGenerated {
 }
 
 abstract class _ImageGenerated extends RecipeState {
-  const factory _ImageGenerated({required final String recipeImage}) =
-      _$_ImageGenerated;
+  const factory _ImageGenerated(
+      {required final String recipeImage,
+      required final String recipe}) = _$_ImageGenerated;
   const _ImageGenerated._() : super._();
 
   String get recipeImage;
+  String get recipe;
   @JsonKey(ignore: true)
   _$$_ImageGeneratedCopyWith<_$_ImageGenerated> get copyWith =>
       throw _privateConstructorUsedError;
@@ -1285,7 +1306,7 @@ class _$_ErrorState extends _ErrorState {
     required TResult Function() textGenerating,
     required TResult Function() imageGenerating,
     required TResult Function(String recipeText) textGenerated,
-    required TResult Function(String recipeImage) imageGenerated,
+    required TResult Function(String recipeImage, String recipe) imageGenerated,
     required TResult Function(String error) error,
   }) {
     return error(this.error);
@@ -1298,7 +1319,7 @@ class _$_ErrorState extends _ErrorState {
     TResult? Function()? textGenerating,
     TResult? Function()? imageGenerating,
     TResult? Function(String recipeText)? textGenerated,
-    TResult? Function(String recipeImage)? imageGenerated,
+    TResult? Function(String recipeImage, String recipe)? imageGenerated,
     TResult? Function(String error)? error,
   }) {
     return error?.call(this.error);
@@ -1311,7 +1332,7 @@ class _$_ErrorState extends _ErrorState {
     TResult Function()? textGenerating,
     TResult Function()? imageGenerating,
     TResult Function(String recipeText)? textGenerated,
-    TResult Function(String recipeImage)? imageGenerated,
+    TResult Function(String recipeImage, String recipe)? imageGenerated,
     TResult Function(String error)? error,
     required TResult orElse(),
   }) {

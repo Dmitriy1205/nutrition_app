@@ -1,6 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:nutrition_app/common/functions.dart';
+import 'package:nutrition_app/common/functions/functions.dart';
 
 import '../../../common/exceptions.dart';
 import '../../../data/repositories/recipe_repository.dart';

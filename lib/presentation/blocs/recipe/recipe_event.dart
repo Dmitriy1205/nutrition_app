@@ -9,5 +9,5 @@ class RecipeEvent with _$RecipeEvent {
     required String recipeName,
   }) = _GenerateRecipe;
 
-  const factory RecipeEvent.generateImage({required String recipeName}) = _GenerateImage;
+  const factory RecipeEvent.generateImage({required String recipeName,required String recipe}) = _GenerateImage;
 }
