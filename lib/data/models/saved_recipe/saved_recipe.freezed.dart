@@ -26,6 +26,7 @@ mixin _$SavedRecipe {
   @JsonKey(name: 'text')
   String? get recipeText => throw _privateConstructorUsedError;
   String? get img => throw _privateConstructorUsedError;
+  String? get date => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -43,7 +44,8 @@ abstract class $SavedRecipeCopyWith<$Res> {
       {@JsonKey(name: '_id') String? id,
       String? name,
       @JsonKey(name: 'text') String? recipeText,
-      String? img});
+      String? img,
+      String? date});
 }
 
 /// @nodoc
@@ -63,6 +65,7 @@ class _$SavedRecipeCopyWithImpl<$Res, $Val extends SavedRecipe>
     Object? name = freezed,
     Object? recipeText = freezed,
     Object? img = freezed,
+    Object? date = freezed,
   }) {
     return _then(_value.copyWith(
       id: freezed == id
@@ -81,6 +84,10 @@ class _$SavedRecipeCopyWithImpl<$Res, $Val extends SavedRecipe>
           ? _value.img
           : img // ignore: cast_nullable_to_non_nullable
               as String?,
+      date: freezed == date
+          ? _value.date
+          : date // ignore: cast_nullable_to_non_nullable
+              as String?,
     ) as $Val);
   }
 }
@@ -97,7 +104,8 @@ abstract class _$$_SavedRecipeCopyWith<$Res>
       {@JsonKey(name: '_id') String? id,
       String? name,
       @JsonKey(name: 'text') String? recipeText,
-      String? img});
+      String? img,
+      String? date});
 }
 
 /// @nodoc
@@ -115,6 +123,7 @@ class __$$_SavedRecipeCopyWithImpl<$Res>
     Object? name = freezed,
     Object? recipeText = freezed,
     Object? img = freezed,
+    Object? date = freezed,
   }) {
     return _then(_$_SavedRecipe(
       id: freezed == id
@@ -133,6 +142,10 @@ class __$$_SavedRecipeCopyWithImpl<$Res>
           ? _value.img
           : img // ignore: cast_nullable_to_non_nullable
               as String?,
+      date: freezed == date
+          ? _value.date
+          : date // ignore: cast_nullable_to_non_nullable
+              as String?,
     ));
   }
 }
@@ -144,7 +157,8 @@ class _$_SavedRecipe implements _SavedRecipe {
       {@JsonKey(name: '_id') this.id,
       this.name,
       @JsonKey(name: 'text') this.recipeText,
-      this.img});
+      this.img,
+      this.date});
 
   factory _$_SavedRecipe.fromJson(Map<String, dynamic> json) =>
       _$$_SavedRecipeFromJson(json);
@@ -159,10 +173,12 @@ class _$_SavedRecipe implements _SavedRecipe {
   final String? recipeText;
   @override
   final String? img;
+  @override
+  final String? date;
 
   @override
   String toString() {
-    return 'SavedRecipe(id: $id, name: $name, recipeText: $recipeText, img: $img)';
+    return 'SavedRecipe(id: $id, name: $name, recipeText: $recipeText, img: $img, date: $date)';
   }
 
   @override
@@ -174,12 +190,13 @@ class _$_SavedRecipe implements _SavedRecipe {
             (identical(other.name, name) || other.name == name) &&
             (identical(other.recipeText, recipeText) ||
                 other.recipeText == recipeText) &&
-            (identical(other.img, img) || other.img == img));
+            (identical(other.img, img) || other.img == img) &&
+            (identical(other.date, date) || other.date == date));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, id, name, recipeText, img);
+  int get hashCode => Object.hash(runtimeType, id, name, recipeText, img, date);
 
   @JsonKey(ignore: true)
   @override
@@ -200,7 +217,8 @@ abstract class _SavedRecipe implements SavedRecipe {
       {@JsonKey(name: '_id') final String? id,
       final String? name,
       @JsonKey(name: 'text') final String? recipeText,
-      final String? img}) = _$_SavedRecipe;
+      final String? img,
+      final String? date}) = _$_SavedRecipe;
 
   factory _SavedRecipe.fromJson(Map<String, dynamic> json) =
       _$_SavedRecipe.fromJson;
@@ -215,6 +233,8 @@ abstract class _SavedRecipe implements SavedRecipe {
   String? get recipeText;
   @override
   String? get img;
+  @override
+  String? get date;
   @override
   @JsonKey(ignore: true)
   _$$_SavedRecipeCopyWith<_$_SavedRecipe> get copyWith =>

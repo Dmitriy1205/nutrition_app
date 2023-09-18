@@ -13,6 +13,9 @@ class ProfileState with _$ProfileState {
   String? get phase =>
       maybeMap(initialized: (state) => state.phase, orElse: () => null);
 
+  String? get dayOfCycle =>
+      maybeMap(initialized: (state) => state.dayOfCycle, orElse: () => null);
+
   const factory ProfileState.initial() = _Initial;
 
   const factory ProfileState.loading() = _LoadingState;
@@ -21,6 +24,7 @@ class ProfileState with _$ProfileState {
     required UserAccount user,
     required String season,
     required String phase,
+    required String dayOfCycle,
   }) = _Initialize;
 
   const factory ProfileState.success() = _Success;

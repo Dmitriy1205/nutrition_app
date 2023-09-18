@@ -31,6 +31,7 @@ mixin _$UserAccount {
   List<String>? get allergy => throw _privateConstructorUsedError;
   List<String>? get foodDontIt => throw _privateConstructorUsedError;
   String? get currentDate => throw _privateConstructorUsedError;
+  Map<String, dynamic>? get subscription => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -55,7 +56,8 @@ abstract class $UserAccountCopyWith<$Res> {
       bool? haveAllergy,
       List<String>? allergy,
       List<String>? foodDontIt,
-      String? currentDate});
+      String? currentDate,
+      Map<String, dynamic>? subscription});
 }
 
 /// @nodoc
@@ -82,6 +84,7 @@ class _$UserAccountCopyWithImpl<$Res, $Val extends UserAccount>
     Object? allergy = freezed,
     Object? foodDontIt = freezed,
     Object? currentDate = freezed,
+    Object? subscription = freezed,
   }) {
     return _then(_value.copyWith(
       name: freezed == name
@@ -128,6 +131,10 @@ class _$UserAccountCopyWithImpl<$Res, $Val extends UserAccount>
           ? _value.currentDate
           : currentDate // ignore: cast_nullable_to_non_nullable
               as String?,
+      subscription: freezed == subscription
+          ? _value.subscription
+          : subscription // ignore: cast_nullable_to_non_nullable
+              as Map<String, dynamic>?,
     ) as $Val);
   }
 }
@@ -150,7 +157,8 @@ abstract class _$$_AccountCopyWith<$Res> implements $UserAccountCopyWith<$Res> {
       bool? haveAllergy,
       List<String>? allergy,
       List<String>? foodDontIt,
-      String? currentDate});
+      String? currentDate,
+      Map<String, dynamic>? subscription});
 }
 
 /// @nodoc
@@ -174,6 +182,7 @@ class __$$_AccountCopyWithImpl<$Res>
     Object? allergy = freezed,
     Object? foodDontIt = freezed,
     Object? currentDate = freezed,
+    Object? subscription = freezed,
   }) {
     return _then(_$_Account(
       name: freezed == name
@@ -220,6 +229,10 @@ class __$$_AccountCopyWithImpl<$Res>
           ? _value.currentDate
           : currentDate // ignore: cast_nullable_to_non_nullable
               as String?,
+      subscription: freezed == subscription
+          ? _value._subscription
+          : subscription // ignore: cast_nullable_to_non_nullable
+              as Map<String, dynamic>?,
     ));
   }
 }
@@ -238,10 +251,12 @@ class _$_Account extends _Account {
       this.haveAllergy,
       final List<String>? allergy,
       final List<String>? foodDontIt,
-      this.currentDate})
+      this.currentDate,
+      final Map<String, dynamic>? subscription})
       : _location = location,
         _allergy = allergy,
         _foodDontIt = foodDontIt,
+        _subscription = subscription,
         super._();
 
   factory _$_Account.fromJson(Map<String, dynamic> json) =>
@@ -293,10 +308,19 @@ class _$_Account extends _Account {
 
   @override
   final String? currentDate;
+  final Map<String, dynamic>? _subscription;
+  @override
+  Map<String, dynamic>? get subscription {
+    final value = _subscription;
+    if (value == null) return null;
+    if (_subscription is EqualUnmodifiableMapView) return _subscription;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableMapView(value);
+  }
 
   @override
   String toString() {
-    return 'UserAccount(name: $name, birthDate: $birthDate, location: $location, dayCycle: $dayCycle, cycleLength: $cycleLength, periodLength: $periodLength, irregularCycle: $irregularCycle, haveAllergy: $haveAllergy, allergy: $allergy, foodDontIt: $foodDontIt, currentDate: $currentDate)';
+    return 'UserAccount(name: $name, birthDate: $birthDate, location: $location, dayCycle: $dayCycle, cycleLength: $cycleLength, periodLength: $periodLength, irregularCycle: $irregularCycle, haveAllergy: $haveAllergy, allergy: $allergy, foodDontIt: $foodDontIt, currentDate: $currentDate, subscription: $subscription)';
   }
 
   @override
@@ -322,7 +346,9 @@ class _$_Account extends _Account {
             const DeepCollectionEquality()
                 .equals(other._foodDontIt, _foodDontIt) &&
             (identical(other.currentDate, currentDate) ||
-                other.currentDate == currentDate));
+                other.currentDate == currentDate) &&
+            const DeepCollectionEquality()
+                .equals(other._subscription, _subscription));
   }
 
   @JsonKey(ignore: true)
@@ -339,7 +365,8 @@ class _$_Account extends _Account {
       haveAllergy,
       const DeepCollectionEquality().hash(_allergy),
       const DeepCollectionEquality().hash(_foodDontIt),
-      currentDate);
+      currentDate,
+      const DeepCollectionEquality().hash(_subscription));
 
   @JsonKey(ignore: true)
   @override
@@ -367,7 +394,8 @@ abstract class _Account extends UserAccount {
       final bool? haveAllergy,
       final List<String>? allergy,
       final List<String>? foodDontIt,
-      final String? currentDate}) = _$_Account;
+      final String? currentDate,
+      final Map<String, dynamic>? subscription}) = _$_Account;
   const _Account._() : super._();
 
   factory _Account.fromJson(Map<String, dynamic> json) = _$_Account.fromJson;
@@ -394,6 +422,8 @@ abstract class _Account extends UserAccount {
   List<String>? get foodDontIt;
   @override
   String? get currentDate;
+  @override
+  Map<String, dynamic>? get subscription;
   @override
   @JsonKey(ignore: true)
   _$$_AccountCopyWith<_$_Account> get copyWith =>

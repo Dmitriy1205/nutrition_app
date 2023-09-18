@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -37,7 +39,7 @@ class _MoodScreenState extends State<MoodScreen> {
     return Scaffold(
       backgroundColor: Colors.transparent,
       body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 24),
+        padding:  EdgeInsets.symmetric(horizontal: Platform.isAndroid ? 14: 24),
         child: Stack(
           alignment: AlignmentDirectional.center,
           children: [
@@ -61,10 +63,13 @@ class _MoodScreenState extends State<MoodScreen> {
                 ),
                 Align(
                   alignment: Alignment.topLeft,
-                  child: Text(
-                    AppStrings.letUsKnow,
-                    style: AppTheme.themeData.textTheme.headlineLarge!
-                        .copyWith(fontSize: 24, fontWeight: FontWeight.w700),
+                  child: FittedBox(
+                    fit: BoxFit.scaleDown,
+                    child: Text(
+                      AppStrings.letUsKnow,
+                      style: AppTheme.themeData.textTheme.headlineLarge!
+                          .copyWith(fontSize: 24, fontWeight: FontWeight.w700),
+                    ),
                   ),
                 ),
                 const SizedBox(
@@ -99,7 +104,29 @@ class _MoodScreenState extends State<MoodScreen> {
                             border: selectedMoodName == moodList[index].name
                                 ? Border.all(color: AppColors.violet, width: 2)
                                 : Border.all(color: AppColors.white, width: 0)),
-                        child: Padding(
+                        child:Platform.isAndroid ? Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 10),
+                          child: Row(
+                            children: [
+                              SvgPicture.asset(
+                                moodList[index].icon,
+                                width: 30,
+                                height: 30,
+                              ),
+                              const SizedBox(
+                                width: 10,
+                              ),
+                              FittedBox(
+                                fit: BoxFit.scaleDown,
+                                child: Text(
+                                  moodList[index].name,
+                                  style: AppTheme.themeData.textTheme.titleSmall!
+                                      .copyWith(color: Colors.black),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ) : Padding(
                           padding: const EdgeInsets.symmetric(horizontal: 15),
                           child: Row(
                             children: [
@@ -118,7 +145,7 @@ class _MoodScreenState extends State<MoodScreen> {
                               ),
                             ],
                           ),
-                        ),
+                        ) ,
                       ),
                     );
                   },

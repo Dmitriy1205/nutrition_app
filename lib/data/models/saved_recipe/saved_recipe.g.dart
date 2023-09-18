@@ -12,6 +12,7 @@ _$_SavedRecipe _$$_SavedRecipeFromJson(Map<String, dynamic> json) =>
       name: json['name'] as String?,
       recipeText: json['text'] as String?,
       img: json['img'] as String?,
+      date: json['date'] as String?,
     );
 
 Map<String, dynamic> _$$_SavedRecipeToJson(_$_SavedRecipe instance) =>
@@ -20,4 +21,5 @@ Map<String, dynamic> _$$_SavedRecipeToJson(_$_SavedRecipe instance) =>
       'name': instance.name,
       'text': instance.recipeText,
       'img': instance.img,
+      'date': instance.date,
     };

@@ -1,4 +1,5 @@
 import 'package:nutrition_app/common/exceptions.dart';
+import 'package:nutrition_app/data/models/subscription/subscription.dart';
 import 'package:nutrition_app/data/models/tutorial/tutorial.dart';
 
 import '../../common/services/firestore_service.dart';
@@ -60,8 +61,19 @@ class UserRepository {
     }
   }
 
-  Future<void> writeTutorial(
-      {required String userId}) async {
+  Future<void> updateSubscription(
+      {required String userId, required Subscription data}) async {
+    try {
+      await _firestoreService.update(
+          collectionName: collectionName,
+          userId: userId,
+          data: {'subscription': data.toJson()});
+    } on Exception catch (e) {
+      throw BadRequestException(message: e.toString());
+    }
+  }
+
+  Future<void> writeTutorial({required String userId}) async {
     try {
       await _firestoreService.writeSubCollection(
           collection: collectionName,
@@ -73,6 +85,8 @@ class UserRepository {
             isRegenerateRecipe: true,
             isRecipeButton: true,
             isShowBottomBar: true,
+            isSwipeCards: true,
+            isAddCraving: true,
           ).toJson());
     } on Exception catch (e) {
       throw BadRequestException(message: e.toString());
@@ -80,7 +94,7 @@ class UserRepository {
   }
 
   Future<void> updateTutorial(
-      {required String userId, required Map<String,dynamic> data}) async {
+      {required String userId, required Map<String, dynamic> data}) async {
     try {
       await _firestoreService.updateFieldSubCollection(
           collection: collectionName,

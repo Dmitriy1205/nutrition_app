@@ -12,6 +12,7 @@ abstract class SavedRecipe with _$SavedRecipe {
     String? name,
     @JsonKey(name: 'text') String? recipeText,
     String? img,
+    String? date,
   }) = _SavedRecipe;
 
   factory SavedRecipe.fromJson(Map<String, dynamic> json) =>

@@ -1,10 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:nutrition_app/presentation/screens/subscription_screen.dart';
-import 'package:nutrition_app/presentation/screens/home/profile_tab/my_subscription.dart';
 import 'package:nutrition_app/presentation/screens/home/profile_tab/profile_screen.dart';
-import 'package:nutrition_app/presentation/screens/policy.dart';
-import 'package:nutrition_app/presentation/screens/terms.dart';
 
 import '../../../blocs/mood/mood_bloc.dart';
 import 'edit_profile_screen.dart';
@@ -17,7 +13,8 @@ class ProfileTab extends StatefulWidget {
 }
 
 class _ProfileTabState extends State<ProfileTab> {
-  final _pageController = PageController(initialPage: 0);
+  final _pageController =
+      PageController(initialPage: 0, viewportFraction: 0.9999);
   int _currentPage = 0;
 
   @override
@@ -60,20 +57,6 @@ class _ProfileTabState extends State<ProfileTab> {
                           curve: Curves.ease,
                         );
                       },
-                      toSubscription: () {
-                        _pageController.animateToPage(
-                          4,
-                          duration: const Duration(milliseconds: 1),
-                          curve: Curves.easeInOut,
-                        );
-                      },
-                      toMySubscription: () {
-                        _pageController.animateToPage(
-                          5,
-                          duration: const Duration(milliseconds: 200),
-                          curve: Curves.easeInCirc,
-                        );
-                      },
                     ),
                     EditProfileScreen(
                       previousPage: () {
@@ -83,16 +66,6 @@ class _ProfileTabState extends State<ProfileTab> {
                         );
                       },
                     ),
-                    PolicyScreen(),
-                    TermsScreen(),
-                    SubscriptionScreen(
-                      previousPage: () {
-                        _pageController.jumpToPage(0);
-                      },
-                    ),
-                    MySubscription(previousPage: (){
-                      _pageController.jumpToPage(0);
-                    }),
                   ],
                 ),
               ),

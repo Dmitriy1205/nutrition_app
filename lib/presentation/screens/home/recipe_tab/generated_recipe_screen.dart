@@ -23,6 +23,7 @@ import '../../../blocs/mood/mood_bloc.dart';
 import '../../../blocs/profile/profile_bloc.dart';
 import '../../../blocs/recipe/recipe_bloc.dart';
 import '../../../blocs/tutorial/tutorial_bloc.dart';
+import '../../subscription_screen.dart';
 
 class GeneratedRecipeScreen extends StatefulWidget {
   final void Function() nextPage;
@@ -81,7 +82,6 @@ class _GeneratedRecipeScreenState extends State<GeneratedRecipeScreen> {
     isRecipe = context.read<TutorialBloc>().state.tutorial!.isRecipeButton!;
     isRegenerate =
         context.read<TutorialBloc>().state.tutorial!.isRegenerateRecipe!;
-
   }
 
   @override
@@ -230,9 +230,8 @@ class _GeneratedRecipeScreenState extends State<GeneratedRecipeScreen> {
                                             .mood!,
                                         exclude: excludeList,
                                         recipeName: recipeName),
-
                                   );
-                               buttonBody = Row(
+                              buttonBody = Row(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
                                   SvgPicture.asset(
@@ -245,7 +244,8 @@ class _GeneratedRecipeScreenState extends State<GeneratedRecipeScreen> {
                                   ),
                                   Text(
                                     AppStrings.saveToGallery,
-                                    style: AppTheme.themeData.textTheme.titleMedium!
+                                    style: AppTheme
+                                        .themeData.textTheme.titleMedium!
                                         .copyWith(color: AppColors.white),
                                   ),
                                   const SizedBox(),
@@ -289,10 +289,6 @@ class _GeneratedRecipeScreenState extends State<GeneratedRecipeScreen> {
                                     ),
                                   ),
                                   onHide: () {
-                                    Future.delayed(
-                                        const Duration(milliseconds: 300), () {
-                                      fourthTooltipController.showTooltip();
-                                    });
                                     _scrollController.animateTo(
                                       _scrollController
                                           .position.maxScrollExtent,
@@ -306,6 +302,10 @@ class _GeneratedRecipeScreenState extends State<GeneratedRecipeScreen> {
                                                 data: {
                                               "isRegenerateRecipe": false
                                             }));
+                                    Future.delayed(
+                                        const Duration(milliseconds: 500), () {
+                                      fourthTooltipController.showTooltip();
+                                    });
                                   },
                                   child: Image.asset(
                                     'assets/images/red_dot.png',
@@ -329,129 +329,6 @@ class _GeneratedRecipeScreenState extends State<GeneratedRecipeScreen> {
                       controller: _scrollController,
                       physics: const ClampingScrollPhysics(),
                       children: [
-                        // Align(
-                        //   alignment: Alignment.topLeft,
-                        //   child: Row(
-                        //     mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        //     children: [
-                        //       InkWell(
-                        //         borderRadius: BorderRadius.circular(20),
-                        //         child: Ink(
-                        //           width: 20,
-                        //           height: 20,
-                        //           child: const Center(
-                        //             child: Icon(
-                        //               Icons.arrow_back_ios,
-                        //               size: 20,
-                        //             ),
-                        //           ),
-                        //         ),
-                        //         onTap: () {
-                        //           widget.previousPage();
-                        //         },
-                        //       ),
-                        //       !isRegenerate!
-                        //           ? GestureDetector(
-                        //               onTap: () {
-                        //                 List<String> excludeList = context
-                        //                         .read<ProfileBloc>()
-                        //                         .state
-                        //                         .user!
-                        //                         .foodDontIt! +
-                        //                     context
-                        //                         .read<ProfileBloc>()
-                        //                         .state
-                        //                         .user!
-                        //                         .allergy!;
-                        //                 context.read<RecipeBloc>().add(
-                        //                       RecipeEvent.generateRecipe(
-                        //                           phase: context
-                        //                               .read<ProfileBloc>()
-                        //                               .state
-                        //                               .phase!,
-                        //                           mood: context
-                        //                               .read<MoodBloc>()
-                        //                               .state
-                        //                               .recipe!
-                        //                               .mood!,
-                        //                           exclude: excludeList,
-                        //                           recipeName: recipeName),
-                        //                     );
-                        //               },
-                        //               child: Text(
-                        //                 AppStrings.badRecipe,
-                        //                 style: AppTheme
-                        //                     .themeData.textTheme.titleMedium!
-                        //                     .copyWith(color: AppColors.violet),
-                        //               ),
-                        //             )
-                        //           : Stack(
-                        //               children: [
-                        //                 Text(
-                        //                   AppStrings.badRecipe,
-                        //                   style: AppTheme
-                        //                       .themeData.textTheme.titleMedium!
-                        //                       .copyWith(
-                        //                           color: AppColors.violet),
-                        //                 ),
-                        //                 Positioned(
-                        //                   bottom: 2,
-                        //                   right: 22,
-                        //                   child: SuperTooltip(
-                        //                     controller: thirdTooltipController,
-                        //                     arrowLength: 8,
-                        //                     arrowBaseWidth: 12,
-                        //                     barrierColor: Colors.transparent,
-                        //                     backgroundColor: Colors.black,
-                        //                     shadowColor: Colors.transparent,
-                        //                     content: Padding(
-                        //                       padding: EdgeInsets.zero,
-                        //                       child: Text(
-                        //                         'Request a new recipe',
-                        //                         style: AppTheme.themeData
-                        //                             .textTheme.titleSmall!
-                        //                             .copyWith(
-                        //                                 color: Colors.white,
-                        //                                 fontSize: 12,
-                        //                                 fontWeight:
-                        //                                     FontWeight.w600),
-                        //                       ),
-                        //                     ),
-                        //                     onHide: () {
-                        //                       Future.delayed(
-                        //                           const Duration(seconds: 1),
-                        //                           () {
-                        //                         fourthTooltipController
-                        //                             .showTooltip();
-                        //                       });
-                        //                       _scrollController.animateTo(
-                        //                         _scrollController
-                        //                             .position.maxScrollExtent,
-                        //                         duration: const Duration(
-                        //                             milliseconds: 500),
-                        //                         curve: Curves.easeInOut,
-                        //                       );
-                        //
-                        //                       context.read<TutorialBloc>().add(
-                        //                               const TutorialEvent
-                        //                                       .updateTutorial(
-                        //                                   data: {
-                        //                                 "isRegenerateRecipe":
-                        //                                     false
-                        //                               }));
-                        //                     },
-                        //                     child: Image.asset(
-                        //                       'assets/images/red_dot.png',
-                        //                       width: 15,
-                        //                       height: 15,
-                        //                     ),
-                        //                   ),
-                        //                 ),
-                        //               ],
-                        //             )
-                        //     ],
-                        //   ),
-                        // ),
                         const SizedBox(
                           height: 20,
                         ),
@@ -499,7 +376,21 @@ class _GeneratedRecipeScreenState extends State<GeneratedRecipeScreen> {
                           }).toList(),
                         ),
                         const SizedBox(height: 10),
-                        const SubscriptionLabel(),
+                        context
+                                .read<ProfileBloc>()
+                                .state
+                                .user!
+                                .subscription!['isSubscribed']
+                            ? const SizedBox()
+                            : GestureDetector(
+                                onTap: () {
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) =>
+                                              const SubscriptionScreen()));
+                                },
+                                child: const SubscriptionLabel()),
                         const SizedBox(height: 30),
 
                         // Instructions
@@ -522,18 +413,20 @@ class _GeneratedRecipeScreenState extends State<GeneratedRecipeScreen> {
                         Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: instructionsList.map((instruction) {
-                            RegExp regex = RegExp(r"^(\d+\.\s|Note:\s)");
+                            RegExp regex = RegExp(r"^(\d+\.\s|Note:\s|Enjoy\s|Enjoy!\s)");
+
                             Match? match = regex.firstMatch(instruction);
                             if (match != null) {
                               // Extract the number part and the rest of the text
                               String numberPart = match.group(0)!;
-                              String restOfText =
-                                  instruction.substring(match.end);
+                              String restOfText = instruction.substring(match.end);
 
-                              if (numberPart.startsWith("Note:")) {
+                              if (numberPart.startsWith("Note:") || restOfText.trim().startsWith("Enjoy")) {
                                 return Container(); // Skip this instruction
                               }
-
+                              if (numberPart.trim().startsWith("Enjoy")) {
+                                return Container(); // Skip this instruction
+                              }
                               return RichText(
                                 strutStyle: const StrutStyle(height: 2.2),
                                 text: TextSpan(
@@ -553,7 +446,7 @@ class _GeneratedRecipeScreenState extends State<GeneratedRecipeScreen> {
                                       text: restOfText
                                           .replaceAll("sautÃ©", "saute")
                                           .replaceAll("SautÃ©", "Saute")
-                                          .replaceAll("Â", ""),
+                                          .replaceAll("Â", "").replaceAll(RegExp(r'[^\x20-\x7E]'), '').replaceAll(RegExp(r'Enjoy(\s|\S)*'), ''),
                                     ),
                                   ],
                                 ),
@@ -625,7 +518,6 @@ class _GeneratedRecipeScreenState extends State<GeneratedRecipeScreen> {
                                         const Icon(Icons.error),
                                   ),
                                 ),
-
                         ),
                         const SizedBox(
                           height: 40,
@@ -639,15 +531,17 @@ class _GeneratedRecipeScreenState extends State<GeneratedRecipeScreen> {
                                   customBorder: RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(10),
                                   ),
-                                  onTap:disableButton ? null : () {
-                                    context
-                                        .read<SavedRecipeBloc>()
-                                        .add(SavedRecipeEvent.saveRecipe(
-                                          recipeName: recipeName,
-                                          recipeImage: state.recipeImage!,
-                                          recipeText: recipeText,
-                                        ));
-                                  },
+                                  onTap: disableButton
+                                      ? null
+                                      : () {
+                                          context
+                                              .read<SavedRecipeBloc>()
+                                              .add(SavedRecipeEvent.saveRecipe(
+                                                recipeName: recipeName,
+                                                recipeImage: state.recipeImage!,
+                                                recipeText: recipeText,
+                                              ));
+                                        },
                                   child: Ink(
                                     decoration: BoxDecoration(
                                         borderRadius: BorderRadius.circular(10),
@@ -660,18 +554,6 @@ class _GeneratedRecipeScreenState extends State<GeneratedRecipeScreen> {
                                   ),
                                 ),
                               )
-                            // AppElevatedButton(
-                            //         showPrefix: true,
-                            //         text: AppStrings.saveToGallery,
-                            //         style: AppTheme.themeData.textTheme.titleMedium!
-                            //             .copyWith(color: AppColors.white),
-                            //         onPressed: () {
-                            //           context.read<SavedRecipeBloc>().add(
-                            //               SavedRecipeEvent.saveRecipe(
-                            //                   recipeName: recipeName,
-                            //                   recipeImage: state.recipeImage!,
-                            //                   recipeText: recipeText,));
-                            //         })
                             : Stack(
                                 children: [
                                   AppElevatedButton(

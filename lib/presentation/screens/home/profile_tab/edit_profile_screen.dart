@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:io';
 
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
@@ -10,6 +11,7 @@ import 'package:intl/intl.dart';
 import 'package:nutrition_app/common/colors.dart';
 import 'package:nutrition_app/common/extensions/validation.dart';
 import 'package:nutrition_app/data/models/account/account.dart';
+import 'package:nutrition_app/data/models/subscription/subscription.dart';
 import 'package:nutrition_app/presentation/blocs/profile/profile_bloc.dart';
 import 'package:nutrition_app/presentation/widgets/app_checkbox.dart';
 import 'package:nutrition_app/presentation/widgets/colored_container.dart';
@@ -56,6 +58,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
   List<String> allergyList = [];
   List<String> foodList = [];
   late Cities location;
+  late Subscription subscription;
   late UserAccount user;
 
   String selectedCity = '';
@@ -64,6 +67,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
   void initState() {
     readJson();
     user = context.read<ProfileBloc>().state.user!;
+
 
     nameController.text = user.name!;
     birthDateController.text = user.birthDate!;
@@ -75,7 +79,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
     allergyList = user.allergy!;
     allergy = user.haveAllergy!;
     irregularCycle = user.irregularCycle!;
-    selectedDay = user.dayCycle!.isNotEmpty ? user.dayCycle : null;
+    selectedDay = context.read<ProfileBloc>().state.dayOfCycle!.isNotEmpty ? context.read<ProfileBloc>().state.dayOfCycle! : null;
     selectedLength = user.cycleLength!.isNotEmpty ? user.cycleLength : null;
     selectedPeriod = user.periodLength!.isNotEmpty ? user.periodLength : null;
     location = Cities(
@@ -92,6 +96,16 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
           .firstWhere((entry) => entry.key == 'lng')
           .value,
     );
+    subscription = Subscription(
+      isSubscribed: user.subscription!.entries.firstWhere((entry) => entry.key == 'isSubscribed').value,
+      isOneYear: user.subscription!.entries.firstWhere((entry) => entry.key == 'isOneYear').value,
+      isOneMonth: user.subscription!.entries.firstWhere((entry) => entry.key == 'isOneMonth').value,
+      isTrial: user.subscription!.entries.firstWhere((entry) => entry.key == 'isTrial').value,
+      startDate: user.subscription!.entries.firstWhere((entry) => entry.key == 'startDate').value,
+      endDate: user.subscription!.entries.firstWhere((entry) => entry.key == 'endDate').value,
+    );
+
+
     super.initState();
   }
 
@@ -633,7 +647,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                               Padding(
                                 padding: const EdgeInsets.only(bottom: 8.0),
                                 child: Text(
-                                  AppStrings.dietaryRestrictionsShort,
+                                  AppStrings.foodAllergies,
                                   style:
                                       AppTheme.themeData.textTheme.titleMedium,
                                 ),
@@ -742,6 +756,8 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                                         allergy: allergyList,
                                         foodDontIt: foodList,
                                         currentDate: formattedDate,
+                                        subscription: subscription.toJson(),
+
                                       ),
                                     ),
                                   );
@@ -845,7 +861,7 @@ showDeleteBottomSheet(BuildContext context) {
     barrierColor: Colors.transparent,
     builder: (BuildContext context) {
       return SizedBox(
-        height: MediaQuery.of(context).size.height/2.55,
+        height: Platform.isAndroid ? MediaQuery.of(context).size.height / 2.2 : MediaQuery.of(context).size.height / 2.55,
         child: Padding(
           padding: const EdgeInsets.symmetric(vertical: 24.0,horizontal: 35),
           child: Column(
@@ -871,25 +887,56 @@ showDeleteBottomSheet(BuildContext context) {
               ),
               Padding(
                 padding: const EdgeInsets.symmetric(vertical: 24.0),
-                child: Row(
+                child: Platform.isAndroid ?
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    SizedBox(
+                      width: 139,
+                      child: AppTransparentButton(
+                          backgroundColor: AppColors.transparentBlue,
+                          text: AppStrings.cancel,
+                          style: AppTheme.themeData.textTheme.titleMedium!
+                              .copyWith(color: AppColors.violet,fontSize: 14),
+                          onPressed: () {
+                            Navigator.pop(context);
+                          }),
+                    ),
+                    SizedBox(
+                      width: 139,
+                      child: AppElevatedButton(
+                          text: AppStrings.delete,
+                          style: AppTheme.themeData.textTheme.titleMedium!
+                              .copyWith(color: AppColors.white,fontSize: 14),
+                          onPressed: () {
+                            Navigator.pop(context);
+                          }),
+                    ),
+                  ],
+                ): Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     SizedBox(
                       width: 159,
-
                       child: AppTransparentButton(
-                        backgroundColor: AppColors.transparentBlue,
+                          backgroundColor: AppColors.transparentBlue,
                           text: AppStrings.cancel,
                           style: AppTheme.themeData.textTheme.titleMedium!
-                              .copyWith(color: AppColors.violet), onPressed: () {Navigator.pop(context);}),
+                              .copyWith(color: AppColors.violet),
+                          onPressed: () {
+                            Navigator.pop(context);
+                          }),
                     ),
                     SizedBox(
                       width: 159,
-
                       child: AppElevatedButton(
+                          text: AppStrings.delete,
+                          style: AppTheme.themeData.textTheme.titleMedium!
+                              .copyWith(color: AppColors.white),
+                          onPressed: () {
 
-                          text: AppStrings.delete, style: AppTheme.themeData.textTheme.titleMedium!
-                          .copyWith(color: AppColors.white),onPressed: () {}),
+                            Navigator.pop(context);
+                          }),
                     ),
                   ],
                 ),

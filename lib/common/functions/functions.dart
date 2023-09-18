@@ -126,25 +126,24 @@ CyclePhase getCurrentCyclePhase({
   required int periodLength,
 }) {
   // Calculate the current day of the cycle based on the current date and the saved day of the cycle
-  int daysSinceCycleStart = DateTime.now().difference(dateOfSaving).inDays + dayOfCycle;
-
-  // Normalize the day of the cycle to make sure it stays within the cycle length
-  int normalizedDayOfCycle = (daysSinceCycleStart % cycleLength) + 1;
-
-  // Calculate the phase boundaries
-  int menstrualPhaseEnd = periodLength;
-  int follicularPhaseEnd = menstrualPhaseEnd + 8;
-  int ovulatoryPhaseEnd = follicularPhaseEnd + 11;
-
+  int daysSinceSaving = DateTime.now().difference(dateOfSaving).inDays;
+  int currentDayOfCycle = (dayOfCycle + daysSinceSaving) % cycleLength;
   // Determine the current phase
-  if (normalizedDayOfCycle <= menstrualPhaseEnd) {
+  if (currentDayOfCycle <= periodLength) {
     return CyclePhase.menstrual;
-  } else if (normalizedDayOfCycle <= follicularPhaseEnd) {
+  } else if (currentDayOfCycle < (periodLength + 8)) {
     return CyclePhase.follicular;
-  } else if (normalizedDayOfCycle <= ovulatoryPhaseEnd) {
+  } else if (currentDayOfCycle < (periodLength + 13)) {
     return CyclePhase.ovulatory;
   } else {
     return CyclePhase.luteal;
   }
+}
+String getCurrentDayOfCycle(DateTime dateOfSaving, int dayOfCycle, int cycleLength) {
+  int daysSinceSaving = DateTime.now().difference(dateOfSaving).inDays;
+  int currentDayOfCycle = (dayOfCycle + daysSinceSaving) % cycleLength;
+  int adjustedDay = currentDayOfCycle > 0 ? currentDayOfCycle : cycleLength;
+
+  return adjustedDay.toString();
 }
 

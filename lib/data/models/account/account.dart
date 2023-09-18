@@ -1,4 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:nutrition_app/data/models/subscription/subscription.dart';
 
 
 part 'account.freezed.dart';
@@ -22,6 +23,7 @@ class UserAccount with _$UserAccount {
     List<String>? allergy,
     List<String>? foodDontIt,
     String? currentDate,
+    Map<String, dynamic>? subscription,
   }) = _Account;
 
   factory UserAccount.fromJson(Map<String, dynamic> json) =>

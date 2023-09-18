@@ -42,9 +42,11 @@ class GenerateRecipesBloc
       );
       print('=================> $currentTime');
       print('=================> ${event.season}');
+      print('================>$generatedRecipes');
       emit(GenerateRecipesState.generated(recipes: generatedRecipes));
     } on BadRequestException catch (e) {
       emit(GenerateRecipesState.error(error: e.message));
+
     }
   }
 }

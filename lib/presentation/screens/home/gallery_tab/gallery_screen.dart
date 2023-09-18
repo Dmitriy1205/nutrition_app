@@ -38,20 +38,16 @@ class _GalleryScreenState extends State<GalleryScreen> {
     super.initState();
   }
 
-  // Future<void> readRecipe() async {
-  //   queryRecipe = await sharedPreferencesHelper.readQueryRecipes();
-  // }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.transparent,
       body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 20),
+        padding:  EdgeInsets.symmetric(horizontal: Platform.isAndroid ? 0: 10, vertical: 20),
         child: ListView(
           children: [
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 24.0),
+              padding: EdgeInsets.symmetric(horizontal: Platform.isAndroid ? 14: 24,),
               child: ExpandablePanel(
                 theme: const ExpandableThemeData(
                   hasIcon: false,
@@ -61,10 +57,13 @@ class _GalleryScreenState extends State<GalleryScreen> {
                   height: 40,
                   child: ColoredContainer(
                     child: Center(
-                      child: Text(
-                        AppStrings.savedRecipes.toUpperCase(),
-                        style: AppTheme.themeData.textTheme.headlineLarge!
-                            .copyWith(fontSize: 17),
+                      child: FittedBox(
+                        fit: BoxFit.scaleDown,
+                        child: Text(
+                          AppStrings.savedRecipes.toUpperCase(),
+                          style: AppTheme.themeData.textTheme.headlineLarge!
+                              .copyWith(fontSize: 17),
+                        ),
                       ),
                     ),
                   ),
@@ -103,7 +102,7 @@ class _GalleryScreenState extends State<GalleryScreen> {
               height: 20,
             ),
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 24.0),
+              padding: EdgeInsets.symmetric(horizontal: Platform.isAndroid ? 14: 24,),
               child: ExpandablePanel(
                 theme: const ExpandableThemeData(
                   hasIcon: false,
@@ -181,68 +180,72 @@ class _GalleryScreenState extends State<GalleryScreen> {
                 ),
                 child: Stack(
                   children: [
-                    SingleChildScrollView(
-                      physics: const ClampingScrollPhysics(),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          ClipRRect(
-                            borderRadius: const BorderRadius.only(
-                                topRight: Radius.circular(8),
-                                topLeft: Radius.circular(8)),
-                            child: SizedBox(
-                              height: 165,
-                              width: 160,
-                              child: Image.network(
-                                recipes[index].img!,
-                                fit: BoxFit.cover,
-                              ),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        ClipRRect(
+                          borderRadius: const BorderRadius.only(
+                              topRight: Radius.circular(8),
+                              topLeft: Radius.circular(8)),
+                          child: SizedBox(
+                            height: 165,
+                            width: 160,
+                            child: Image.network(
+                              recipes[index].img!,
+                              fit: BoxFit.cover,
                             ),
                           ),
-                          Padding(
-                            padding: const EdgeInsets.symmetric(
-                                horizontal: 10.0, vertical: 5),
-                            child: Text(
-                              '12.08.2023',
-                              style: AppTheme.themeData.textTheme.headlineLarge!
-                                  .copyWith(
-                                      fontSize: 10,
-                                      fontWeight: FontWeight.w600,
-                                      color: AppColors.greu),
-                            ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 10.0, vertical: 5),
+                          child: Text(
+                            recipes[index].date ?? '',
+                            style: AppTheme.themeData.textTheme.headlineLarge!
+                                .copyWith(
+                                    fontSize: 10,
+                                    fontWeight: FontWeight.w600,
+                                    color: AppColors.greu),
                           ),
-                          Padding(
-                            padding: const EdgeInsets.only(
-                              left: 10.0,
-                              right: 30,
-                            ),
-                            child: Text(
-                              recipes[index].name!,
-                              // overflow: TextOverflow.ellipsis,
-                              textAlign: TextAlign.start,
-                              style: AppTheme.themeData.textTheme.headlineLarge!
-                                  .copyWith(
-                                      fontSize: 16,
-                                      fontWeight: FontWeight.w600),
-                            ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.only(
+                            left: 10.0,
+                            right: 15,
                           ),
-                        ],
-                      ),
+                          child: Text(
+                            recipes[index].name!,
+                            overflow: TextOverflow.ellipsis,
+                            maxLines: Platform.isAndroid ? 2 : 3,
+                            textAlign: TextAlign.start,
+                            style: AppTheme.themeData.textTheme.headlineLarge!
+                                .copyWith(
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.w600),
+                          ),
+                        ),
+                        SizedBox(height: 5,)
+                      ],
                     ),
                     Positioned(
                       top: 2,
                       right: 2,
-                      child: Container(
-                        width: 40,
-                        height: 40,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(8),
-                          color: AppColors.violet,
-                        ),
-                        child: const Center(
-                          child: Icon(
-                            Icons.bookmark,
-                            color: Colors.white,
+                      child: GestureDetector(
+                        onTap: (){
+                          showDeleteBottomSheet(context, recipes[index].id!);
+                        },
+                        child: Container(
+                          width: 40,
+                          height: 40,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(8),
+                            color: AppColors.violet,
+                          ),
+                          child: const Center(
+                            child: Icon(
+                              Icons.bookmark,
+                              color: Colors.white,
+                            ),
                           ),
                         ),
                       ),
@@ -302,7 +305,7 @@ class _GalleryScreenState extends State<GalleryScreen> {
                         child: SizedBox(
                           height: 165,
                           width: 160,
-                          child: Image.file(File(recipes[index].image!)
+                          child: Image.network(recipes[index].image!
                             ,
                             fit: BoxFit.cover,
                           ),
@@ -323,11 +326,12 @@ class _GalleryScreenState extends State<GalleryScreen> {
                       Padding(
                         padding: const EdgeInsets.only(
                           left: 10.0,
-                          right: 30,
+                          right: 15,
                         ),
                         child: Text(
                           recipes[index].recipeName!,
-                          // overflow: TextOverflow.ellipsis,
+                          overflow: TextOverflow.ellipsis,
+                          maxLines: Platform.isAndroid ? 2 : 3,
                           textAlign: TextAlign.start,
                           style: AppTheme.themeData.textTheme.headlineLarge!
                               .copyWith(
@@ -353,7 +357,7 @@ showDeleteBottomSheet(BuildContext context, String recipeId) {
     barrierColor: Colors.transparent,
     builder: (BuildContext context) {
       return SizedBox(
-        height: MediaQuery.of(context).size.height / 2.55,
+        height: Platform.isAndroid ? MediaQuery.of(context).size.height / 2.2 : MediaQuery.of(context).size.height / 2.55,
         child: Padding(
           padding: const EdgeInsets.symmetric(vertical: 24.0, horizontal: 35),
           child: Column(
@@ -381,7 +385,36 @@ showDeleteBottomSheet(BuildContext context, String recipeId) {
               ),
               Padding(
                 padding: const EdgeInsets.symmetric(vertical: 24.0),
-                child: Row(
+                child:Platform.isAndroid ?
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    SizedBox(
+                      width: 139,
+                      child: AppTransparentButton(
+                          backgroundColor: AppColors.transparentBlue,
+                          text: AppStrings.cancel,
+                          style: AppTheme.themeData.textTheme.titleMedium!
+                              .copyWith(color: AppColors.violet,fontSize: 14),
+                          onPressed: () {
+                            Navigator.pop(context);
+                          }),
+                    ),
+                    SizedBox(
+                      width: 139,
+                      child: AppElevatedButton(
+                          text: AppStrings.delete,
+                          style: AppTheme.themeData.textTheme.titleMedium!
+                              .copyWith(color: AppColors.white,fontSize: 14),
+                          onPressed: () {
+                            context.read<SavedRecipeBloc>().add(
+                                SavedRecipeEvent.deleteRecipe(
+                                    recipeId: recipeId));
+                            Navigator.pop(context);
+                          }),
+                    ),
+                  ],
+                ): Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     SizedBox(

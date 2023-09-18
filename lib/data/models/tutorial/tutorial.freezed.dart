@@ -25,6 +25,8 @@ mixin _$Tutorial {
   bool? get isRegenerateRecipe => throw _privateConstructorUsedError;
   bool? get isRecipeButton => throw _privateConstructorUsedError;
   bool? get isShowBottomBar => throw _privateConstructorUsedError;
+  bool? get isSwipeCards => throw _privateConstructorUsedError;
+  bool? get isAddCraving => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -42,7 +44,9 @@ abstract class $TutorialCopyWith<$Res> {
       bool? isFoodChoose,
       bool? isRegenerateRecipe,
       bool? isRecipeButton,
-      bool? isShowBottomBar});
+      bool? isShowBottomBar,
+      bool? isSwipeCards,
+      bool? isAddCraving});
 }
 
 /// @nodoc
@@ -63,6 +67,8 @@ class _$TutorialCopyWithImpl<$Res, $Val extends Tutorial>
     Object? isRegenerateRecipe = freezed,
     Object? isRecipeButton = freezed,
     Object? isShowBottomBar = freezed,
+    Object? isSwipeCards = freezed,
+    Object? isAddCraving = freezed,
   }) {
     return _then(_value.copyWith(
       isEditMood: freezed == isEditMood
@@ -85,6 +91,14 @@ class _$TutorialCopyWithImpl<$Res, $Val extends Tutorial>
           ? _value.isShowBottomBar
           : isShowBottomBar // ignore: cast_nullable_to_non_nullable
               as bool?,
+      isSwipeCards: freezed == isSwipeCards
+          ? _value.isSwipeCards
+          : isSwipeCards // ignore: cast_nullable_to_non_nullable
+              as bool?,
+      isAddCraving: freezed == isAddCraving
+          ? _value.isAddCraving
+          : isAddCraving // ignore: cast_nullable_to_non_nullable
+              as bool?,
     ) as $Val);
   }
 }
@@ -101,7 +115,9 @@ abstract class _$$_TutorialCopyWith<$Res> implements $TutorialCopyWith<$Res> {
       bool? isFoodChoose,
       bool? isRegenerateRecipe,
       bool? isRecipeButton,
-      bool? isShowBottomBar});
+      bool? isShowBottomBar,
+      bool? isSwipeCards,
+      bool? isAddCraving});
 }
 
 /// @nodoc
@@ -120,6 +136,8 @@ class __$$_TutorialCopyWithImpl<$Res>
     Object? isRegenerateRecipe = freezed,
     Object? isRecipeButton = freezed,
     Object? isShowBottomBar = freezed,
+    Object? isSwipeCards = freezed,
+    Object? isAddCraving = freezed,
   }) {
     return _then(_$_Tutorial(
       isEditMood: freezed == isEditMood
@@ -142,6 +160,14 @@ class __$$_TutorialCopyWithImpl<$Res>
           ? _value.isShowBottomBar
           : isShowBottomBar // ignore: cast_nullable_to_non_nullable
               as bool?,
+      isSwipeCards: freezed == isSwipeCards
+          ? _value.isSwipeCards
+          : isSwipeCards // ignore: cast_nullable_to_non_nullable
+              as bool?,
+      isAddCraving: freezed == isAddCraving
+          ? _value.isAddCraving
+          : isAddCraving // ignore: cast_nullable_to_non_nullable
+              as bool?,
     ));
   }
 }
@@ -154,7 +180,9 @@ class _$_Tutorial implements _Tutorial {
       this.isFoodChoose,
       this.isRegenerateRecipe,
       this.isRecipeButton,
-      this.isShowBottomBar});
+      this.isShowBottomBar,
+      this.isSwipeCards,
+      this.isAddCraving});
 
   factory _$_Tutorial.fromJson(Map<String, dynamic> json) =>
       _$$_TutorialFromJson(json);
@@ -169,10 +197,14 @@ class _$_Tutorial implements _Tutorial {
   final bool? isRecipeButton;
   @override
   final bool? isShowBottomBar;
+  @override
+  final bool? isSwipeCards;
+  @override
+  final bool? isAddCraving;
 
   @override
   String toString() {
-    return 'Tutorial(isEditMood: $isEditMood, isFoodChoose: $isFoodChoose, isRegenerateRecipe: $isRegenerateRecipe, isRecipeButton: $isRecipeButton, isShowBottomBar: $isShowBottomBar)';
+    return 'Tutorial(isEditMood: $isEditMood, isFoodChoose: $isFoodChoose, isRegenerateRecipe: $isRegenerateRecipe, isRecipeButton: $isRecipeButton, isShowBottomBar: $isShowBottomBar, isSwipeCards: $isSwipeCards, isAddCraving: $isAddCraving)';
   }
 
   @override
@@ -189,13 +221,24 @@ class _$_Tutorial implements _Tutorial {
             (identical(other.isRecipeButton, isRecipeButton) ||
                 other.isRecipeButton == isRecipeButton) &&
             (identical(other.isShowBottomBar, isShowBottomBar) ||
-                other.isShowBottomBar == isShowBottomBar));
+                other.isShowBottomBar == isShowBottomBar) &&
+            (identical(other.isSwipeCards, isSwipeCards) ||
+                other.isSwipeCards == isSwipeCards) &&
+            (identical(other.isAddCraving, isAddCraving) ||
+                other.isAddCraving == isAddCraving));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, isEditMood, isFoodChoose,
-      isRegenerateRecipe, isRecipeButton, isShowBottomBar);
+  int get hashCode => Object.hash(
+      runtimeType,
+      isEditMood,
+      isFoodChoose,
+      isRegenerateRecipe,
+      isRecipeButton,
+      isShowBottomBar,
+      isSwipeCards,
+      isAddCraving);
 
   @JsonKey(ignore: true)
   @override
@@ -217,7 +260,9 @@ abstract class _Tutorial implements Tutorial {
       final bool? isFoodChoose,
       final bool? isRegenerateRecipe,
       final bool? isRecipeButton,
-      final bool? isShowBottomBar}) = _$_Tutorial;
+      final bool? isShowBottomBar,
+      final bool? isSwipeCards,
+      final bool? isAddCraving}) = _$_Tutorial;
 
   factory _Tutorial.fromJson(Map<String, dynamic> json) = _$_Tutorial.fromJson;
 
@@ -231,6 +276,10 @@ abstract class _Tutorial implements Tutorial {
   bool? get isRecipeButton;
   @override
   bool? get isShowBottomBar;
+  @override
+  bool? get isSwipeCards;
+  @override
+  bool? get isAddCraving;
   @override
   @JsonKey(ignore: true)
   _$$_TutorialCopyWith<_$_Tutorial> get copyWith =>

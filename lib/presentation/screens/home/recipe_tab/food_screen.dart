@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -35,24 +37,31 @@ class _FoodScreenState extends State<FoodScreen> {
   final ScrollController _scrollController = ScrollController();
 
   List<bool> isSelected = [];
+  List<String> addedCravingsFromText = [];
+  List<String> addedCravingsFromChips = [];
   List<String> addedCravings = [];
   List<String> allFoodsList = [];
   List<String> randomlySelectedFoods = [];
   bool isFirstTimeSelected = true;
   bool? isEditTut;
   bool? isFoodTut;
+  bool? isCravingTut;
 
   final SuperTooltipController firstTooltipController =
       SuperTooltipController();
   final SuperTooltipController secondTooltipController =
       SuperTooltipController();
+  final SuperTooltipController thirdTooltipController =
+  SuperTooltipController();
   late List<String> excludeList;
+
   @override
   void initState() {
     excludeList = context.read<ProfileBloc>().state.user!.foodDontIt! +
         context.read<ProfileBloc>().state.user!.allergy!;
     isEditTut = context.read<TutorialBloc>().state.tutorial!.isEditMood!;
     isFoodTut = context.read<TutorialBloc>().state.tutorial!.isFoodChoose!;
+    isCravingTut = context.read<TutorialBloc>().state.tutorial!.isAddCraving!;
     Phase currentPhaseObject = phaseList.firstWhere(
         (phase) => phase.name == context.read<ProfileBloc>().state.phase);
 
@@ -94,6 +103,7 @@ class _FoodScreenState extends State<FoodScreen> {
               setState(() {
                 isEditTut = state.tutorial!.isEditMood;
                 isFoodTut = state.tutorial!.isFoodChoose;
+                isCravingTut = state.tutorial!.isAddCraving;
               });
             },
             orElse: () {});
@@ -104,7 +114,7 @@ class _FoodScreenState extends State<FoodScreen> {
           resizeToAvoidBottomInset: true,
           backgroundColor: Colors.transparent,
           body: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 24),
+            padding: EdgeInsets.symmetric(horizontal: Platform.isAndroid ? 14: 24),
             child: Stack(
               alignment: AlignmentDirectional.center,
               children: [
@@ -298,17 +308,19 @@ class _FoodScreenState extends State<FoodScreen> {
                       height: 56,
                     ),
                     Wrap(
-                      spacing: 15.0,
+                      spacing: 12.0,
                       alignment: WrapAlignment.center,
                       runSpacing: 2.0,
                       children: List<Widget>.generate(
                           randomlySelectedFoods.length, (index) {
                         return Padding(
-                          padding: const EdgeInsets.only(right: 6),
+                          padding: const EdgeInsets.only(right: 0),
                           child: !isFoodTut!
                               ? RawChip(
+                           clipBehavior: Clip.antiAlias,
+
                                   labelPadding:
-                                      EdgeInsets.symmetric(horizontal: 2),
+                                      EdgeInsets.symmetric(horizontal: 5,),
                                   showCheckmark: false,
                                   selected: isSelected[index],
                                   onSelected: (selected) {
@@ -321,16 +333,16 @@ class _FoodScreenState extends State<FoodScreen> {
                                       FocusScope.of(context).unfocus();
                                       if (selected && isFirstTimeSelected) {
                                         // Clear the addedCravings list only on the first time selection
-                                        addedCravings = [];
+                                        addedCravingsFromChips = [];
                                         isFirstTimeSelected = false;
                                       }
                                       if (selected) {
                                         // Add the selected food item to the addedCravings list
-                                        addedCravings
+                                        addedCravingsFromChips
                                             .add(randomlySelectedFoods[index]);
                                       } else {
                                         // Remove the unselected food item from the addedCravings list
-                                        addedCravings.remove(
+                                        addedCravingsFromChips.remove(
                                             randomlySelectedFoods[index]);
                                       }
                                     });
@@ -341,7 +353,8 @@ class _FoodScreenState extends State<FoodScreen> {
                                   side: isSelected[index]
                                       ? const BorderSide(
                                           color: AppColors.violet, width: 2)
-                                      : BorderSide.none,
+                                      : const BorderSide(
+                                      color: AppColors.white, width: 2),
                                   selectedColor: isSelected[index]
                                       ? AppColors.violet
                                       : AppColors.background,
@@ -358,8 +371,9 @@ class _FoodScreenState extends State<FoodScreen> {
                               : Stack(
                                   children: [
                                     RawChip(
+                                      clipBehavior: Clip.antiAlias,
                                       labelPadding:
-                                          EdgeInsets.symmetric(horizontal: 2),
+                                          EdgeInsets.symmetric(horizontal: 5),
                                       showCheckmark: false,
                                       selected: isSelected[index],
                                       onSelected: (selected) {
@@ -392,7 +406,8 @@ class _FoodScreenState extends State<FoodScreen> {
                                       side: isSelected[index]
                                           ? const BorderSide(
                                               color: AppColors.violet, width: 2)
-                                          : BorderSide.none,
+                                          : const BorderSide(
+                                          color: AppColors.white, width: 2),
                                       selectedColor: isSelected[index]
                                           ? AppColors.violet
                                           : AppColors.background,
@@ -413,6 +428,14 @@ class _FoodScreenState extends State<FoodScreen> {
                                         child: SuperTooltip(
                                           left: 70,
                                           onHide: () {
+                                            _scrollController.animateTo(
+                                              _scrollController
+                                                  .position.maxScrollExtent/2,
+                                              duration:
+                                              const Duration(milliseconds: 500),
+                                              curve: Curves.easeInOut,
+                                            );
+                                            thirdTooltipController.showTooltip();
                                             context.read<TutorialBloc>().add(
                                                     const TutorialEvent
                                                         .updateTutorial(data: {
@@ -457,11 +480,58 @@ class _FoodScreenState extends State<FoodScreen> {
                     Padding(
                       padding: const EdgeInsets.symmetric(
                           horizontal: 0, vertical: 6),
-                      child: Text(
+                      child:!isCravingTut! ? Text(
                         AppStrings.orWriteWishes,
                         style: AppTheme.themeData.textTheme.headlineLarge!
                             .copyWith(
-                                fontSize: 24, fontWeight: FontWeight.w700),
+                            fontSize: 24, fontWeight: FontWeight.w700),
+                      ) : Stack(
+                        children: [
+                          Text(
+                          AppStrings.orWriteWishes,
+                          style: AppTheme.themeData.textTheme.headlineLarge!
+                              .copyWith(
+                                  fontSize: 24, fontWeight: FontWeight.w700),
+                        ),
+                          Positioned(
+                            top: 0,
+                            left: 22,
+                            child: SuperTooltip(
+                              left: 40,
+                              onHide: () {
+                                context.read<TutorialBloc>().add(
+                                    const TutorialEvent
+                                        .updateTutorial(data: {
+                                      "isAddCraving": false
+                                    }));
+                              },
+                              popupDirection: TooltipDirection.up,
+                              controller: thirdTooltipController,
+                              arrowLength: 8,
+                              arrowBaseWidth: 12,
+                              barrierColor: Colors.transparent,
+                              backgroundColor: Colors.black,
+                              shadowColor: Colors.transparent,
+                              content: Padding(
+                                padding: EdgeInsets.zero,
+                                child: Text(
+                                  'Customize your recipe',
+                                  style: AppTheme.themeData
+                                      .textTheme.titleSmall!
+                                      .copyWith(
+                                      color: Colors.white,
+                                      fontSize: 12,
+                                      fontWeight:
+                                      FontWeight.w600),
+                                ),
+                              ),
+                              child: Image.asset(
+                                'assets/images/red_dot.png',
+                                width: 15,
+                                height: 15,
+                              ),
+                            ),
+                          ),],
                       ),
                     ),
                     const SizedBox(
@@ -475,7 +545,7 @@ class _FoodScreenState extends State<FoodScreen> {
                       style: AppTheme.themeData.textTheme.labelSmall!
                           .copyWith(fontSize: 14),
                       decoration: InputDecoration(
-                        hintText: 'I want (ex. duck, bowl etc)...',
+                        hintText: 'ex. duck, bowl etc...',
                         hintStyle: AppTheme.themeData.textTheme.titleSmall!
                             .copyWith(color: AppColors.greu),
                         fillColor: AppColors.white,
@@ -494,7 +564,6 @@ class _FoodScreenState extends State<FoodScreen> {
                             curve: Curves.easeInOut,
                           );
                         });
-
                       },
                       onChanged: (text) {
                         setState(() {
@@ -504,11 +573,12 @@ class _FoodScreenState extends State<FoodScreen> {
                             curve: Curves.easeInOut,
                           );
                           if (text.isEmpty) {
-                            addedCravings.clear();
+                            addedCravingsFromText.clear();
                           } else {
                             selectedCount = 0;
-                            addedCravings.clear();
-                            addedCravings = text
+                            addedCravingsFromText.clear();
+
+                            addedCravingsFromText = text
                                 .split(',')
                                 .map((letter) => letter.trim())
                                 .toList();
@@ -532,9 +602,13 @@ class _FoodScreenState extends State<FoodScreen> {
                           showArrow: true,
                           style: AppTheme.themeData.textTheme.titleMedium!
                               .copyWith(color: AppColors.white),
-                          onPressed: addedCravings.isNotEmpty
+                          onPressed: addedCravingsFromText.isNotEmpty || addedCravingsFromChips.isNotEmpty
                               ? () {
                                   FocusScope.of(context).unfocus();
+                                  addedCravings.clear();
+                                  addedCravings.addAll(addedCravingsFromChips);
+                                  addedCravings.addAll(addedCravingsFromText);
+
                                   context
                                       .read<MoodBloc>()
                                       .add(MoodEvent.setData(data: {

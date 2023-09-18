@@ -1,26 +1,28 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:nutrition_app/common/colors.dart';
 import 'package:nutrition_app/data/models/account/account.dart';
 import 'package:nutrition_app/presentation/blocs/profile/profile_bloc.dart';
+import 'package:nutrition_app/presentation/screens/subscription_screen.dart';
+import 'package:nutrition_app/presentation/screens/terms.dart';
 import 'package:nutrition_app/presentation/widgets/colored_container.dart';
 import 'package:nutrition_app/presentation/widgets/subscription_label.dart';
 import '../../../../common/strings.dart';
 import '../../../../common/theme.dart';
 import '../../../blocs/auth/auth_bloc.dart';
 import '../../../widgets/loading_indicator.dart';
+import '../../policy.dart';
+import 'my_subscription.dart';
 
 class ProfileScreen extends StatefulWidget {
   final void Function() nextPage;
-  final void Function() toSubscription;
-  final void Function() toMySubscription;
 
   const ProfileScreen({
     super.key,
     required this.nextPage,
-    required this.toSubscription,
-    required this.toMySubscription,
   });
 
   @override
@@ -61,8 +63,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
           return state.maybeMap(
             loading: (_) => const LoadingIndicator(),
             orElse: () => Padding(
-              padding: const EdgeInsets.symmetric(
-                horizontal: 34,
+              padding: EdgeInsets.symmetric(
+                horizontal: Platform.isAndroid ? 24 : 34,
               ),
               child: ListView(
                 physics: const ClampingScrollPhysics(),
@@ -135,7 +137,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     style: AppTheme.themeData.textTheme.bodyMedium,
                   ),
                   Text(
-                    'email@email.com',
+                    context.read<AuthBloc>().state.user!.email!,
                     style: AppTheme.themeData.textTheme.titleMedium,
                   ),
                   const SizedBox(
@@ -163,7 +165,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                               style: AppTheme.themeData.textTheme.bodyMedium,
                             ),
                             Text(
-                              user.dayCycle!,
+                              state.dayOfCycle!,
                               style: AppTheme.themeData.textTheme.titleMedium,
                             ),
                             const SizedBox(
@@ -193,81 +195,95 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   const SizedBox(
                     height: 17,
                   ),
-                  user.foodDontIt!.isEmpty ||  user.foodDontIt![0].isEmpty ? const SizedBox() : Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        AppStrings.foodPreferencesShort,
-                        style: AppTheme.themeData.textTheme.bodyMedium,
-                      ),
-                      Text(
-                        user.foodDontIt!.join(', '),
-                        style: AppTheme.themeData.textTheme.titleMedium,
-                      ),
-                    ],
-                  ),
+                  user.foodDontIt!.isEmpty || user.foodDontIt![0].isEmpty
+                      ? const SizedBox()
+                      : Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              AppStrings.foodPreferencesShort,
+                              style: AppTheme.themeData.textTheme.bodyMedium,
+                            ),
+                            Text(
+                              user.foodDontIt!.join(', '),
+                              style: AppTheme.themeData.textTheme.titleMedium,
+                            ),
+                          ],
+                        ),
                   const SizedBox(
                     height: 17,
                   ),
-                  !user.haveAllergy! ? const SizedBox() : Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        AppStrings.dietaryRestrictionsShort,
-                        style: AppTheme.themeData.textTheme.bodyMedium,
-                      ),
-                      Text(
-                        user.allergy!.join(', '),
-                        style: AppTheme.themeData.textTheme.titleMedium,
-                      ),
-                    ],
-                  ),
-
+                  !user.haveAllergy!
+                      ? const SizedBox()
+                      : Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              AppStrings.foodAllergies,
+                              style: AppTheme.themeData.textTheme.bodyMedium,
+                            ),
+                            Text(
+                              user.allergy!.join(', '),
+                              style: AppTheme.themeData.textTheme.titleMedium,
+                            ),
+                          ],
+                        ),
                   const SizedBox(
                     height: 40,
                   ),
-                  //TODO: one more gesture for navigiation to my subscriptionPage if user subscribed
-                  Column(
-                    children: [
-                      GestureDetector(
-                          onTap: () {
-                           widget.toSubscription();
-
-                          },
-                          child: const SubscriptionLabel()),
-                      const SizedBox(
-                        height: 20,
-                      ),
-                    ],
-                  ),
-
-                  ///////////////////////////////             /////////////////////////////////////
-                  // const Padding(
-                  //   padding: EdgeInsets.symmetric(vertical: 8.0),
-                  //   child: Divider(
-                  //     color: AppColors.greu,
-                  //   ),
-                  // ),
-                  // GestureDetector(
-                  //   onTap: () {
-                  //     widget.toMySubscription();
-                  //   },
-                  //   child: Text(
-                  //     AppStrings.mySubscription,
-                  //     style: AppTheme.themeData.textTheme.titleMedium,
-                  //   ),
-                  // ),
-                  // const Padding(
-                  //   padding: EdgeInsets.symmetric(vertical: 8.0),
-                  //   child: Divider(
-                  //     color: AppColors.greu,
-                  //   ),
-                  // ),
-                  ///////////////////////////////             /////////////////////////////////////
-
+                  state.user!.subscription!['isSubscribed']
+                      ? Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            const Padding(
+                              padding: EdgeInsets.symmetric(vertical: 8.0),
+                              child: Divider(
+                                color: AppColors.greu,
+                              ),
+                            ),
+                            GestureDetector(
+                              onTap: () {
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) =>
+                                            const MySubscription()));
+                              },
+                              child: Text(
+                                AppStrings.mySubscription,
+                                style: AppTheme.themeData.textTheme.titleMedium,
+                              ),
+                            ),
+                            const Padding(
+                              padding: EdgeInsets.symmetric(vertical: 8.0),
+                              child: Divider(
+                                color: AppColors.greu,
+                              ),
+                            ),
+                          ],
+                        )
+                      : Column(
+                          children: [
+                            GestureDetector(
+                                onTap: () {
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) =>
+                                              const SubscriptionScreen()));
+                                },
+                                child: const SubscriptionLabel()),
+                            const SizedBox(
+                              height: 20,
+                            ),
+                          ],
+                        ),
                   GestureDetector(
                     onTap: () {
-                      //TODO: Navigate to terms
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const TermsScreen()));
                     },
                     child: Text(
                       'Terms of use',
@@ -282,7 +298,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   ),
                   GestureDetector(
                     onTap: () {
-                      //TODO: Navvigate to policy
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const PolicyScreen()));
                     },
                     child: Text(
                       AppStrings.policy,

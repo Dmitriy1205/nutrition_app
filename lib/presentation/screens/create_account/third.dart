@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
 import 'package:nutrition_app/common/extensions/validation.dart';
+import 'package:nutrition_app/data/models/subscription/subscription.dart';
 
 import '../../../common/colors.dart';
 import '../../../common/strings.dart';
@@ -203,7 +204,8 @@ class _ThirdState extends State<Third> {
                           }
                           _formKey.currentState!.save();
                           DateTime currentDate = DateTime.now();
-                          String formattedDate = DateFormat('yyyy-M-d').format(currentDate);
+                          String formattedDate =
+                              DateFormat('yyyy-M-d').format(currentDate);
                           context.read<CreateAccountBloc>().add(
                                 CreateAccountEvent.createFields(
                                   account: UserAccount(
@@ -218,10 +220,13 @@ class _ThirdState extends State<Third> {
                                     allergy: allergyList,
                                     foodDontIt: foodList,
                                     currentDate: formattedDate,
+                                    subscription: const Subscription().toJson(),
                                   ),
                                 ),
                               );
-                          context.read<TutorialBloc>().add(const TutorialEvent.createTutorial());
+                          context
+                              .read<TutorialBloc>()
+                              .add(const TutorialEvent.createTutorial());
                         }),
                   ),
                 ],

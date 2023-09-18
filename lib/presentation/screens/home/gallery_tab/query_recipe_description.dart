@@ -1,27 +1,11 @@
-import 'dart:io';
-
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:nutrition_app/common/strings.dart';
-import 'package:nutrition_app/presentation/blocs/cache/cache_bloc.dart';
 import 'package:nutrition_app/presentation/blocs/saved_recipe/saved_recipe_bloc.dart';
-import 'package:nutrition_app/presentation/screens/home/recipe_tab/loading_screen.dart';
-import 'package:nutrition_app/presentation/widgets/app_elevated_button.dart';
-import 'package:nutrition_app/presentation/widgets/app_transparent_button.dart';
 import 'package:nutrition_app/presentation/widgets/colored_container.dart';
-import 'package:nutrition_app/presentation/widgets/subscription_label.dart';
-import 'package:shimmer/shimmer.dart';
-import 'package:super_tooltip/super_tooltip.dart';
 
 import '../../../../common/colors.dart';
 import '../../../../common/functions/functions.dart';
 import '../../../../common/theme.dart';
-import '../../../../data/local/share_pref.dart';
-import '../../../blocs/mood/mood_bloc.dart';
-import '../../../blocs/profile/profile_bloc.dart';
-import '../../../blocs/recipe/recipe_bloc.dart';
-import '../../../blocs/tutorial/tutorial_bloc.dart';
 
 class QueryRecipeDescription extends StatefulWidget {
   final String recipeImage;
@@ -42,9 +26,6 @@ class _QueryRecipeDescriptionState extends State<QueryRecipeDescription> {
   late List<String> sections;
   late List<String> ingredientsList;
   late List<String> instructionsList;
-
-  // bool? isRecipe;
-  // bool? isRegenerate;
   //
   @override
   void initState() {
@@ -63,8 +44,6 @@ class _QueryRecipeDescriptionState extends State<QueryRecipeDescription> {
           .sublist(instructionsIndex + 1)
           .map((section) => section.trim())
           .toList();
-      context.read<RecipeBloc>().add(RecipeEvent.generateImage(
-          recipeName: recipeName, recipe: widget.recipeText));
     });
   }
 
@@ -203,57 +182,62 @@ class _QueryRecipeDescriptionState extends State<QueryRecipeDescription> {
                         ),
                       ),
                       const SizedBox(height: 30),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: instructionsList.map((instruction) {
-                RegExp regex = RegExp(r"^(\d+\.\s|Note:\s)");
-                Match? match = regex.firstMatch(instruction);
-                if (match != null) {
-                  // Extract the number part and the rest of the text
-                  String numberPart = match.group(0)!;
-                  String restOfText = instruction.substring(match.end);
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: instructionsList.map((instruction) {
+                          RegExp regex = RegExp(r"^(\d+\.\s|Note:\s|Enjoy\s|Enjoy!\s)");
 
-                  if (numberPart.startsWith("Note:")) {
-                    return Container(); // Skip this instruction
-                  }
+                          Match? match = regex.firstMatch(instruction);
+                          if (match != null) {
+                            // Extract the number part and the rest of the text
+                            String numberPart = match.group(0)!;
+                            String restOfText = instruction.substring(match.end);
 
-                  return RichText(
-                    strutStyle: const StrutStyle(height: 2.2),
-                    text: TextSpan(
-                      style: const TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.w400,
-                        color: Colors.black,
+                            if (numberPart.startsWith("Note:") || restOfText.trim().startsWith("Enjoy")) {
+                              return Container(); // Skip this instruction
+                            }
+                            if (numberPart.trim().startsWith("Enjoy")) {
+                              return Container(); // Skip this instruction
+                            }
+
+                            return RichText(
+                              strutStyle: const StrutStyle(height: 2.2),
+                              text: TextSpan(
+                                style: const TextStyle(
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.w400,
+                                  color: Colors.black,
+                                ),
+                                children: [
+                                  TextSpan(
+                                    text: numberPart.replaceAll('.', '.  '),
+                                    style: const TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                  TextSpan(
+                                    text: restOfText
+                                        .replaceAll("sautÃ©", "saute")
+                                        .replaceAll("SautÃ©", "Saute")
+                                        .replaceAll("Â", "")
+                                        .replaceAll("Ã", "").replaceAll(RegExp(r'[^\x20-\x7E]'), ''),
+                                  ),
+                                ],
+                              ),
+                            );
+                          } else {
+                            return Text(
+                              instruction.replaceAll(':', ': '),
+                              strutStyle: const StrutStyle(height: 2.2),
+                              style: const TextStyle(
+                                fontSize: 16,
+                                fontWeight: FontWeight.w400,
+                                color: Colors.black,
+                              ),
+                            );
+                          }
+                        }).toList(),
                       ),
-                      children: [
-                        TextSpan(
-                          text: numberPart.replaceAll('.', '.  '),
-                          style: const TextStyle(
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                        TextSpan(
-                          text: restOfText
-                              .replaceAll("sautÃ©", "saute")
-                              .replaceAll("SautÃ©", "Saute")
-                              .replaceAll("Â", ""),
-                        ),
-                      ],
-                    ),
-                  );
-                } else {
-                  return Text(
-                    instruction.replaceAll(':', ': '),
-                    strutStyle: const StrutStyle(height: 2.2),
-                    style: const TextStyle(
-                      fontSize: 16,
-                      fontWeight: FontWeight.w400,
-                      color: Colors.black,
-                    ),
-                  );
-                }
-              }).toList(),
-            ),
 
                       const SizedBox(
                         height: 10,
@@ -282,8 +266,8 @@ class _QueryRecipeDescriptionState extends State<QueryRecipeDescription> {
                           child: SizedBox(
                             height: 165,
                             width: 160,
-                            child: Image.file(
-                              File(widget.recipeImage),
+                            child: Image.network(
+                              widget.recipeImage,
                               fit: BoxFit.cover,
                             ),
                           ),

@@ -63,6 +63,7 @@ class RecipeRepository {
           await http.post(Uri.parse(url), headers: headers, body: body);
 
       if (response.statusCode == 200) {
+
         String recipeText = jsonDecode(response.body);
 
         return recipeText;
@@ -100,6 +101,7 @@ class RecipeRepository {
     required String recipeName,
     required String recipeText,
     required String recipeImage,
+    required String currentDate,
   }) async {
     const url = "$apiUrl$recipeCollection";
     final headers = {'Content-Type': 'application/json'};
@@ -112,6 +114,8 @@ class RecipeRepository {
           "name": recipeName,
           "text": recipeText,
           "img": recipeImage,
+          "date":currentDate,
+
         }),
       );
 

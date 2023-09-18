@@ -1,9 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:flutter_switch/flutter_switch.dart';
 import 'package:nutrition_app/common/colors.dart';
 import 'package:nutrition_app/common/strings.dart';
+import 'package:nutrition_app/presentation/blocs/profile/profile_bloc.dart';
 import 'package:nutrition_app/presentation/widgets/app_checkbox.dart';
 import 'package:nutrition_app/presentation/widgets/app_elevated_button.dart';
 import 'package:nutrition_app/presentation/widgets/app_transparent_button.dart';
@@ -12,15 +14,15 @@ import '../../common/icons.dart';
 import '../../common/theme.dart';
 
 class SubscriptionScreen extends StatefulWidget {
-  final void Function() previousPage;
-
-  const SubscriptionScreen({super.key, required this.previousPage});
+  const SubscriptionScreen({super.key});
 
   @override
   State<SubscriptionScreen> createState() => _SubscriptionScreenState();
 }
 
 class _SubscriptionScreenState extends State<SubscriptionScreen> {
+
+  bool trialSwitch = false;
   bool isTrial = false;
   bool isOneYear = false;
   bool isOneMonth = false;
@@ -29,7 +31,12 @@ class _SubscriptionScreenState extends State<SubscriptionScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.transparent,
-      body: Column(
+      body: BlocListener<ProfileBloc, ProfileState>(
+  listener: (context, state) {
+    state.maybeMap(
+        initialized: (_) => Navigator.pop(context), orElse: () {});
+  },
+  child: Column(
         children: [
           SizedBox(
             width: MediaQuery.of(context).size.width,
@@ -46,7 +53,7 @@ class _SubscriptionScreenState extends State<SubscriptionScreen> {
                   top: 47,
                   child: GestureDetector(
                     onTap: () {
-                      widget.previousPage();
+                      Navigator.pop(context);
                     },
                     child: Container(
                       width: 36,
@@ -170,21 +177,18 @@ class _SubscriptionScreenState extends State<SubscriptionScreen> {
                             padding: 2,
                             toggleSize: 18,
                             activeColor: AppColors.violet,
-                            value: isTrial,
+                            value: trialSwitch,
                             onToggle: (v) {
                               setState(() {
-                                isTrial = v;
-                                isOneMonth = false;
-                                isOneYear = false;
+                                trialSwitch =v;
                               });
-
                             },
                           ),
                         ],
                       ),
                     ),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 17,
                   ),
                   SizedBox(
@@ -196,8 +200,11 @@ class _SubscriptionScreenState extends State<SubscriptionScreen> {
                             height: 58,
                             decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(10),
-                              border:
-                                  Border.all(color:isOneYear ? AppColors.violet : AppColors.violetLight, width: 2),
+                              border: Border.all(
+                                  color: isOneYear
+                                      ? AppColors.violet
+                                      : AppColors.violetLight,
+                                  width: 2),
                             ),
                             child: Padding(
                               padding: const EdgeInsets.symmetric(
@@ -262,14 +269,18 @@ class _SubscriptionScreenState extends State<SubscriptionScreen> {
                       ],
                     ),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 15,
                   ),
                   Container(
                     height: 58,
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(10),
-                      border: Border.all(color:isOneMonth ? AppColors.violet :AppColors.violetLight , width: 2),
+                      border: Border.all(
+                          color: isOneMonth
+                              ? AppColors.violet
+                              : AppColors.violetLight,
+                          width: 2),
                     ),
                     child: Padding(
                       padding: const EdgeInsets.symmetric(
@@ -299,15 +310,80 @@ class _SubscriptionScreenState extends State<SubscriptionScreen> {
                       ),
                     ),
                   ),
-                  SizedBox(
+                 !trialSwitch ? const SizedBox():Column(
+                    children: [
+                      const SizedBox(
+                        height: 15,
+                      ),
+                      Container(
+                        height: 58,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(10),
+                          border: Border.all(
+                              color: isTrial
+                                  ? AppColors.violet
+                                  : AppColors.violetLight,
+                              width: 2),
+                        ),
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(
+                              vertical: 5.0, horizontal: 16),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Text(
+                                AppStrings.trial,
+                                style: AppTheme.themeData.textTheme.titleMedium,
+                              ),
+                              SizedBox(
+                                width: 20,
+                                height: 20,
+                                child: AppCheckbox(
+                                    value: isTrial,
+                                    onChanged: (v) {
+                                      setState(() {
+                                        isTrial = v!;
+                                        isOneMonth = false;
+                                        isOneYear = false;
+                                      });
+                                    },
+                                    borderColor: AppColors.violet),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                  const SizedBox(
                     height: 30,
                   ),
-                !isTrial && !isOneYear && !isOneMonth ? SizedBox():  AppElevatedButton(
-                      text: isTrial ? AppStrings.startFreeTrial : isOneYear ? AppStrings.getYear : AppStrings.oneMonth,
-                      style: AppTheme.themeData.textTheme.titleMedium!
-                          .copyWith(color: AppColors.white),
-                      onPressed: () {}),
-                  SizedBox(
+                  !isTrial && !isOneYear && !isOneMonth
+                      ? const SizedBox()
+                      : AppElevatedButton(
+                          text: isTrial
+                              ? AppStrings.startFreeTrial
+                              : isOneYear
+                                  ? AppStrings.getYear
+                                  : AppStrings.oneMonth,
+                          style: AppTheme.themeData.textTheme.titleMedium!
+                              .copyWith(color: AppColors.white),
+                          onPressed: () {
+                            isTrial
+                                ? context.read<ProfileBloc>().add(
+                                    const ProfileEvent.subscribe(
+                                        isTrial: true, isSubscribed: true))
+                                : isOneYear
+                                    ? context.read<ProfileBloc>().add(
+                                        const ProfileEvent.subscribe(
+                                            isOneYear: true,
+                                            isSubscribed: true))
+                                    : context.read<ProfileBloc>().add(
+                                        const ProfileEvent.subscribe(
+                                            isOneMonth: true,
+                                            isSubscribed: true));
+                          }),
+                  const SizedBox(
                     height: 27,
                   ),
                   SizedBox(
@@ -362,12 +438,16 @@ class _SubscriptionScreenState extends State<SubscriptionScreen> {
                           .copyWith(color: AppColors.violet),
                     ),
                   ),
+                  SizedBox(
+                    height: 55,
+                  ),
                 ],
               ),
             ),
           ),
         ],
       ),
+),
     );
   }
 }

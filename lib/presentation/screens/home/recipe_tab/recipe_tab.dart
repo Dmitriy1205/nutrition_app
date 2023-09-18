@@ -4,6 +4,7 @@ import 'package:nutrition_app/presentation/screens/home/recipe_tab/food_screen.d
 import 'package:nutrition_app/presentation/screens/home/recipe_tab/generated_recipe_screen.dart';
 import 'package:nutrition_app/presentation/screens/home/recipe_tab/mood_screen.dart';
 import 'package:nutrition_app/presentation/screens/home/recipe_tab/recipe_screen.dart';
+import 'package:nutrition_app/presentation/screens/home/recipe_tab/swipe_recipe_screen.dart';
 
 import '../../../blocs/mood/mood_bloc.dart';
 
@@ -81,7 +82,7 @@ class _RecipeTabState extends State<RecipeTab> {
                         curve: Curves.ease,
                       );
                     }),
-                    RecipeScreen(previousPage: () {
+                    SwipeRecipeScreen(previousPage: () {
                       _pageController.previousPage(
                         duration: const Duration(milliseconds: 200),
                         curve: Curves.ease,

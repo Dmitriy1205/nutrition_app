@@ -51,9 +51,12 @@ class AppElevatedButton extends StatelessWidget {
           Flexible(
             child: Padding(
               padding: const EdgeInsets.symmetric(vertical: 20),
-              child: Text(
-                text,
-                style: style ?? AppTheme.themeData.textTheme.titleMedium,
+              child: FittedBox(
+                fit: BoxFit.scaleDown,
+                child: Text(
+                  text,
+                  style: style ?? AppTheme.themeData.textTheme.titleMedium,
+                ),
               ),
             ),
           ),

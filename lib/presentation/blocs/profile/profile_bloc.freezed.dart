@@ -20,6 +20,10 @@ mixin _$ProfileEvent {
   TResult when<TResult extends Object?>({
     required TResult Function(String userId) fetchData,
     required TResult Function(UserAccount? account) updateData,
+    required TResult Function(bool? isSubscribed, bool? isOneYear,
+            bool? isOneMonth, bool? isTrial)
+        subscribe,
+    required TResult Function() unsubscribe,
     required TResult Function() reset,
   }) =>
       throw _privateConstructorUsedError;
@@ -27,6 +31,10 @@ mixin _$ProfileEvent {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(String userId)? fetchData,
     TResult? Function(UserAccount? account)? updateData,
+    TResult? Function(bool? isSubscribed, bool? isOneYear, bool? isOneMonth,
+            bool? isTrial)?
+        subscribe,
+    TResult? Function()? unsubscribe,
     TResult? Function()? reset,
   }) =>
       throw _privateConstructorUsedError;
@@ -34,6 +42,10 @@ mixin _$ProfileEvent {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String userId)? fetchData,
     TResult Function(UserAccount? account)? updateData,
+    TResult Function(bool? isSubscribed, bool? isOneYear, bool? isOneMonth,
+            bool? isTrial)?
+        subscribe,
+    TResult Function()? unsubscribe,
     TResult Function()? reset,
     required TResult orElse(),
   }) =>
@@ -42,6 +54,8 @@ mixin _$ProfileEvent {
   TResult map<TResult extends Object?>({
     required TResult Function(_FetchData value) fetchData,
     required TResult Function(_UpdateData value) updateData,
+    required TResult Function(_Subscribe value) subscribe,
+    required TResult Function(_Unsubscribe value) unsubscribe,
     required TResult Function(_Reset value) reset,
   }) =>
       throw _privateConstructorUsedError;
@@ -49,6 +63,8 @@ mixin _$ProfileEvent {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_FetchData value)? fetchData,
     TResult? Function(_UpdateData value)? updateData,
+    TResult? Function(_Subscribe value)? subscribe,
+    TResult? Function(_Unsubscribe value)? unsubscribe,
     TResult? Function(_Reset value)? reset,
   }) =>
       throw _privateConstructorUsedError;
@@ -56,6 +72,8 @@ mixin _$ProfileEvent {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_FetchData value)? fetchData,
     TResult Function(_UpdateData value)? updateData,
+    TResult Function(_Subscribe value)? subscribe,
+    TResult Function(_Unsubscribe value)? unsubscribe,
     TResult Function(_Reset value)? reset,
     required TResult orElse(),
   }) =>
@@ -146,6 +164,10 @@ class _$_FetchData implements _FetchData {
   TResult when<TResult extends Object?>({
     required TResult Function(String userId) fetchData,
     required TResult Function(UserAccount? account) updateData,
+    required TResult Function(bool? isSubscribed, bool? isOneYear,
+            bool? isOneMonth, bool? isTrial)
+        subscribe,
+    required TResult Function() unsubscribe,
     required TResult Function() reset,
   }) {
     return fetchData(userId);
@@ -156,6 +178,10 @@ class _$_FetchData implements _FetchData {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(String userId)? fetchData,
     TResult? Function(UserAccount? account)? updateData,
+    TResult? Function(bool? isSubscribed, bool? isOneYear, bool? isOneMonth,
+            bool? isTrial)?
+        subscribe,
+    TResult? Function()? unsubscribe,
     TResult? Function()? reset,
   }) {
     return fetchData?.call(userId);
@@ -166,6 +192,10 @@ class _$_FetchData implements _FetchData {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String userId)? fetchData,
     TResult Function(UserAccount? account)? updateData,
+    TResult Function(bool? isSubscribed, bool? isOneYear, bool? isOneMonth,
+            bool? isTrial)?
+        subscribe,
+    TResult Function()? unsubscribe,
     TResult Function()? reset,
     required TResult orElse(),
   }) {
@@ -180,6 +210,8 @@ class _$_FetchData implements _FetchData {
   TResult map<TResult extends Object?>({
     required TResult Function(_FetchData value) fetchData,
     required TResult Function(_UpdateData value) updateData,
+    required TResult Function(_Subscribe value) subscribe,
+    required TResult Function(_Unsubscribe value) unsubscribe,
     required TResult Function(_Reset value) reset,
   }) {
     return fetchData(this);
@@ -190,6 +222,8 @@ class _$_FetchData implements _FetchData {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_FetchData value)? fetchData,
     TResult? Function(_UpdateData value)? updateData,
+    TResult? Function(_Subscribe value)? subscribe,
+    TResult? Function(_Unsubscribe value)? unsubscribe,
     TResult? Function(_Reset value)? reset,
   }) {
     return fetchData?.call(this);
@@ -200,6 +234,8 @@ class _$_FetchData implements _FetchData {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_FetchData value)? fetchData,
     TResult Function(_UpdateData value)? updateData,
+    TResult Function(_Subscribe value)? subscribe,
+    TResult Function(_Unsubscribe value)? unsubscribe,
     TResult Function(_Reset value)? reset,
     required TResult orElse(),
   }) {
@@ -299,6 +335,10 @@ class _$_UpdateData implements _UpdateData {
   TResult when<TResult extends Object?>({
     required TResult Function(String userId) fetchData,
     required TResult Function(UserAccount? account) updateData,
+    required TResult Function(bool? isSubscribed, bool? isOneYear,
+            bool? isOneMonth, bool? isTrial)
+        subscribe,
+    required TResult Function() unsubscribe,
     required TResult Function() reset,
   }) {
     return updateData(account);
@@ -309,6 +349,10 @@ class _$_UpdateData implements _UpdateData {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(String userId)? fetchData,
     TResult? Function(UserAccount? account)? updateData,
+    TResult? Function(bool? isSubscribed, bool? isOneYear, bool? isOneMonth,
+            bool? isTrial)?
+        subscribe,
+    TResult? Function()? unsubscribe,
     TResult? Function()? reset,
   }) {
     return updateData?.call(account);
@@ -319,6 +363,10 @@ class _$_UpdateData implements _UpdateData {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String userId)? fetchData,
     TResult Function(UserAccount? account)? updateData,
+    TResult Function(bool? isSubscribed, bool? isOneYear, bool? isOneMonth,
+            bool? isTrial)?
+        subscribe,
+    TResult Function()? unsubscribe,
     TResult Function()? reset,
     required TResult orElse(),
   }) {
@@ -333,6 +381,8 @@ class _$_UpdateData implements _UpdateData {
   TResult map<TResult extends Object?>({
     required TResult Function(_FetchData value) fetchData,
     required TResult Function(_UpdateData value) updateData,
+    required TResult Function(_Subscribe value) subscribe,
+    required TResult Function(_Unsubscribe value) unsubscribe,
     required TResult Function(_Reset value) reset,
   }) {
     return updateData(this);
@@ -343,6 +393,8 @@ class _$_UpdateData implements _UpdateData {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_FetchData value)? fetchData,
     TResult? Function(_UpdateData value)? updateData,
+    TResult? Function(_Subscribe value)? subscribe,
+    TResult? Function(_Unsubscribe value)? unsubscribe,
     TResult? Function(_Reset value)? reset,
   }) {
     return updateData?.call(this);
@@ -353,6 +405,8 @@ class _$_UpdateData implements _UpdateData {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_FetchData value)? fetchData,
     TResult Function(_UpdateData value)? updateData,
+    TResult Function(_Subscribe value)? subscribe,
+    TResult Function(_Unsubscribe value)? unsubscribe,
     TResult Function(_Reset value)? reset,
     required TResult orElse(),
   }) {
@@ -371,6 +425,326 @@ abstract class _UpdateData implements ProfileEvent {
   @JsonKey(ignore: true)
   _$$_UpdateDataCopyWith<_$_UpdateData> get copyWith =>
       throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$_SubscribeCopyWith<$Res> {
+  factory _$$_SubscribeCopyWith(
+          _$_Subscribe value, $Res Function(_$_Subscribe) then) =
+      __$$_SubscribeCopyWithImpl<$Res>;
+  @useResult
+  $Res call(
+      {bool? isSubscribed, bool? isOneYear, bool? isOneMonth, bool? isTrial});
+}
+
+/// @nodoc
+class __$$_SubscribeCopyWithImpl<$Res>
+    extends _$ProfileEventCopyWithImpl<$Res, _$_Subscribe>
+    implements _$$_SubscribeCopyWith<$Res> {
+  __$$_SubscribeCopyWithImpl(
+      _$_Subscribe _value, $Res Function(_$_Subscribe) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? isSubscribed = freezed,
+    Object? isOneYear = freezed,
+    Object? isOneMonth = freezed,
+    Object? isTrial = freezed,
+  }) {
+    return _then(_$_Subscribe(
+      isSubscribed: freezed == isSubscribed
+          ? _value.isSubscribed
+          : isSubscribed // ignore: cast_nullable_to_non_nullable
+              as bool?,
+      isOneYear: freezed == isOneYear
+          ? _value.isOneYear
+          : isOneYear // ignore: cast_nullable_to_non_nullable
+              as bool?,
+      isOneMonth: freezed == isOneMonth
+          ? _value.isOneMonth
+          : isOneMonth // ignore: cast_nullable_to_non_nullable
+              as bool?,
+      isTrial: freezed == isTrial
+          ? _value.isTrial
+          : isTrial // ignore: cast_nullable_to_non_nullable
+              as bool?,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$_Subscribe implements _Subscribe {
+  const _$_Subscribe(
+      {this.isSubscribed, this.isOneYear, this.isOneMonth, this.isTrial});
+
+  @override
+  final bool? isSubscribed;
+  @override
+  final bool? isOneYear;
+  @override
+  final bool? isOneMonth;
+  @override
+  final bool? isTrial;
+
+  @override
+  String toString() {
+    return 'ProfileEvent.subscribe(isSubscribed: $isSubscribed, isOneYear: $isOneYear, isOneMonth: $isOneMonth, isTrial: $isTrial)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_Subscribe &&
+            (identical(other.isSubscribed, isSubscribed) ||
+                other.isSubscribed == isSubscribed) &&
+            (identical(other.isOneYear, isOneYear) ||
+                other.isOneYear == isOneYear) &&
+            (identical(other.isOneMonth, isOneMonth) ||
+                other.isOneMonth == isOneMonth) &&
+            (identical(other.isTrial, isTrial) || other.isTrial == isTrial));
+  }
+
+  @override
+  int get hashCode =>
+      Object.hash(runtimeType, isSubscribed, isOneYear, isOneMonth, isTrial);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_SubscribeCopyWith<_$_Subscribe> get copyWith =>
+      __$$_SubscribeCopyWithImpl<_$_Subscribe>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(String userId) fetchData,
+    required TResult Function(UserAccount? account) updateData,
+    required TResult Function(bool? isSubscribed, bool? isOneYear,
+            bool? isOneMonth, bool? isTrial)
+        subscribe,
+    required TResult Function() unsubscribe,
+    required TResult Function() reset,
+  }) {
+    return subscribe(isSubscribed, isOneYear, isOneMonth, isTrial);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(String userId)? fetchData,
+    TResult? Function(UserAccount? account)? updateData,
+    TResult? Function(bool? isSubscribed, bool? isOneYear, bool? isOneMonth,
+            bool? isTrial)?
+        subscribe,
+    TResult? Function()? unsubscribe,
+    TResult? Function()? reset,
+  }) {
+    return subscribe?.call(isSubscribed, isOneYear, isOneMonth, isTrial);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(String userId)? fetchData,
+    TResult Function(UserAccount? account)? updateData,
+    TResult Function(bool? isSubscribed, bool? isOneYear, bool? isOneMonth,
+            bool? isTrial)?
+        subscribe,
+    TResult Function()? unsubscribe,
+    TResult Function()? reset,
+    required TResult orElse(),
+  }) {
+    if (subscribe != null) {
+      return subscribe(isSubscribed, isOneYear, isOneMonth, isTrial);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_FetchData value) fetchData,
+    required TResult Function(_UpdateData value) updateData,
+    required TResult Function(_Subscribe value) subscribe,
+    required TResult Function(_Unsubscribe value) unsubscribe,
+    required TResult Function(_Reset value) reset,
+  }) {
+    return subscribe(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_FetchData value)? fetchData,
+    TResult? Function(_UpdateData value)? updateData,
+    TResult? Function(_Subscribe value)? subscribe,
+    TResult? Function(_Unsubscribe value)? unsubscribe,
+    TResult? Function(_Reset value)? reset,
+  }) {
+    return subscribe?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_FetchData value)? fetchData,
+    TResult Function(_UpdateData value)? updateData,
+    TResult Function(_Subscribe value)? subscribe,
+    TResult Function(_Unsubscribe value)? unsubscribe,
+    TResult Function(_Reset value)? reset,
+    required TResult orElse(),
+  }) {
+    if (subscribe != null) {
+      return subscribe(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _Subscribe implements ProfileEvent {
+  const factory _Subscribe(
+      {final bool? isSubscribed,
+      final bool? isOneYear,
+      final bool? isOneMonth,
+      final bool? isTrial}) = _$_Subscribe;
+
+  bool? get isSubscribed;
+  bool? get isOneYear;
+  bool? get isOneMonth;
+  bool? get isTrial;
+  @JsonKey(ignore: true)
+  _$$_SubscribeCopyWith<_$_Subscribe> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$_UnsubscribeCopyWith<$Res> {
+  factory _$$_UnsubscribeCopyWith(
+          _$_Unsubscribe value, $Res Function(_$_Unsubscribe) then) =
+      __$$_UnsubscribeCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$_UnsubscribeCopyWithImpl<$Res>
+    extends _$ProfileEventCopyWithImpl<$Res, _$_Unsubscribe>
+    implements _$$_UnsubscribeCopyWith<$Res> {
+  __$$_UnsubscribeCopyWithImpl(
+      _$_Unsubscribe _value, $Res Function(_$_Unsubscribe) _then)
+      : super(_value, _then);
+}
+
+/// @nodoc
+
+class _$_Unsubscribe implements _Unsubscribe {
+  const _$_Unsubscribe();
+
+  @override
+  String toString() {
+    return 'ProfileEvent.unsubscribe()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _$_Unsubscribe);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(String userId) fetchData,
+    required TResult Function(UserAccount? account) updateData,
+    required TResult Function(bool? isSubscribed, bool? isOneYear,
+            bool? isOneMonth, bool? isTrial)
+        subscribe,
+    required TResult Function() unsubscribe,
+    required TResult Function() reset,
+  }) {
+    return unsubscribe();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(String userId)? fetchData,
+    TResult? Function(UserAccount? account)? updateData,
+    TResult? Function(bool? isSubscribed, bool? isOneYear, bool? isOneMonth,
+            bool? isTrial)?
+        subscribe,
+    TResult? Function()? unsubscribe,
+    TResult? Function()? reset,
+  }) {
+    return unsubscribe?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(String userId)? fetchData,
+    TResult Function(UserAccount? account)? updateData,
+    TResult Function(bool? isSubscribed, bool? isOneYear, bool? isOneMonth,
+            bool? isTrial)?
+        subscribe,
+    TResult Function()? unsubscribe,
+    TResult Function()? reset,
+    required TResult orElse(),
+  }) {
+    if (unsubscribe != null) {
+      return unsubscribe();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_FetchData value) fetchData,
+    required TResult Function(_UpdateData value) updateData,
+    required TResult Function(_Subscribe value) subscribe,
+    required TResult Function(_Unsubscribe value) unsubscribe,
+    required TResult Function(_Reset value) reset,
+  }) {
+    return unsubscribe(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_FetchData value)? fetchData,
+    TResult? Function(_UpdateData value)? updateData,
+    TResult? Function(_Subscribe value)? subscribe,
+    TResult? Function(_Unsubscribe value)? unsubscribe,
+    TResult? Function(_Reset value)? reset,
+  }) {
+    return unsubscribe?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_FetchData value)? fetchData,
+    TResult Function(_UpdateData value)? updateData,
+    TResult Function(_Subscribe value)? subscribe,
+    TResult Function(_Unsubscribe value)? unsubscribe,
+    TResult Function(_Reset value)? reset,
+    required TResult orElse(),
+  }) {
+    if (unsubscribe != null) {
+      return unsubscribe(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _Unsubscribe implements ProfileEvent {
+  const factory _Unsubscribe() = _$_Unsubscribe;
 }
 
 /// @nodoc
@@ -411,6 +785,10 @@ class _$_Reset implements _Reset {
   TResult when<TResult extends Object?>({
     required TResult Function(String userId) fetchData,
     required TResult Function(UserAccount? account) updateData,
+    required TResult Function(bool? isSubscribed, bool? isOneYear,
+            bool? isOneMonth, bool? isTrial)
+        subscribe,
+    required TResult Function() unsubscribe,
     required TResult Function() reset,
   }) {
     return reset();
@@ -421,6 +799,10 @@ class _$_Reset implements _Reset {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(String userId)? fetchData,
     TResult? Function(UserAccount? account)? updateData,
+    TResult? Function(bool? isSubscribed, bool? isOneYear, bool? isOneMonth,
+            bool? isTrial)?
+        subscribe,
+    TResult? Function()? unsubscribe,
     TResult? Function()? reset,
   }) {
     return reset?.call();
@@ -431,6 +813,10 @@ class _$_Reset implements _Reset {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String userId)? fetchData,
     TResult Function(UserAccount? account)? updateData,
+    TResult Function(bool? isSubscribed, bool? isOneYear, bool? isOneMonth,
+            bool? isTrial)?
+        subscribe,
+    TResult Function()? unsubscribe,
     TResult Function()? reset,
     required TResult orElse(),
   }) {
@@ -445,6 +831,8 @@ class _$_Reset implements _Reset {
   TResult map<TResult extends Object?>({
     required TResult Function(_FetchData value) fetchData,
     required TResult Function(_UpdateData value) updateData,
+    required TResult Function(_Subscribe value) subscribe,
+    required TResult Function(_Unsubscribe value) unsubscribe,
     required TResult Function(_Reset value) reset,
   }) {
     return reset(this);
@@ -455,6 +843,8 @@ class _$_Reset implements _Reset {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_FetchData value)? fetchData,
     TResult? Function(_UpdateData value)? updateData,
+    TResult? Function(_Subscribe value)? subscribe,
+    TResult? Function(_Unsubscribe value)? unsubscribe,
     TResult? Function(_Reset value)? reset,
   }) {
     return reset?.call(this);
@@ -465,6 +855,8 @@ class _$_Reset implements _Reset {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_FetchData value)? fetchData,
     TResult Function(_UpdateData value)? updateData,
+    TResult Function(_Subscribe value)? subscribe,
+    TResult Function(_Unsubscribe value)? unsubscribe,
     TResult Function(_Reset value)? reset,
     required TResult orElse(),
   }) {
@@ -485,7 +877,8 @@ mixin _$ProfileState {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(UserAccount user, String season, String phase)
+    required TResult Function(
+            UserAccount user, String season, String phase, String dayOfCycle)
         initialized,
     required TResult Function() success,
     required TResult Function(String error) error,
@@ -495,7 +888,8 @@ mixin _$ProfileState {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(UserAccount user, String season, String phase)?
+    TResult? Function(
+            UserAccount user, String season, String phase, String dayOfCycle)?
         initialized,
     TResult? Function()? success,
     TResult? Function(String error)? error,
@@ -505,7 +899,8 @@ mixin _$ProfileState {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(UserAccount user, String season, String phase)?
+    TResult Function(
+            UserAccount user, String season, String phase, String dayOfCycle)?
         initialized,
     TResult Function()? success,
     TResult Function(String error)? error,
@@ -599,7 +994,8 @@ class _$_Initial extends _Initial {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(UserAccount user, String season, String phase)
+    required TResult Function(
+            UserAccount user, String season, String phase, String dayOfCycle)
         initialized,
     required TResult Function() success,
     required TResult Function(String error) error,
@@ -612,7 +1008,8 @@ class _$_Initial extends _Initial {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(UserAccount user, String season, String phase)?
+    TResult? Function(
+            UserAccount user, String season, String phase, String dayOfCycle)?
         initialized,
     TResult? Function()? success,
     TResult? Function(String error)? error,
@@ -625,7 +1022,8 @@ class _$_Initial extends _Initial {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(UserAccount user, String season, String phase)?
+    TResult Function(
+            UserAccount user, String season, String phase, String dayOfCycle)?
         initialized,
     TResult Function()? success,
     TResult Function(String error)? error,
@@ -723,7 +1121,8 @@ class _$_LoadingState extends _LoadingState {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(UserAccount user, String season, String phase)
+    required TResult Function(
+            UserAccount user, String season, String phase, String dayOfCycle)
         initialized,
     required TResult Function() success,
     required TResult Function(String error) error,
@@ -736,7 +1135,8 @@ class _$_LoadingState extends _LoadingState {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(UserAccount user, String season, String phase)?
+    TResult? Function(
+            UserAccount user, String season, String phase, String dayOfCycle)?
         initialized,
     TResult? Function()? success,
     TResult? Function(String error)? error,
@@ -749,7 +1149,8 @@ class _$_LoadingState extends _LoadingState {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(UserAccount user, String season, String phase)?
+    TResult Function(
+            UserAccount user, String season, String phase, String dayOfCycle)?
         initialized,
     TResult Function()? success,
     TResult Function(String error)? error,
@@ -813,7 +1214,7 @@ abstract class _$$_InitializeCopyWith<$Res> {
           _$_Initialize value, $Res Function(_$_Initialize) then) =
       __$$_InitializeCopyWithImpl<$Res>;
   @useResult
-  $Res call({UserAccount user, String season, String phase});
+  $Res call({UserAccount user, String season, String phase, String dayOfCycle});
 
   $UserAccountCopyWith<$Res> get user;
 }
@@ -832,6 +1233,7 @@ class __$$_InitializeCopyWithImpl<$Res>
     Object? user = null,
     Object? season = null,
     Object? phase = null,
+    Object? dayOfCycle = null,
   }) {
     return _then(_$_Initialize(
       user: null == user
@@ -845,6 +1247,10 @@ class __$$_InitializeCopyWithImpl<$Res>
       phase: null == phase
           ? _value.phase
           : phase // ignore: cast_nullable_to_non_nullable
+              as String,
+      dayOfCycle: null == dayOfCycle
+          ? _value.dayOfCycle
+          : dayOfCycle // ignore: cast_nullable_to_non_nullable
               as String,
     ));
   }
@@ -862,7 +1268,10 @@ class __$$_InitializeCopyWithImpl<$Res>
 
 class _$_Initialize extends _Initialize {
   const _$_Initialize(
-      {required this.user, required this.season, required this.phase})
+      {required this.user,
+      required this.season,
+      required this.phase,
+      required this.dayOfCycle})
       : super._();
 
   @override
@@ -871,10 +1280,12 @@ class _$_Initialize extends _Initialize {
   final String season;
   @override
   final String phase;
+  @override
+  final String dayOfCycle;
 
   @override
   String toString() {
-    return 'ProfileState.initialized(user: $user, season: $season, phase: $phase)';
+    return 'ProfileState.initialized(user: $user, season: $season, phase: $phase, dayOfCycle: $dayOfCycle)';
   }
 
   @override
@@ -884,11 +1295,13 @@ class _$_Initialize extends _Initialize {
             other is _$_Initialize &&
             (identical(other.user, user) || other.user == user) &&
             (identical(other.season, season) || other.season == season) &&
-            (identical(other.phase, phase) || other.phase == phase));
+            (identical(other.phase, phase) || other.phase == phase) &&
+            (identical(other.dayOfCycle, dayOfCycle) ||
+                other.dayOfCycle == dayOfCycle));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, user, season, phase);
+  int get hashCode => Object.hash(runtimeType, user, season, phase, dayOfCycle);
 
   @JsonKey(ignore: true)
   @override
@@ -901,12 +1314,13 @@ class _$_Initialize extends _Initialize {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(UserAccount user, String season, String phase)
+    required TResult Function(
+            UserAccount user, String season, String phase, String dayOfCycle)
         initialized,
     required TResult Function() success,
     required TResult Function(String error) error,
   }) {
-    return initialized(user, season, phase);
+    return initialized(user, season, phase, dayOfCycle);
   }
 
   @override
@@ -914,12 +1328,13 @@ class _$_Initialize extends _Initialize {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(UserAccount user, String season, String phase)?
+    TResult? Function(
+            UserAccount user, String season, String phase, String dayOfCycle)?
         initialized,
     TResult? Function()? success,
     TResult? Function(String error)? error,
   }) {
-    return initialized?.call(user, season, phase);
+    return initialized?.call(user, season, phase, dayOfCycle);
   }
 
   @override
@@ -927,14 +1342,15 @@ class _$_Initialize extends _Initialize {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(UserAccount user, String season, String phase)?
+    TResult Function(
+            UserAccount user, String season, String phase, String dayOfCycle)?
         initialized,
     TResult Function()? success,
     TResult Function(String error)? error,
     required TResult orElse(),
   }) {
     if (initialized != null) {
-      return initialized(user, season, phase);
+      return initialized(user, season, phase, dayOfCycle);
     }
     return orElse();
   }
@@ -984,12 +1400,14 @@ abstract class _Initialize extends ProfileState {
   const factory _Initialize(
       {required final UserAccount user,
       required final String season,
-      required final String phase}) = _$_Initialize;
+      required final String phase,
+      required final String dayOfCycle}) = _$_Initialize;
   const _Initialize._() : super._();
 
   UserAccount get user;
   String get season;
   String get phase;
+  String get dayOfCycle;
   @JsonKey(ignore: true)
   _$$_InitializeCopyWith<_$_Initialize> get copyWith =>
       throw _privateConstructorUsedError;
@@ -1034,7 +1452,8 @@ class _$_Success extends _Success {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(UserAccount user, String season, String phase)
+    required TResult Function(
+            UserAccount user, String season, String phase, String dayOfCycle)
         initialized,
     required TResult Function() success,
     required TResult Function(String error) error,
@@ -1047,7 +1466,8 @@ class _$_Success extends _Success {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(UserAccount user, String season, String phase)?
+    TResult? Function(
+            UserAccount user, String season, String phase, String dayOfCycle)?
         initialized,
     TResult? Function()? success,
     TResult? Function(String error)? error,
@@ -1060,7 +1480,8 @@ class _$_Success extends _Success {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(UserAccount user, String season, String phase)?
+    TResult Function(
+            UserAccount user, String season, String phase, String dayOfCycle)?
         initialized,
     TResult Function()? success,
     TResult Function(String error)? error,
@@ -1184,7 +1605,8 @@ class _$_ErrorState extends _ErrorState {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(UserAccount user, String season, String phase)
+    required TResult Function(
+            UserAccount user, String season, String phase, String dayOfCycle)
         initialized,
     required TResult Function() success,
     required TResult Function(String error) error,
@@ -1197,7 +1619,8 @@ class _$_ErrorState extends _ErrorState {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(UserAccount user, String season, String phase)?
+    TResult? Function(
+            UserAccount user, String season, String phase, String dayOfCycle)?
         initialized,
     TResult? Function()? success,
     TResult? Function(String error)? error,
@@ -1210,7 +1633,8 @@ class _$_ErrorState extends _ErrorState {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(UserAccount user, String season, String phase)?
+    TResult Function(
+            UserAccount user, String season, String phase, String dayOfCycle)?
         initialized,
     TResult Function()? success,
     TResult Function(String error)? error,

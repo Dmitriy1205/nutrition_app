@@ -1,5 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:intl/intl.dart';
 import 'package:nutrition_app/common/exceptions.dart';
 import 'package:nutrition_app/data/models/recipe_collection/recipe_collection.dart';
 
@@ -38,11 +39,14 @@ class SavedRecipeBloc extends Bloc<SavedRecipeEvent, SavedRecipeState> {
       _SaveRecipe event, Emitter<SavedRecipeState> emit) async {
     try {
       emit(const SavedRecipeState.saving());
+      DateTime currentDate = DateTime.now();
+      String formattedDate = DateFormat('d.MM.yyyy').format(currentDate);
       final currentUserId = _authRepository.currentUser()!.uid;
       final String recipeId = await _recipeRepository.saveRecipeOnDatabase(
           recipeName: event.recipeName,
           recipeText: event.recipeText,
-          recipeImage: event.recipeImage);
+          recipeImage: event.recipeImage,
+          currentDate: formattedDate);
       await _recipeRepository.saveRecipeToUserCollection(
           currentUserId: currentUserId, recipeId: recipeId);
       emit(const SavedRecipeState.saved());

@@ -94,8 +94,8 @@ class AppStrings {
   static const String upgradeToPremium = 'Upgrade to premium!';
   static const String enjoyAll = 'Unlock unlimited real-time recipes';
   static const String editProfile = 'Edit profile';
-  static const String foodPreferencesShort = 'Food preferences';
-  static const String dietaryRestrictionsShort = 'Dietary restrictions';
+  static const String foodPreferencesShort = 'Dietary restrictions';
+  static const String foodAllergies = 'Food Allergies';
   static const String deleteMyAccount = 'Delete my account';
   static const String deleteYourAccount = 'Delete your account';
   static const String deleteFromSaved = 'DELETE FROM SAVED';
@@ -114,6 +114,7 @@ class AppStrings {
   static const String getYear = 'Get 12 Month / \$79.00';
   static const String onlyMonth = 'Only 6.65 USD/month';
   static const String oneMonth = '1 month, 9.99 USD';
+  static const String trial = 'FIRST 3 DAYS ARE FREE TRIAL';
   static const String startFreeTrial = 'Start free trial';
   static const String restorePurchase = 'Restore purchase';
   static const String redeemCode = 'Redeem code';

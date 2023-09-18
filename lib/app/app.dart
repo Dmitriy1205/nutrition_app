@@ -12,15 +12,36 @@ import '../presentation/blocs/auth/auth_bloc.dart';
 import '../presentation/blocs/tutorial/tutorial_bloc.dart';
 import '../presentation/screens/auth/sign_in_screen.dart';
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
   MyApp({super.key});
 
-  final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
+  @override
+  State<MyApp> createState() => _MyAppState();
+}
 
+class _MyAppState extends State<MyApp> with WidgetsBindingObserver{
+  final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addObserver(this);
+  }
+
+  @override
+  void dispose() {
+    WidgetsBinding.instance.removeObserver(this);
+    super.dispose();
+  }
   @override
   Widget build(BuildContext context) {
     return Providers(
       child: MaterialApp(
+        builder: (context, child) {
+          return MediaQuery(
+            data: MediaQuery.of(context).copyWith(textScaleFactor: 1.0),
+            child: child!,
+          );
+        },
         debugShowCheckedModeBanner: false,
         navigatorKey: navigatorKey,
         theme: AppTheme.themeData,

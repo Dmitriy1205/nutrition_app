@@ -32,13 +32,6 @@ class SharedPreferencesHelper {
   }
 
 
-  // Future<void> writeSavedRecipe(String name, String image) async {
-  //   await _writeItem(_savedRecipesKey, name, image);
-  // }
-  //
-  // Future<List<Map<String, String>>> readSavedRecipes() async {
-  //   return await _readItems(_savedRecipesKey);
-  // }
 
   Future<void> writeQueryRecipe({
     required String name,
@@ -55,14 +48,14 @@ class SharedPreferencesHelper {
         .toList() ?? [];
 
     // Save the image locally and get the path
-    String imagePath = await _saveImageLocally(image);
+    // String imagePath = await _saveImageLocally(image);
 
     // Insert the new item at the beginning of the list
     existingItems.insert(
       0,
       QueryRecipe(
         recipeName: name,
-        image: imagePath,
+        image: image,
         recipeBody: recipeBody,
         dateTime: formattedDate,
       ),
@@ -128,3 +121,11 @@ class SharedPreferencesHelper {
 //       .toList();
 // }
 }
+
+// Future<void> writeSavedRecipe(String name, String image) async {
+//   await _writeItem(_savedRecipesKey, name, image);
+// }
+//
+// Future<List<Map<String, String>>> readSavedRecipes() async {
+//   return await _readItems(_savedRecipesKey);
+// }
