@@ -478,46 +478,49 @@ class _GeneratedRecipeScreenState extends State<GeneratedRecipeScreen> {
                         const SizedBox(
                           height: 20,
                         ),
-                        Container(
-                          width: MediaQuery.of(context).size.width,
-                          height: 300.0,
-                          decoration: BoxDecoration(
-                            color: Colors.white,
-                            borderRadius: BorderRadius.circular(10),
-                          ),
-                          child: state.recipeImage == null
-                              ? Shimmer.fromColors(
-                                  baseColor: Colors.grey.shade400,
-                                  highlightColor: Colors.white,
-                                  child: Container(
-                                    decoration: BoxDecoration(
-                                      color: Colors.white,
-                                      borderRadius: BorderRadius.circular(10),
-                                    ),
-                                  ),
-                                )
-                              : ClipRRect(
-                                  borderRadius: BorderRadius.circular(10),
-                                  child: CachedNetworkImage(
-                                    imageUrl: state.recipeImage!,
-                                    fit: BoxFit.fill,
-                                    progressIndicatorBuilder:
-                                        (context, url, downloadProgress) =>
-                                            Shimmer.fromColors(
-                                      baseColor: Colors.grey.shade400,
-                                      highlightColor: Colors.white,
-                                      child: Container(
-                                        decoration: BoxDecoration(
-                                          color: Colors.white,
-                                          borderRadius:
-                                              BorderRadius.circular(10),
-                                        ),
+                        AspectRatio(
+                          aspectRatio: 1.05,
+                          child: Container(
+                            // width: MediaQuery.of(context).size.width,
+                            // height: MediaQuery.of(context).size.height/2.6,
+                            decoration: BoxDecoration(
+                              color: Colors.white,
+                              borderRadius: BorderRadius.circular(10),
+                            ),
+                            child: state.recipeImage == null
+                                ? Shimmer.fromColors(
+                                    baseColor: Colors.grey.shade400,
+                                    highlightColor: Colors.white,
+                                    child: Container(
+                                      decoration: BoxDecoration(
+                                        color: Colors.white,
+                                        borderRadius: BorderRadius.circular(10),
                                       ),
                                     ),
-                                    errorWidget: (context, url, error) =>
-                                        const Icon(Icons.error),
+                                  )
+                                : ClipRRect(
+                                    borderRadius: BorderRadius.circular(10),
+                                    child: CachedNetworkImage(
+                                      imageUrl: state.recipeImage!,
+                                      fit: BoxFit.fill,
+                                      progressIndicatorBuilder:
+                                          (context, url, downloadProgress) =>
+                                              Shimmer.fromColors(
+                                        baseColor: Colors.grey.shade400,
+                                        highlightColor: Colors.white,
+                                        child: Container(
+                                          decoration: BoxDecoration(
+                                            color: Colors.white,
+                                            borderRadius:
+                                                BorderRadius.circular(10),
+                                          ),
+                                        ),
+                                      ),
+                                      errorWidget: (context, url, error) =>
+                                          const Icon(Icons.error),
+                                    ),
                                   ),
-                                ),
+                          ),
                         ),
                         const SizedBox(
                           height: 40,

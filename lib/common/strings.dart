@@ -107,7 +107,7 @@ class AppStrings {
   static const String premiumSubscription = 'Premium subscription';
   static const String unlimitedCustomRecipes = 'Unlimited Custom Recipes';
   static const String groceriesForEveryPhase = 'Groceries for every Phase';
-  static const String healthCycle = 'Health & Cycle Support with\nNeeded Nutrients';
+  static const String healthCycle = 'Health & Cycle Support with\nthe Needed Nutrients';
   static const String stillNotSure = 'Still not sure?';
   static const String activateYourFreeTrial = 'activate your free trial';
   static const String oneYear = '1 year, 79.99 USD';
@@ -556,3 +556,4 @@ List<String> phrases = [
   "Exploring the endless possibilities of cooking with {ingredient}...",
   "Creating a magical combination of flavors, including {ingredient}...",
 ];
+

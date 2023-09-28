@@ -317,6 +317,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                             autovalidateMode:
                                 AutovalidateMode.onUserInteraction,
                             focusNode: focusNode,
+
                             validator: context.validateFieldNotEmpty,
                             decoration: InputDecoration(
                               fillColor: AppColors.white,
@@ -381,7 +382,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                                             title: Text(
                                               suggestion,
                                               style:
-                                                  const TextStyle(fontSize: 16),
+                                                  const TextStyle(fontSize: 16,color: Colors.black),
                                             ),
                                           ),
                                         ),

@@ -255,21 +255,23 @@ class _RecipeDescriptionState extends State<RecipeDescription> {
                       const SizedBox(
                         height: 20,
                       ),
-                      Container(
-                        width: MediaQuery.of(context).size.width,
-                        height: 300.0,
-                        decoration: BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.circular(10),
-                        ),
-                        child: ClipRRect(
-                          borderRadius: BorderRadius.circular(8),
-                          child: SizedBox(
-                            height: 165,
-                            width: 160,
-                            child: Image.network(
-                              widget.recipeImage,
-                              fit: BoxFit.cover,
+                      AspectRatio(
+                        aspectRatio: 1.05,
+                        child: Container(
+                          // width: MediaQuery.of(context).size.width,
+                          // height: MediaQuery.of(context).size.height/2.6,
+                          decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                          child: ClipRRect(
+                            borderRadius: BorderRadius.circular(8),
+                            child: SizedBox(
+
+                              child: Image.network(
+                                widget.recipeImage,
+                                fit: BoxFit.cover,
+                              ),
                             ),
                           ),
                         ),

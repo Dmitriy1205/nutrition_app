@@ -1,20 +1,17 @@
 import 'dart:io';
 
 import 'package:carousel_slider/carousel_slider.dart';
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:nutrition_app/common/strings.dart';
 import 'package:nutrition_app/presentation/blocs/auth/auth_bloc.dart';
 import 'package:nutrition_app/presentation/blocs/generate_recipes/generate_recipes_bloc.dart';
 import 'package:nutrition_app/presentation/blocs/recipe/recipe_bloc.dart';
-import 'package:nutrition_app/presentation/screens/home/home_screen.dart';
 import 'package:nutrition_app/presentation/widgets/app_elevated_button.dart';
 import 'package:shimmer/shimmer.dart';
 import 'package:super_tooltip/super_tooltip.dart';
 
 import '../../../../common/colors.dart';
-import '../../../../common/services/service_locator.dart';
 import '../../../../common/theme.dart';
 import '../../../blocs/mood/mood_bloc.dart';
 import '../../../blocs/profile/profile_bloc.dart';
@@ -67,6 +64,12 @@ class _SwipeRecipeScreenState extends State<SwipeRecipeScreen> {
                 setState(() {
                   isSwipeTut = state.tutorial!.isSwipeCards;
                 });
+              },
+              error: (e) {
+                if (e.error.contains('ClientException:')) {
+                  context.read<ProfileBloc>().add(ProfileEvent.fetchData(
+                      userId: context.read<AuthBloc>().state.user!.uid));
+                }
               },
               orElse: () {});
         },
@@ -146,7 +149,7 @@ class _SwipeRecipeScreenState extends State<SwipeRecipeScreen> {
                                   borderRadius: BorderRadius.circular(15),
                                 ),
                                 child: Padding(
-                                  padding: EdgeInsets.symmetric(
+                                  padding: const EdgeInsets.symmetric(
                                     horizontal: 10,
                                   ),
                                   child: Center(
@@ -181,16 +184,6 @@ class _SwipeRecipeScreenState extends State<SwipeRecipeScreen> {
                                             },
                                           ),
                                           error: (e) {
-                                            if (e.error.contains(
-                                                'ClientException:Operation timed out')) {
-                                              context.read<ProfileBloc>().add(
-                                                  ProfileEvent.fetchData(
-                                                      userId: context
-                                                          .read<AuthBloc>()
-                                                          .state
-                                                          .user!
-                                                          .uid));
-                                            }
                                             return Center(child: Text(e.error));
                                           },
                                           orElse: () => ListView.builder(
@@ -308,114 +301,121 @@ class _SwipeRecipeScreenState extends State<SwipeRecipeScreen> {
                                 itemCount: totalCardCount,
                                 itemBuilder: (context, index, realIndex) {
                                   return Container(
-                                    height: 380,
-                                    width: 350,
+                                    // height: 380,
+                                    // width: 350,
                                     decoration: BoxDecoration(
                                       color: AppColors.transparentBlue,
                                       borderRadius: BorderRadius.circular(15),
                                     ),
                                     child: Padding(
-                                      padding: EdgeInsets.symmetric(
+                                      padding: const EdgeInsets.symmetric(
                                           horizontal: 10,
-                                          vertical:
-                                              Platform.isAndroid ? 45 : 80),
-                                      child: state.maybeMap(
-                                        generating: (_) => ListView.builder(
-                                          shrinkWrap: true,
-                                          physics:
-                                              const NeverScrollableScrollPhysics(),
-                                          itemCount: 3,
-                                          itemBuilder: (context, index) {
-                                            return Padding(
-                                              padding: const EdgeInsets.only(
-                                                  bottom: 16.0),
-                                              child: Shimmer.fromColors(
-                                                baseColor: Colors.white,
-                                                highlightColor:
-                                                    Colors.grey.shade200,
-                                                child: Container(
-                                                  decoration: BoxDecoration(
-                                                      color: Colors.black,
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              15)),
-                                                  height: 77,
-                                                ),
-                                              ),
-                                            );
-                                          },
-                                        ),
-                                        error: (e) => Center(
-                                          child: Text(e.error),
-                                        ),
-                                        orElse: () => ListView.builder(
-                                            physics:
-                                                const NeverScrollableScrollPhysics(),
-                                            itemCount: 3,
-                                            itemBuilder: (c, innerIndex) {
-                                              final currentIndex =
-                                                  index * 3 + innerIndex;
-                                              if (recipes.isEmpty) {
-                                                recipes = List.generate(
-                                                    state.recipes!.length,
-                                                    (index) =>
-                                                        state.recipes![index]);
-                                              }
-                                              return Padding(
-                                                padding: const EdgeInsets.only(
-                                                    bottom: 16.0),
-                                                child: GestureDetector(
-                                                  onTap: () {
-                                                    setState(() {
-                                                      selectedRecipeName =
-                                                          recipes[currentIndex];
-                                                    });
-                                                  },
-                                                  child: Container(
-                                                    decoration: BoxDecoration(
-                                                      color: selectedRecipeName ==
-                                                              recipes[
-                                                                  currentIndex]
-                                                          ? AppColors.violet
-                                                          : AppColors.white,
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              15),
+                                          ),
+                                      child: Center(
+                                        child: Column(
+                                          mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                          children: [
+                                            state.maybeMap(
+                                              generating: (_) => ListView.builder(
+                                                shrinkWrap: true,
+                                                physics:
+                                                    const NeverScrollableScrollPhysics(),
+                                                itemCount: 3,
+                                                itemBuilder: (context, index) {
+                                                  return Padding(
+                                                    padding: const EdgeInsets.only(
+                                                        bottom: 16.0),
+                                                    child: Shimmer.fromColors(
+                                                      baseColor: Colors.white,
+                                                      highlightColor:
+                                                          Colors.grey.shade200,
+                                                      child: Container(
+                                                        decoration: BoxDecoration(
+                                                            color: Colors.black,
+                                                            borderRadius:
+                                                                BorderRadius.circular(
+                                                                    15)),
+                                                        height: 77,
+                                                      ),
                                                     ),
-                                                    height: 77,
-                                                    child: Center(
-                                                      child: SizedBox(
-                                                        width: 200,
-                                                        child: Text(
-                                                          recipes[currentIndex],
-                                                          textAlign:
-                                                              TextAlign.center,
-                                                          style: AppTheme
-                                                              .themeData
-                                                              .textTheme
-                                                              .titleSmall!
-                                                              .copyWith(
+                                                  );
+                                                },
+                                              ),
+                                              error: (e) => Center(
+                                                child: Text(e.error),
+                                              ),
+                                              orElse: () => ListView.builder(shrinkWrap: true,
+                                                  physics:
+                                                      const NeverScrollableScrollPhysics(),
+                                                  itemCount: 3,
+                                                  itemBuilder: (c, innerIndex) {
+                                                    final currentIndex =
+                                                        index * 3 + innerIndex;
+                                                    if (recipes.isEmpty) {
+                                                      recipes = List.generate(
+                                                          state.recipes!.length,
+                                                          (index) =>
+                                                              state.recipes![index]);
+                                                    }
+                                                    return Padding(
+                                                      padding: const EdgeInsets.only(
+                                                          bottom: 16.0),
+                                                      child: GestureDetector(
+                                                        onTap: () {
+                                                          setState(() {
+                                                            selectedRecipeName =
+                                                                recipes[currentIndex];
+                                                          });
+                                                        },
+                                                        child: Container(
+                                                          decoration: BoxDecoration(
                                                             color: selectedRecipeName ==
                                                                     recipes[
                                                                         currentIndex]
-                                                                ? AppColors
-                                                                    .white
-                                                                : Colors.black,
+                                                                ? AppColors.violet
+                                                                : AppColors.white,
+                                                            borderRadius:
+                                                                BorderRadius.circular(
+                                                                    15),
+                                                          ),
+                                                          height: 77,
+                                                          child: Center(
+                                                            child: SizedBox(
+                                                              width: 200,
+                                                              child: Text(
+                                                                recipes[currentIndex],
+                                                                textAlign:
+                                                                    TextAlign.center,
+                                                                style: AppTheme
+                                                                    .themeData
+                                                                    .textTheme
+                                                                    .titleSmall!
+                                                                    .copyWith(
+                                                                  color: selectedRecipeName ==
+                                                                          recipes[
+                                                                              currentIndex]
+                                                                      ? AppColors
+                                                                          .white
+                                                                      : Colors.black,
+                                                                ),
+                                                              ),
+                                                            ),
                                                           ),
                                                         ),
                                                       ),
-                                                    ),
-                                                  ),
-                                                ),
-                                              );
-                                            }),
+                                                    );
+                                                  }),
+                                            ),
+                                          ],
+                                        ),
                                       ),
                                     ),
                                   );
                                 },
                                 options: CarouselOptions(
                                   enableInfiniteScroll: false,
-                                  aspectRatio: 1.0,
+                                  aspectRatio: 0.95,
                                   enlargeCenterPage: true,
                                   onPageChanged: (index, reason) {
                                     setState(() {

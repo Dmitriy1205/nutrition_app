@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 class AppTheme {
   static ThemeData themeData = ThemeData(
+
     expansionTileTheme: ExpansionTileThemeData(),
     // dividerColor: const Color(0xFFC7ED3A),
     bottomSheetTheme: const BottomSheetThemeData(surfaceTintColor: Color(0xFFF2F2F2),),
@@ -12,7 +13,7 @@ class AppTheme {
     ),
     scaffoldBackgroundColor: const Color(0xFFFFFFFF),
     textSelectionTheme:
-    const TextSelectionThemeData(cursorColor: Color(0xFF10284D)),
+    const TextSelectionThemeData(cursorColor: Color(0xFF10284D),selectionColor: Color(0xFFD0CDFF)),
     inputDecorationTheme: InputDecorationTheme(
       focusColor: const Color(0xFF10284D),
       enabledBorder: OutlineInputBorder(

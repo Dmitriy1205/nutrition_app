@@ -65,7 +65,7 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
     emit(const ProfileState.loading());
     try {
       String phase;
-      String? currentDayOfCycle;
+      String? currentDayOfCycle = '';
       final currentUser = _authBloc.state.user!.uid;
       final userAccount = await _userRepository.getAccount(id: currentUser);
 
@@ -107,7 +107,7 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
     emit(const ProfileState.loading());
     try {
       String phase;
-      String? currentDayOfCycle;
+      String? currentDayOfCycle = '';
       final currentUser = _authBloc.state.user!.uid;
       await _userRepository.updateAccount(
           userId: currentUser, data: event.account!);
@@ -151,7 +151,7 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
     emit(const ProfileState.loading());
     try {
       String? formattedEnd;
-      String? currentDayOfCycle;
+      String? currentDayOfCycle = '';
       DateTime currentDate = DateTime.now();
       String formattedCurrentDate =
           DateFormat('dd.MM.yyyy').format(currentDate);
@@ -218,7 +218,7 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
     emit(const ProfileState.loading());
     try {
       final currentUser = _authBloc.state.user!.uid;
-      String? currentDayOfCycle;
+      String? currentDayOfCycle = '';
       await _userRepository.updateSubscription(
           userId: currentUser,
           data: const Subscription(

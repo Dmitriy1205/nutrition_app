@@ -137,7 +137,23 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     style: AppTheme.themeData.textTheme.bodyMedium,
                   ),
                   Text(
-                    context.read<AuthBloc>().state.user!.email!,
+                    context
+                                .read<AuthBloc>()
+                                .state
+                                .user!
+                                .providerData[0]
+                                .providerId ==
+                            'apple.com'
+                        ? 'signed by Apple'
+                        : context
+                                    .read<AuthBloc>()
+                                    .state
+                                    .user!
+                                    .providerData[0]
+                                    .providerId ==
+                                'google.com'
+                            ? 'signed by Google'
+                            : context.read<AuthBloc>().state.user!.email!,
                     style: AppTheme.themeData.textTheme.titleMedium,
                   ),
                   const SizedBox(

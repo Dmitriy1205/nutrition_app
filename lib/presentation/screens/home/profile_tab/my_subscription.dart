@@ -89,7 +89,7 @@ class MySubscription extends StatelessWidget {
                         ),
                       ),
                       Container(
-                        height: 248,
+                        // height: 248,
                         color: AppColors.white,
                         child: Padding(
                           padding: const EdgeInsets.symmetric(
@@ -107,7 +107,7 @@ class MySubscription extends StatelessWidget {
                                     width: 10,
                                   ),
                                   Text(
-                                    'Text for subscription pluses',
+                                    'Unlimited Custom Recipes',
                                     style:
                                         AppTheme.themeData.textTheme.bodyMedium,
                                   ),
@@ -126,7 +126,7 @@ class MySubscription extends StatelessWidget {
                                       width: 10,
                                     ),
                                     Text(
-                                      'Text for subscription pluses',
+                                      'Groceries for every Phase',
                                       style: AppTheme
                                           .themeData.textTheme.bodyMedium,
                                     ),
@@ -147,34 +147,34 @@ class MySubscription extends StatelessWidget {
                                       width: 10,
                                     ),
                                     Text(
-                                      'Text for subscription pluses\ntwo line text',
+                                      'Health & Cycle Support with\nNeeded Nutrients',
                                       style: AppTheme
                                           .themeData.textTheme.bodyMedium,
                                     ),
                                   ],
                                 ),
                               ),
-                              Padding(
-                                padding:
-                                    const EdgeInsets.symmetric(vertical: 8.0),
-                                child: Row(
-                                  children: [
-                                    SvgPicture.asset(
-                                      AppIcons.checkbox,
-                                      width: 20,
-                                      height: 20,
-                                    ),
-                                    SizedBox(
-                                      width: 10,
-                                    ),
-                                    Text(
-                                      'Text for subscription pluses',
-                                      style: AppTheme
-                                          .themeData.textTheme.bodyMedium,
-                                    ),
-                                  ],
-                                ),
-                              ),
+                              // Padding(
+                              //   padding:
+                              //       const EdgeInsets.symmetric(vertical: 8.0),
+                              //   child: Row(
+                              //     children: [
+                              //       SvgPicture.asset(
+                              //         AppIcons.checkbox,
+                              //         width: 20,
+                              //         height: 20,
+                              //       ),
+                              //       SizedBox(
+                              //         width: 10,
+                              //       ),
+                              //       Text(
+                              //         'Text for subscription pluses',
+                              //         style: AppTheme
+                              //             .themeData.textTheme.bodyMedium,
+                              //       ),
+                              //     ],
+                              //   ),
+                              // ),
                               const SizedBox(
                                 height: 16,
                               ),

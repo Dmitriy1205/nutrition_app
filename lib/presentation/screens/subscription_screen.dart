@@ -1,11 +1,14 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_html/flutter_html.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:flutter_switch/flutter_switch.dart';
 import 'package:nutrition_app/common/colors.dart';
 import 'package:nutrition_app/common/strings.dart';
 import 'package:nutrition_app/presentation/blocs/profile/profile_bloc.dart';
+import 'package:nutrition_app/presentation/screens/policy.dart';
+import 'package:nutrition_app/presentation/screens/terms.dart';
 import 'package:nutrition_app/presentation/widgets/app_checkbox.dart';
 import 'package:nutrition_app/presentation/widgets/app_elevated_button.dart';
 import 'package:nutrition_app/presentation/widgets/app_transparent_button.dart';
@@ -177,10 +180,12 @@ class _SubscriptionScreenState extends State<SubscriptionScreen> {
                             padding: 2,
                             toggleSize: 18,
                             activeColor: AppColors.violet,
-                            value: trialSwitch,
+                            value: isTrial,
                             onToggle: (v) {
                               setState(() {
-                                trialSwitch =v;
+                                isTrial =v;
+                                isOneYear = v;
+                                isOneMonth = false;
                               });
                             },
                           ),
@@ -239,7 +244,7 @@ class _SubscriptionScreenState extends State<SubscriptionScreen> {
                                           setState(() {
                                             isOneYear = v!;
                                             isOneMonth = false;
-                                            isTrial = false;
+
                                           });
                                         },
                                         borderColor: AppColors.violet),
@@ -301,7 +306,6 @@ class _SubscriptionScreenState extends State<SubscriptionScreen> {
                                   setState(() {
                                     isOneMonth = v!;
                                     isOneYear = false;
-                                    isTrial = false;
                                   });
                                 },
                                 borderColor: AppColors.violet),
@@ -310,51 +314,51 @@ class _SubscriptionScreenState extends State<SubscriptionScreen> {
                       ),
                     ),
                   ),
-                 !trialSwitch ? const SizedBox():Column(
-                    children: [
-                      const SizedBox(
-                        height: 15,
-                      ),
-                      Container(
-                        height: 58,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(10),
-                          border: Border.all(
-                              color: isTrial
-                                  ? AppColors.violet
-                                  : AppColors.violetLight,
-                              width: 2),
-                        ),
-                        child: Padding(
-                          padding: const EdgeInsets.symmetric(
-                              vertical: 5.0, horizontal: 16),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Text(
-                                AppStrings.trial,
-                                style: AppTheme.themeData.textTheme.titleMedium,
-                              ),
-                              SizedBox(
-                                width: 20,
-                                height: 20,
-                                child: AppCheckbox(
-                                    value: isTrial,
-                                    onChanged: (v) {
-                                      setState(() {
-                                        isTrial = v!;
-                                        isOneMonth = false;
-                                        isOneYear = false;
-                                      });
-                                    },
-                                    borderColor: AppColors.violet),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
+                 // !trialSwitch ? const SizedBox():Column(
+                 //    children: [
+                 //      const SizedBox(
+                 //        height: 15,
+                 //      ),
+                 //      Container(
+                 //        height: 58,
+                 //        decoration: BoxDecoration(
+                 //          borderRadius: BorderRadius.circular(10),
+                 //          border: Border.all(
+                 //              color: isTrial
+                 //                  ? AppColors.violet
+                 //                  : AppColors.violetLight,
+                 //              width: 2),
+                 //        ),
+                 //        child: Padding(
+                 //          padding: const EdgeInsets.symmetric(
+                 //              vertical: 5.0, horizontal: 16),
+                 //          child: Row(
+                 //            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                 //            children: [
+                 //              Text(
+                 //                AppStrings.trial,
+                 //                style: AppTheme.themeData.textTheme.titleMedium,
+                 //              ),
+                 //              SizedBox(
+                 //                width: 20,
+                 //                height: 20,
+                 //                child: AppCheckbox(
+                 //                    value: isTrial,
+                 //                    onChanged: (v) {
+                 //                      setState(() {
+                 //                        isTrial = v!;
+                 //                        isOneMonth = false;
+                 //                        isOneYear = false;
+                 //                      });
+                 //                    },
+                 //                    borderColor: AppColors.violet),
+                 //              ),
+                 //            ],
+                 //          ),
+                 //        ),
+                 //      ),
+                 //    ],
+                 //  ),
                   const SizedBox(
                     height: 30,
                   ),
@@ -422,20 +426,36 @@ class _SubscriptionScreenState extends State<SubscriptionScreen> {
                     height: 40,
                   ),
                   Center(
-                    child: Text(
-                      AppStrings.terms,
-                      style: AppTheme.themeData.textTheme.titleMedium!
-                          .copyWith(color: AppColors.violet),
+                    child: GestureDetector(
+                      onTap: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => const TermsScreen()));
+                      },
+                      child: Text(
+                        AppStrings.terms,
+                        style: AppTheme.themeData.textTheme.titleMedium!
+                            .copyWith(color: AppColors.violet),
+                      ),
                     ),
                   ),
                   SizedBox(
                     height: 15,
                   ),
                   Center(
-                    child: Text(
-                      AppStrings.policy,
-                      style: AppTheme.themeData.textTheme.titleMedium!
-                          .copyWith(color: AppColors.violet),
+                    child: GestureDetector(
+                      onTap: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => const PolicyScreen()));
+                      },
+                      child: Text(
+                        AppStrings.policy,
+                        style: AppTheme.themeData.textTheme.titleMedium!
+                            .copyWith(color: AppColors.violet),
+                      ),
                     ),
                   ),
                   SizedBox(
